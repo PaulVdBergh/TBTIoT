@@ -16,20 +16,53 @@
  * 
  * =====================================================================
  *	This file is part of the TBTIoT project.  
- *	For more info see http://paulvandenbergh.be/TBT
+ *	For more info see http://paulvandenbergh.be
  * =====================================================================
  */
 
 /*
- * main.cpp
+ * DCCGen.h
  *
- *  Created on: Feb 19, 2018
+ *  Created on: Feb 26, 2018
  *      Author: paulvdbergh
  */
 
+#ifndef MAIN_DCCGEN_H_
+#define MAIN_DCCGEN_H_
 
-int main(int argc, char* argv[])
+#include "driver/rmt.h"
+#include <thread>
+
+using namespace std;
+
+#include "DCCMessage.h"
+
+namespace TBTIoT
 {
-	return 0;
-}
+	class DCCGen
+	{
+		public:
+			typedef enum
+			{
+				PowerOff = 0,
+				PowerOn
+			} PowerState_t;
 
+			DCCGen(gpio_num_t gpio_num, rmt_channel_t channel = RMT_CHANNEL_0);
+			virtual ~DCCGen();
+
+		protected:
+			virtual bool	getNextDccCommand(void);
+
+			rmt_config_t m_config;
+
+		private:
+			void threadFunc(void);
+
+			thread			m_thread;
+			volatile bool 	m_bContinue;
+			PowerState_t	m_PowerState;
+	};
+}	//	namespace TBTIoT
+
+#endif /* MAIN_DCCGEN_H_ */

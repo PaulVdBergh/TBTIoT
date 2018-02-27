@@ -21,15 +21,45 @@
  */
 
 /*
- * main.cpp
+ * DCCMessage.cpp
  *
- *  Created on: Feb 19, 2018
+ *  Created on: Feb 26, 2018
  *      Author: paulvdbergh
  */
 
+#include "DCCMessage.h"
 
-int main(int argc, char* argv[])
+#include <cstring>
+
+namespace TBTIoT
 {
-	return 0;
-}
 
+	DCCMessage::DCCMessage(uint8_t* pmsg)
+	:	m_pMsg(nullptr)
+	{
+		if(pmsg[0] > 0)
+		{
+			m_pMsg = new uint8_t[pmsg[0]];
+			memcpy(m_pMsg, pmsg, pmsg[0]);
+		}
+		else
+		{
+			throw("DCCMessage::DCCMessage");
+		}
+	}
+
+	DCCMessage::~DCCMessage()
+	{
+		delete [] m_pMsg;
+	}
+
+	const uint8_t& DCCMessage::operator[](int x)
+	{
+		if(m_pMsg && (x < m_pMsg[0]))
+		{
+			return m_pMsg[x];
+		}
+		throw("DCCMessage::operator[]");
+	}
+
+} /* namespace TBTIoT */

@@ -21,15 +21,35 @@
  */
 
 /*
- * main.cpp
+ * DCCMessage.h
  *
- *  Created on: Feb 19, 2018
+ *  Created on: Feb 26, 2018
  *      Author: paulvdbergh
  */
 
+#ifndef MAIN_DCCMESSAGE_H_
+#define MAIN_DCCMESSAGE_H_
 
-int main(int argc, char* argv[])
+#include <stdint.h>
+
+namespace TBTIoT
 {
-	return 0;
-}
 
+	class DCCMessage
+	{
+		public:
+			DCCMessage(uint8_t* pmsg);
+			virtual ~DCCMessage();
+
+			const uint8_t& operator[](int x);
+
+		protected:
+			uint8_t*		m_pMsg;
+
+		private:
+
+	};
+
+} /* namespace TBTIoT */
+
+#endif /* MAIN_DCCMESSAGE_H_ */
