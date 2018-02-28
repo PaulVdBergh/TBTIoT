@@ -59,7 +59,9 @@ namespace TBTIoT
 		protected:
 			virtual DCCMessage*	getNextDccMessage(void);
 
-			rmt_config_t m_config;
+			rmt_config_t 	m_rmtConfig;
+			gpio_config_t 	m_gpioConfig;
+
 
 		private:
 			void threadFunc(void);

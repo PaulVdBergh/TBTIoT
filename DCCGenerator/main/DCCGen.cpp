@@ -50,6 +50,33 @@ namespace TBTIoT
 	,	m_DccGPIONum(DccGPIONum)
 	,	m_Channel(channel)
 	{
+		memset(&m_gpioConfig, 0, sizeof(gpio_config_t));
+
+		m_gpioConfig.pin_bit_mask = ((1ULL << m_RailcomGPIONum) | (1ULL << m_PowerGPIONum));
+		m_gpioConfig.mode = GPIO_MODE_OUTPUT;
+		m_gpioConfig.pull_up_en = GPIO_PULLUP_ENABLE;
+		m_gpioConfig.pull_down_en = GPIO_PULLDOWN_DISABLE;
+		m_gpioConfig.intr_type = GPIO_INTR_DISABLE;
+
+		ESP_ERROR_CHECK(gpio_config(&m_gpioConfig));
+
+		ESP_ERROR_CHECK(gpio_set_level(m_PowerGPIONum, 0));
+		ESP_ERROR_CHECK(gpio_set_level(m_RailcomGPIONum, 0));
+
+		memset(&m_rmtConfig, 0, sizeof(m_rmtConfig));
+
+	    m_rmtConfig.rmt_mode = RMT_MODE_TX;
+	    m_rmtConfig.channel = m_Channel;
+	    m_rmtConfig.clk_div = 0x01;
+	    m_rmtConfig.gpio_num = m_DccGPIONum;
+	    m_rmtConfig.mem_block_num = 1;
+	    m_rmtConfig.tx_config.idle_output_en = 1;
+	    m_rmtConfig.tx_config.idle_level = RMT_IDLE_LEVEL_LOW;
+
+	    ESP_ERROR_CHECK(rmt_config(&m_rmtConfig));
+	    ESP_ERROR_CHECK(rmt_driver_install(m_rmtConfig.channel, 0, 0));
+
+
 	    m_thread = thread([this]{threadFunc();});
 	}
 
@@ -66,47 +93,6 @@ namespace TBTIoT
 
 	void DCCGen::threadFunc()
 	{
-		gpio_config_t gpioConfig;
-		memset(&gpioConfig, 0, sizeof(gpio_config_t));
-
-		gpioConfig.pin_bit_mask = ((1ULL << m_RailcomGPIONum) | (1ULL << m_PowerGPIONum));
-		gpioConfig.mode = GPIO_MODE_OUTPUT;
-		gpioConfig.pull_up_en = GPIO_PULLUP_ENABLE;
-		gpioConfig.pull_down_en = GPIO_PULLDOWN_DISABLE;
-		gpioConfig.intr_type = GPIO_INTR_DISABLE;
-
-		ESP_ERROR_CHECK(gpio_config(&gpioConfig));
-
-		gpio_pad_select_gpio(m_PowerGPIONum);
-		gpio_pad_select_gpio(m_RailcomGPIONum);
-
-		ESP_ERROR_CHECK(gpio_set_direction(m_PowerGPIONum, GPIO_MODE_OUTPUT));
-		ESP_ERROR_CHECK(gpio_set_direction(m_RailcomGPIONum, GPIO_MODE_OUTPUT));
-
-		ESP_ERROR_CHECK(gpio_set_pull_mode(m_PowerGPIONum, GPIO_PULLUP_ONLY));
-		ESP_ERROR_CHECK(gpio_set_pull_mode(m_RailcomGPIONum, GPIO_PULLUP_ONLY));
-
-		ESP_ERROR_CHECK(gpio_pullup_en(m_PowerGPIONum));
-		ESP_ERROR_CHECK(gpio_pullup_en(m_RailcomGPIONum));
-
-		ESP_ERROR_CHECK(gpio_intr_disable(m_PowerGPIONum));
-		ESP_ERROR_CHECK(gpio_intr_disable(m_RailcomGPIONum));
-
-		ESP_ERROR_CHECK(gpio_set_level(m_PowerGPIONum, 0));
-		ESP_ERROR_CHECK(gpio_set_level(m_RailcomGPIONum, 0));
-
-		memset(&m_config, 0, sizeof(m_config));
-
-	    m_config.rmt_mode = RMT_MODE_TX;
-	    m_config.channel = m_Channel;
-	    m_config.clk_div = 0x01;
-	    m_config.gpio_num = m_DccGPIONum;
-	    m_config.mem_block_num = 1;
-	    m_config.tx_config.idle_output_en = 1;
-	    m_config.tx_config.idle_level = RMT_IDLE_LEVEL_LOW;
-
-	    ESP_ERROR_CHECK(rmt_config(&m_config));
-	    ESP_ERROR_CHECK(rmt_driver_install(m_config.channel, 0, 0));
 
 		const uint8_t _idleMsg[] = {0x03, 0xFF, 0x00, 0xFF};
 		DCCMessage IdleMessage(_idleMsg);
@@ -125,8 +111,9 @@ namespace TBTIoT
 		while(m_bContinue)
 		{
 			//	send the preamble_items
-			ESP_ERROR_CHECK(rmt_write_items(m_config.channel, preamble_items, PREAMBLE_NBR_CYCLES, false));
+			ESP_ERROR_CHECK(rmt_write_items(m_rmtConfig.channel, preamble_items, PREAMBLE_NBR_CYCLES, false));
 
+			// meanwhile  (we have 1856 µS to spend...)
 			usleep(28);
 			//	Shutdown power
 			gpio_set_level(m_PowerGPIONum, 0);
@@ -153,10 +140,13 @@ namespace TBTIoT
 			ItemCount = (ItemCount > 64) ? 64 : ItemCount;
 			memcpy(pItems, pNextMessage->getItems(), ItemCount * sizeof(rmt_item32_t));
 
-			ESP_ERROR_CHECK(rmt_wait_tx_done(m_config.channel, PREAMBLE_WAIT_TIME));
-			ESP_ERROR_CHECK(rmt_write_items(m_config.channel, pItems, ItemCount, true));
+			//	wait until preamble finished
+			ESP_ERROR_CHECK(rmt_wait_tx_done(m_rmtConfig.channel, PREAMBLE_WAIT_TIME));
+
+			//	send dcc data and wait until end of transmission
+			ESP_ERROR_CHECK(rmt_write_items(m_rmtConfig.channel, pItems, ItemCount, true));
 		}
 
-		ESP_ERROR_CHECK(rmt_driver_uninstall(m_config.channel));
+		ESP_ERROR_CHECK(rmt_driver_uninstall(m_rmtConfig.channel));
 	}
 }	//	namespace TBTIoT

@@ -56,7 +56,7 @@ namespace TBTIoT
 			m_itemCount = ((pmsg[0]) * 9) + 1;
 			rmt_item32_t* p = m_pItems = new rmt_item32_t[m_itemCount];
 
-			for(uint8_t i = 1; i < pmsg[0]; i++)
+			for(uint8_t i = 1; i < (pmsg[0] + 1); i++)
 			{
 				*p++ = DCC_ZERO_BIT;
 				for(uint8_t j = 0x80; j; j >>= 1)
