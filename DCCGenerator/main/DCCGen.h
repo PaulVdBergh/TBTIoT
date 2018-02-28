@@ -27,13 +27,14 @@
  *      Author: paulvdbergh
  */
 
-#ifndef MAIN_DCCGEN_H_
-#define MAIN_DCCGEN_H_
-
+#include "driver/gpio.h"
 #include "driver/rmt.h"
 #include <thread>
 
 using namespace std;
+
+#ifndef MAIN_DCCGEN_H_
+#define MAIN_DCCGEN_H_
 
 #include "DCCMessage.h"
 
@@ -48,11 +49,15 @@ namespace TBTIoT
 				PowerOn
 			} PowerState_t;
 
-			DCCGen(gpio_num_t gpio_num, rmt_channel_t channel = RMT_CHANNEL_0);
+			DCCGen(	gpio_num_t RailcomGPIONum = GPIO_NUM_16,
+					gpio_num_t PowerGPIONum = GPIO_NUM_17,
+					gpio_num_t DccGPIONum = GPIO_NUM_18,
+					rmt_channel_t channel = RMT_CHANNEL_0);
+
 			virtual ~DCCGen();
 
 		protected:
-			virtual bool	getNextDccCommand(void);
+			virtual DCCMessage*	getNextDccMessage(void);
 
 			rmt_config_t m_config;
 
@@ -62,6 +67,11 @@ namespace TBTIoT
 			thread			m_thread;
 			volatile bool 	m_bContinue;
 			PowerState_t	m_PowerState;
+
+			gpio_num_t		m_PowerGPIONum;
+			gpio_num_t		m_RailcomGPIONum;
+			gpio_num_t		m_DccGPIONum;
+			rmt_channel_t	m_Channel;
 	};
 }	//	namespace TBTIoT
 

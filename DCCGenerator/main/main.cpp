@@ -8,8 +8,19 @@
 
 #include "DCCGen.h"
 
+#include "iostream"
+
+//	to start openocd for ESP-WROVER-KIT :
+//	bin/openocd -s share/openocd/scripts -f interface/ftdi/esp32_devkitj_v1.cfg -f board/esp32-wrover.cfg
+
 extern "C" void app_main(void)
 {
-	TBTIoT::DCCGen Generator(GPIO_NUM_18);
+	std::cout << "Starting DCC Generator\n";
+	TBTIoT::DCCGen Generator();
+
+	while(1)
+	{
+		sleep(1000);
+	}
 }
 

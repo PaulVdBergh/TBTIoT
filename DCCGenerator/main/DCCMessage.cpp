@@ -34,13 +34,37 @@
 namespace TBTIoT
 {
 
-	DCCMessage::DCCMessage(uint8_t* pmsg)
-	:	m_pMsg(nullptr)
+	DCCMessage::DCCMessage(const uint8_t* pmsg)
+	:	m_pItems(nullptr)
+	,	m_itemCount(0)
 	{
-		if(pmsg[0] > 0)
+		if(!sm_bInitialized)
 		{
-			m_pMsg = new uint8_t[pmsg[0]];
-			memcpy(m_pMsg, pmsg, pmsg[0]);
+			(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->duration0 = ZERO_PULSE_LENGTH;
+			(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->duration1 = ZERO_PULSE_LENGTH;
+			(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->level0 = 1;
+			(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->level1 = 0;
+
+			(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->duration0 = ONE_PULSE_LENGTH;
+			(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->duration1 = ONE_PULSE_LENGTH;
+			(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->level0 = 1;
+			(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->level1 = 0;
+		}
+
+		if(pmsg && pmsg[0])
+		{
+			m_itemCount = ((pmsg[0]) * 9) + 1;
+			rmt_item32_t* p = m_pItems = new rmt_item32_t[m_itemCount];
+
+			for(uint8_t i = 1; i < pmsg[0]; i++)
+			{
+				*p++ = DCC_ZERO_BIT;
+				for(uint8_t j = 0x80; j; j >>= 1)
+				{
+					*p++ = (pmsg[i] & j) ? DCC_ONE_BIT : DCC_ZERO_BIT;
+				}
+			}
+			*p = DCC_ONE_BIT;
 		}
 		else
 		{
@@ -50,16 +74,11 @@ namespace TBTIoT
 
 	DCCMessage::~DCCMessage()
 	{
-		delete [] m_pMsg;
+		delete [] m_pItems;
 	}
 
-	const uint8_t& DCCMessage::operator[](int x)
-	{
-		if(m_pMsg && (x < m_pMsg[0]))
-		{
-			return m_pMsg[x];
-		}
-		throw("DCCMessage::operator[]");
-	}
+	const rmt_item32_t DCCMessage::DCC_ZERO_BIT;
+	const rmt_item32_t DCCMessage::DCC_ONE_BIT;
+	bool DCCMessage::sm_bInitialized = false;
 
 } /* namespace TBTIoT */

@@ -30,21 +30,34 @@
 #ifndef MAIN_DCCMESSAGE_H_
 #define MAIN_DCCMESSAGE_H_
 
+#include "driver/rmt.h"
 #include <stdint.h>
 
 namespace TBTIoT
 {
+#define ZERO_PULSE_LENGTH (8640)
+#define ONE_PULSE_LENGTH (4640)
+
+#define PREAMBLE_NBR_CYCLES 16
+#define PREAMBLE_WAIT_TIME ((TickType_t)1000000000)
 
 	class DCCMessage
 	{
 		public:
-			DCCMessage(uint8_t* pmsg);
+			DCCMessage(const uint8_t* pmsg);
 			virtual ~DCCMessage();
 
-			const uint8_t& operator[](int x);
+			rmt_item32_t* 	getItems(void) { return m_pItems; }
+			uint16_t		getItemCount(void) { return m_itemCount; }
+
+			static const rmt_item32_t	DCC_ZERO_BIT;
+			static const rmt_item32_t	DCC_ONE_BIT;
 
 		protected:
-			uint8_t*		m_pMsg;
+			rmt_item32_t*	m_pItems;
+			uint16_t		m_itemCount;
+
+			static bool		sm_bInitialized;
 
 		private:
 
