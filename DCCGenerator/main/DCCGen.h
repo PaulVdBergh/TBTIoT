@@ -49,9 +49,9 @@ namespace TBTIoT
 				PowerOn
 			} PowerState_t;
 
-			DCCGen(	gpio_num_t RailcomGPIONum = GPIO_NUM_16,
-					gpio_num_t PowerGPIONum = GPIO_NUM_17,
-					gpio_num_t DccGPIONum = GPIO_NUM_18,
+			DCCGen(	gpio_num_t RailcomGPIONum = GPIO_NUM_4,
+					gpio_num_t PowerGPIONum = GPIO_NUM_2,
+					gpio_num_t DccGPIONum = GPIO_NUM_0,
 					rmt_channel_t channel = RMT_CHANNEL_0);
 
 			virtual ~DCCGen();

@@ -38,9 +38,9 @@ using namespace std;
 namespace TBTIoT
 {
 
-	DCCGen::DCCGen(	gpio_num_t RailcomGPIONum /* = GPIO_NUM_16 */,
-					gpio_num_t PowerGPIONum /* = GPIO_NUM_17 */,
-					gpio_num_t DccGPIONum /* = GPIO_NUM_18 */,
+	DCCGen::DCCGen(	gpio_num_t RailcomGPIONum /* = GPIO_NUM_4 */,
+					gpio_num_t PowerGPIONum /* = GPIO_NUM_2 */,
+					gpio_num_t DccGPIONum /* = GPIO_NUM_0 */,
 					rmt_channel_t channel /* = RMT_CHANNEL_0 */
 				  )
 	:	m_bContinue(true)
@@ -50,15 +50,8 @@ namespace TBTIoT
 	,	m_DccGPIONum(DccGPIONum)
 	,	m_Channel(channel)
 	{
-		memset(&m_gpioConfig, 0, sizeof(gpio_config_t));
-
-		m_gpioConfig.pin_bit_mask = ((1ULL << m_RailcomGPIONum) | (1ULL << m_PowerGPIONum));
-		m_gpioConfig.mode = GPIO_MODE_OUTPUT;
-		m_gpioConfig.pull_up_en = GPIO_PULLUP_ENABLE;
-		m_gpioConfig.pull_down_en = GPIO_PULLDOWN_DISABLE;
-		m_gpioConfig.intr_type = GPIO_INTR_DISABLE;
-
-		ESP_ERROR_CHECK(gpio_config(&m_gpioConfig));
+		gpio_set_direction(m_PowerGPIONum, GPIO_MODE_OUTPUT);
+		gpio_set_direction(m_RailcomGPIONum, GPIO_MODE_OUTPUT);
 
 		ESP_ERROR_CHECK(gpio_set_level(m_PowerGPIONum, 0));
 		ESP_ERROR_CHECK(gpio_set_level(m_RailcomGPIONum, 0));
