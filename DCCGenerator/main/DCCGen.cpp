@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Paul Van den Bergh <admin@paulvandenbergh.be>
+ * Copyright (C) 2018 Paul Van den Bergh <admin@paulvandenbergh.be>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -29,10 +29,12 @@
 
 #include "DCCGen.h"
 
-#include <cstring>
+#include "freertos/task.h"
 
+#include <cstring>
 #include <chrono>
 #include <iostream>
+
 using namespace std;
 
 namespace TBTIoT
@@ -81,6 +83,7 @@ namespace TBTIoT
 
 	DCCMessage* DCCGen::getNextDccMessage()
 	{
+		//	TODO write implementation
 		return nullptr;
 	}
 
@@ -90,22 +93,29 @@ namespace TBTIoT
 		const uint8_t _idleMsg[] = {0x03, 0xFF, 0x00, 0xFF};
 		DCCMessage IdleMessage(_idleMsg);
 
-		/* const */ rmt_item32_t preamble_items[PREAMBLE_NBR_CYCLES];
+		const rmt_item32_t preamble_items[PREAMBLE_NBR_CYCLES] =
+		{
+			DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT,
+			DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT,
+			DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT,
+			DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT
+		};
+
 		rmt_item32_t pItems[64];
 		uint16_t ItemCount = 0;
 
-		for(uint8_t i = 0; i < PREAMBLE_NBR_CYCLES; i++)
-		{
-			preamble_items[i] = DCCMessage::DCC_ONE_BIT;
-		}
-
 		DCCMessage* pNextMessage = nullptr;
+
+		TaskHandle_t taskHandle = (TaskHandle_t)(m_thread.native_handle());
+		UBaseType_t priority = uxTaskPriorityGet(taskHandle) + 1;
+		vTaskPrioritySet(taskHandle, priority);
 
 		while(m_bContinue)
 		{
 			//	send the preamble_items
 			ESP_ERROR_CHECK(rmt_write_items(m_rmtConfig.channel, preamble_items, PREAMBLE_NBR_CYCLES, false));
 
+			//	RailCom Gap.
 			// meanwhile  (we have 1856 µS to spend...)
 			usleep(28);
 			//	Shutdown power
@@ -133,10 +143,10 @@ namespace TBTIoT
 			ItemCount = (ItemCount > 64) ? 64 : ItemCount;
 			memcpy(pItems, pNextMessage->getItems(), ItemCount * sizeof(rmt_item32_t));
 
-			//	wait until preamble finished
+			//	wait until preamble items finished
 			ESP_ERROR_CHECK(rmt_wait_tx_done(m_rmtConfig.channel, PREAMBLE_WAIT_TIME));
 
-			//	send dcc data and wait until end of transmission
+			//	send dcc data items and wait until end of transmission
 			ESP_ERROR_CHECK(rmt_write_items(m_rmtConfig.channel, pItems, ItemCount, true));
 		}
 

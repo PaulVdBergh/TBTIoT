@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Paul Van den Bergh <admin@paulvandenbergh.be>
+ * Copyright (C) 2018 Paul Van den Bergh <admin@paulvandenbergh.be>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -59,15 +59,15 @@ namespace TBTIoT
 		protected:
 			virtual DCCMessage*	getNextDccMessage(void);
 
-			rmt_config_t 	m_rmtConfig;
-			gpio_config_t 	m_gpioConfig;
-
 
 		private:
 			void threadFunc(void);
 
 			thread			m_thread;
 			volatile bool 	m_bContinue;
+
+			rmt_config_t 	m_rmtConfig;
+
 			PowerState_t	m_PowerState;
 
 			gpio_num_t		m_PowerGPIONum;

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017 Paul Van den Bergh <admin@paulvandenbergh.be>
+ * Copyright (C) 2018 Paul Van den Bergh <admin@paulvandenbergh.be>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,7 +16,7 @@
  * 
  * =====================================================================
  *	This file is part of the TBTIoT project.  
- *	For more info see http://paulvandenbergh.be/TBT
+ *	For more info see http://paulvandenbergh.be
  * =====================================================================
  */
 
