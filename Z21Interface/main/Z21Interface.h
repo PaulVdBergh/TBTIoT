@@ -64,12 +64,12 @@ namespace TBTIoT
 		private:
 			void			threadFunc(void);
 
-			in_port_t		m_port;
-			thread			m_thread;
-			int 			m_fdStop;
-			int				m_fdsock_me;
-			recursive_mutex	m_Mfdsock_me;
-			sockaddr_in		m_sockaddr_me;
+			in_port_t			m_port;
+			thread				m_thread;
+			int					m_fdStop;
+			int					m_fdsock_me;
+			recursive_mutex		m_Mfdsock_me;
+			sockaddr_in			m_sockaddr_me;
 			vector<Z21Client*>	m_Clients;
 			recursive_mutex		m_MClients;
 

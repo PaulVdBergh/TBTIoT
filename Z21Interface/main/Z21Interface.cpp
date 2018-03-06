@@ -102,9 +102,9 @@ namespace TBTIoT
 			int recv_len = recvfrom(m_fdsock_me, recvbuffer, 128, 0, (sockaddr*)&si_other, &slen);
 			ESP_LOGI(m_TAG, "Received message from %s:%i, %i bytes.", inet_ntoa(si_other.sin_addr), si_other.sin_port, recv_len);
 			uint8_t* payload = recvbuffer;
+
 			while(payload < (recvbuffer + recv_len))
 			{
-//				ESP_LOGI(m_TAG, "*(uint32_t*)payload = 0x%08X", (*(uint32_t*)payload));
 				switch(*(uint32_t*)payload)
 				{
 					/** @ingroup Z21LANProtocol

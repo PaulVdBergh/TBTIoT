@@ -71,7 +71,6 @@ namespace TBTIoT
 	    ESP_ERROR_CHECK(rmt_config(&m_rmtConfig));
 	    ESP_ERROR_CHECK(rmt_driver_install(m_rmtConfig.channel, 0, 0));
 
-
 	    m_thread = thread([this]{threadFunc();});
 	}
 
