@@ -6,16 +6,17 @@
 #include "nvs_flash.h"
 #include "driver/gpio.h"
 
-void task_paho(void* ignore);
+//void task_paho(void* ignore);
 
 esp_err_t event_handler(void *ctx, system_event_t *event)
 {
 	if (event->event_id == SYSTEM_EVENT_STA_GOT_IP)
 	{
-	    xTaskCreatePinnedToCore(&task_paho, "task_paho", 8048, NULL, 5, NULL, 0);
+//	    xTaskCreatePinnedToCore(&task_paho, "task_paho", 8048, NULL, 5, NULL, 0);
 	}
 	return ESP_OK;
 }
+
 
 void app_main(void)
 {
