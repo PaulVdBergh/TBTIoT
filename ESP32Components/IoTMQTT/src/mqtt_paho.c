@@ -38,7 +38,7 @@ void task_paho(void *ignore) {
 	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
 	data.clientID          = clientId;
 	data.willFlag          = 0;
-	data.MQTTVersion       = 3;
+	data.MQTTVersion       = 4;
 	data.keepAliveInterval = 0;
 	data.cleansession      = 1;
 
@@ -53,6 +53,7 @@ void task_paho(void *ignore) {
 	if (rc != SUCCESS) {
 		ESP_LOGE(tag, "::MQTTSubscribe: %d", rc);
 	}
+
 	while(1) {
 		MQTTYield(&client, 1000);
 	}

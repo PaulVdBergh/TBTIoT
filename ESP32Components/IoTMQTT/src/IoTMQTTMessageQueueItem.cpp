@@ -28,14 +28,12 @@ void IoTMQTTMessageHandler_func(MessageData* md)
 	memcpy(Item.m_payload, md->message->payload, md->message->payloadlen);
 	Item.m_payloadlen = md->message->payloadlen;
 
-	xQueueReset(IoTMQTTMessageQueue);
-
 	if(pdPASS == xQueueSendToBack(IoTMQTTMessageQueue, &Item, 0))
 	{
 		ESP_LOGI(tag, "Item queued");
 	}
 	else
 	{
-		ESP_LOGI(tag, "Item failed to queue");
+		ESP_LOGE(tag, "Item failed to queue");
 	}
 }

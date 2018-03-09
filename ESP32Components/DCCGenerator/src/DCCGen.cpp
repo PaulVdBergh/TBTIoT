@@ -77,7 +77,7 @@ namespace TBTIoT
 
 	    m_thread = thread([this]{threadFunc();});
 
-	    MQTTSubscription* pSubscription = new MQTTSubscription("TBTIoT");
+	    MQTTSubscription* pSubscription = new MQTTSubscription("TBTIoT/Decoders/#");
 	}
 
 	DCCGen::~DCCGen()

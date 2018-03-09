@@ -9,6 +9,7 @@
 #define IOTMQTT_SRC_MQTTMESSAGEHANDLER_H_
 
 #include <algorithm>
+#include <map>
 #include <mutex>
 #include <thread>
 #include <vector>
@@ -17,8 +18,12 @@
 #include "IoTMQTTMessageQueueItem.h"
 using namespace std;
 
+extern MQTTClient client;
+
 namespace TBTIoT
 {
+
+	class BackupSubscription;	//	forward declaration
 
 	class MQTTMessageHandler
 	{
@@ -29,15 +34,22 @@ namespace TBTIoT
 			void RegisterSubscription(MQTTSubscription* pSub);
 			void unRegisterSubscription(MQTTSubscription* pSub);
 
+			void updateBackup(IoTMQTTMessageQueueItem* pItem);
+
 		protected:
 			MQTTMessageHandler();
 			void threadFunc(void);
 
 		private:
+			BackupSubscription*	m_pBackupSubscription;
+
 			thread	m_thread;
 
 			vector<MQTTSubscription*>	m_Subscriptions;
 			recursive_mutex	m_MSubscriptions;
+
+			map<string, IoTMQTTMessageQueueItem> m_BackupMessages;
+			recursive_mutex m_MBackupMessages;
 
 			static MQTTMessageHandler*	sm_pInstance;
 	};

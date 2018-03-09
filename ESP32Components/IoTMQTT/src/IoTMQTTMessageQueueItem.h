@@ -14,6 +14,10 @@
 #ifndef MAIN_IOTMQTTMESSAGEQUEUEITEM_H_
 #define MAIN_IOTMQTTMESSAGEQUEUEITEM_H_
 
+#ifndef MAX_TOPIC_SIZE
+#define MAX_TOPIC_SIZE 256
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -24,7 +28,7 @@ extern void IoTMQTTMessageHandler_func(MessageData* md);
 
 struct IoTMQTTMessageQueueItem
 {
-	char	m_Topic[256];
+	char	m_Topic[MAX_TOPIC_SIZE];
 	enum QoS		m_QoS;
 	unsigned char m_retained;
 	unsigned char m_dup;

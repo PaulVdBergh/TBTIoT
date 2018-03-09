@@ -12,6 +12,31 @@ static char tag[] = "MQTTMessageHandler";
 
 namespace TBTIoT
 {
+	class BackupSubscription : public MQTTSubscription
+	{
+		public:
+			BackupSubscription(MQTTMessageHandler* pHandler)
+			:	MQTTSubscription("#")
+			,	m_pHandler(pHandler)
+			{
+
+			}
+
+			void OnNewData(IoTMQTTMessageQueueItem* pItem)
+			{
+				static char tag[] = "BackupSubscription";
+				ESP_LOGI(tag, "OnNewData : topic = %s", pItem->m_Topic);
+				m_pHandler->updateBackup(pItem);
+			}
+
+		protected:
+			MQTTMessageHandler*	m_pHandler;
+
+		private:
+
+	};
+
+
 	MQTTMessageHandler* MQTTMessageHandler::getInstance()
 	{
 		if(nullptr == sm_pInstance)
@@ -34,8 +59,27 @@ namespace TBTIoT
 
 	void MQTTMessageHandler::RegisterSubscription(MQTTSubscription* pSub)
 	{
-		lock_guard<recursive_mutex> lock(m_MSubscriptions);
-		m_Subscriptions.push_back(pSub);
+		bool bNewSubscription = false;
+		{
+			lock_guard<recursive_mutex> lock(m_MSubscriptions);
+			auto thisone = find(m_Subscriptions.begin(), m_Subscriptions.end(), pSub);
+			bNewSubscription = (m_Subscriptions.end() == thisone);
+			if(bNewSubscription)
+			{
+				m_Subscriptions.push_back(pSub);
+			}
+		}
+		if(bNewSubscription)
+		{
+			lock_guard<recursive_mutex> lock1(m_MBackupMessages);
+			for(auto itempair : m_BackupMessages)
+			{
+				if(pSub->isTopicMatched(&(itempair.second)))
+				{
+					pSub->OnNewData(&(itempair.second));
+				}
+			}
+		}
 	}
 
 	void MQTTMessageHandler::unRegisterSubscription(MQTTSubscription* pSub)
@@ -46,6 +90,12 @@ namespace TBTIoT
 		{
 			m_Subscriptions.erase(thisOne);
 		}
+	}
+	void MQTTMessageHandler::updateBackup(IoTMQTTMessageQueueItem* pItem)
+	{
+		string topic(pItem->m_Topic);
+		lock_guard<recursive_mutex> lock(m_MBackupMessages);
+		m_BackupMessages[topic] = *pItem;
 	}
 
 	void MQTTMessageHandler::threadFunc(void)
@@ -66,6 +116,10 @@ namespace TBTIoT
 				}
 			}
 		} exec(&QueueItem);
+
+		vTaskDelay(1 / portTICK_PERIOD_MS);
+
+		m_pBackupSubscription = new BackupSubscription(this);
 
 		while(true)
 		{

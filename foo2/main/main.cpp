@@ -1,3 +1,10 @@
+/*
+ * To start debugger:
+ * 	$ cd ~/esp/openocd-esp32
+ * 	$ bin/openocd -s share/openocd/scripts -f interface/ftdi/esp32_devkitj_v1.cfg -f board/esp32-wrover.cfg
+ */
+
+
 #include "freertos/FreeRTOS.h"
 #include "esp_wifi.h"
 #include "esp_system.h"
