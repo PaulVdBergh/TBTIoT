@@ -32,8 +32,8 @@
   #define DLLImport
   #define DLLExport
 #endif
-#include "MQTTLinux.h"
-#include "MQTTPacket.h"
+#include "../MQTTClient-C/src/linux/MQTTLinux.h"
+#include "../MQTTPacket/src/MQTTPacket.h"
 #include "stdio.h"
 
 #if defined(MQTTCLIENT_PLATFORM_HEADER)

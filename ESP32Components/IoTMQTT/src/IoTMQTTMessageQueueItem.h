@@ -9,7 +9,7 @@
 #include <freertos/queue.h>
 #include <freertos/semphr.h>
 
-#include "MQTTClient.h"
+#include "../MQTTClient-C/src/linux/MQTTClient.h"
 
 #ifndef MAIN_IOTMQTTMESSAGEQUEUEITEM_H_
 #define MAIN_IOTMQTTMESSAGEQUEUEITEM_H_
