@@ -28,12 +28,11 @@
  */
 
 #include "IoTMQTT.h"
-#include "IoTMQTTSubscription.h"
-
 #include <inttypes.h>
 
 #include <algorithm>
 #include <iterator>
+#include "IoTMQTTSubscription.h"
 
 using namespace std;
 
