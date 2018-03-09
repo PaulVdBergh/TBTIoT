@@ -68,7 +68,7 @@ namespace TBTIoT
 		}
 		else
 		{
-			throw("DCCMessage::DCCMessage");
+			//throw("DCCMessage::DCCMessage");
 		}
 	}
 

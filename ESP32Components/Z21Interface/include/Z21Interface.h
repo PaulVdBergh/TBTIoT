@@ -54,7 +54,7 @@ namespace TBTIoT
 	class Z21Interface
 	{
 		public:
-			Z21Interface(in_port_t port);
+			Z21Interface(in_port_t port = 21105);
 			virtual ~Z21Interface();
 
 			ssize_t sendToSocket(const uint8_t* pMsg, sockaddr* address);

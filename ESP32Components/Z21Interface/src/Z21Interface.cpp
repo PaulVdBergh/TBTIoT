@@ -30,7 +30,7 @@
 #include "Z21Interface.h"
 #include "Z21Client.h"
 
-void* addZ21Interface(uint16_t port)
+void* addZ21Interface(uint16_t port /* = 21105 */)
 {
 	return new TBTIoT::Z21Interface(port);
 }
@@ -74,6 +74,7 @@ namespace TBTIoT
 
 	Z21Interface::~Z21Interface()
 	{
+//		bContinue = false;
 		m_thread.join();
 	}
 
