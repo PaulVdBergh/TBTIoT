@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (C) 2018 Paul Van den Bergh <admin@paulvandenbergh.be>
  *
  * This program is free software: you can redistribute it and/or modify

@@ -21,61 +21,39 @@
  */
 
 /*
- * MQTTMessageHandler.h
+ * MQTTPublisher.h
  *
- *  Created on: Mar 8, 2018
+ *  Created on: Mar 10, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef IOTMQTT_SRC_MQTTMESSAGEHANDLER_H_
-#define IOTMQTT_SRC_MQTTMESSAGEHANDLER_H_
+#ifndef IOTMQTT_INCLUDE_MQTTPUBLISHER_H_
+#define IOTMQTT_INCLUDE_MQTTPUBLISHER_H_
 
-#include <algorithm>
-#include <map>
-#include <mutex>
-#include <thread>
-#include <vector>
+#include "../MQTTClient-C/src/linux/MQTTClient.h"
 
-#include "MQTTSubscription.h"
-#include "IoTMQTTMessageQueueItem.h"
+#include <string>
 using namespace std;
-
-extern MQTTClient client;
 
 namespace TBTIoT
 {
 
-	class BackupSubscription;	//	forward declaration
-
-	class MQTTMessageHandler
+	class MQTTPublisher
 	{
 		public:
-			static MQTTMessageHandler* getInstance(void);
-			virtual ~MQTTMessageHandler();
+			MQTTPublisher(const string& topic);
+			virtual ~MQTTPublisher();
 
-			void RegisterSubscription(MQTTSubscription* pSub);
-			void unRegisterSubscription(MQTTSubscription* pSub);
-
-			void updateBackup(IoTMQTTMessageQueueItem* pItem);
+			int Publish(const string& payload, QoS qos = QOS0, bool retained = false);
+			int Publish(const char* payload, QoS qos = QOS0, bool retained = false);
+			int Publish(void* payload, size_t payloadlen, QoS qos = QOS0, bool retained = false);
 
 		protected:
-			MQTTMessageHandler();
-			void threadFunc(void);
+			string	m_Topic;
 
 		private:
-			BackupSubscription*	m_pBackupSubscription;
-
-			thread	m_thread;
-
-			vector<MQTTSubscription*>	m_Subscriptions;
-			recursive_mutex	m_MSubscriptions;
-
-			map<string, IoTMQTTMessageQueueItem> m_BackupMessages;
-			recursive_mutex m_MBackupMessages;
-
-			static MQTTMessageHandler*	sm_pInstance;
 	};
 
 } /* namespace TBTIoT */
 
-#endif /* IOTMQTT_SRC_MQTTMESSAGEHANDLER_H_ */
+#endif /* IOTMQTT_INCLUDE_MQTTPUBLISHER_H_ */
