@@ -13,50 +13,63 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  * =====================================================================
- *	This file is part of the TBTIoT project.
+ *	This file is part of the TBTIoT project.  
  *	For more info see http://paulvandenbergh.be
  * =====================================================================
  */
 
 /*
- * MQTTPublisher.h
+ * DCCDecoders.h
  *
  *  Created on: Mar 10, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef IOTMQTT_INCLUDE_MQTTPUBLISHER_H_
-#define IOTMQTT_INCLUDE_MQTTPUBLISHER_H_
+#ifndef MAIN_DECODERS_H_
+#define MAIN_DECODERS_H_
 
-#include "../MQTTClient-C/src/linux/MQTTClient.h"
+#include "MQTTSubscription.h"
+#include "Decoder.h"
 
+#include <map>
+#include <mutex>
 #include <string>
 using namespace std;
+
+#ifndef DCCDECODERS_TOPICBASEPATH
+#define DCCDECODERS_TOPICBASEPATH "TBTIoT/Decoders/"
+#endif
 
 namespace TBTIoT
 {
 
-	class MQTTPublisher
+	typedef map<DCCAddress_t, Decoder*> DecodersMap_t;
+
+	class Decoders : public MQTTSubscription
 	{
 		public:
-			MQTTPublisher(const string& topic);
-			virtual ~MQTTPublisher();
+			static Decoders* getInstance();
 
-			int Publish(const string& payload, QoS qos = QOS0, bool retained = false);
-			int Publish(const char* payload, QoS qos = QOS0, bool retained = false);
-			int Publish(const uint8_t& uint8Val, QoS qos = QOS0, bool retained = false);
-			int Publish(const bool& boolVal, QoS qos = QOS0, bool retained = false);
+			virtual ~Decoders();
 
-			int Publish(void* payload, size_t payloadlen, QoS qos = QOS0, bool retained = false);
+			void OnNewData(IoTMQTTMessageQueueItem* pItem);
 
 		protected:
-			string	m_Topic;
+			Decoders(const string& MQTTTopicBasePath = DCCDECODERS_TOPICBASEPATH);
+
+			Decoder* getDecoder(const DCCAddress_t& address);
 
 		private:
+			string				m_TopicBasePath;
+
+			static Decoders*	sm_Instance;
+
+			DecodersMap_t		sm_Decoders;
+			recursive_mutex		sm_MDecoders;
 	};
 
 } /* namespace TBTIoT */
 
-#endif /* IOTMQTT_INCLUDE_MQTTPUBLISHER_H_ */
+#endif /* MAIN_DECODERS_H_ */

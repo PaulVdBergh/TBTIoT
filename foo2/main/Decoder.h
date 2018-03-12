@@ -13,50 +13,49 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  * =====================================================================
- *	This file is part of the TBTIoT project.
+ *	This file is part of the TBTIoT project.  
  *	For more info see http://paulvandenbergh.be
  * =====================================================================
  */
 
 /*
- * MQTTPublisher.h
+ * Decoder.h
  *
  *  Created on: Mar 10, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef IOTMQTT_INCLUDE_MQTTPUBLISHER_H_
-#define IOTMQTT_INCLUDE_MQTTPUBLISHER_H_
+#ifndef MAIN_DECODER_H_
+#define MAIN_DECODER_H_
 
-#include "../MQTTClient-C/src/linux/MQTTClient.h"
+#include <stdint.h>
 
+#include <mutex>
 #include <string>
 using namespace std;
 
 namespace TBTIoT
 {
+	typedef uint16_t DCCAddress_t;
 
-	class MQTTPublisher
+	class Decoder
 	{
 		public:
-			MQTTPublisher(const string& topic);
-			virtual ~MQTTPublisher();
+			Decoder(const DCCAddress_t& address);
+			virtual ~Decoder();
 
-			int Publish(const string& payload, QoS qos = QOS0, bool retained = false);
-			int Publish(const char* payload, QoS qos = QOS0, bool retained = false);
-			int Publish(const uint8_t& uint8Val, QoS qos = QOS0, bool retained = false);
-			int Publish(const bool& boolVal, QoS qos = QOS0, bool retained = false);
-
-			int Publish(void* payload, size_t payloadlen, QoS qos = QOS0, bool retained = false);
+			virtual void onNewMQTTData(const string& topic, const string& payload) = 0;
 
 		protected:
-			string	m_Topic;
+			const DCCAddress_t	m_DccAddress;
+			recursive_mutex		m_MDecoder;
 
 		private:
+
 	};
 
 } /* namespace TBTIoT */
 
-#endif /* IOTMQTT_INCLUDE_MQTTPUBLISHER_H_ */
+#endif /* MAIN_DECODER_H_ */

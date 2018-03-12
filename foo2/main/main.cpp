@@ -16,7 +16,7 @@
 #include "esp_log.h"
 static char tag[] = "app_main";
 
-#include "DCCGen.h"
+#include "Decoders.h"
 
 using namespace TBTIoT;
 
@@ -54,7 +54,7 @@ void app_main(void)
     ESP_ERROR_CHECK( esp_wifi_start() );
     ESP_ERROR_CHECK( esp_wifi_connect() );
 
-    DCCGen* pDccGen = new DCCGen();
+    Decoders* pDecoders = Decoders::getInstance();
 
     gpio_set_direction(GPIO_NUM_4, GPIO_MODE_OUTPUT);
     int level = 0;

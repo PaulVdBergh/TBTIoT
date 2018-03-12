@@ -40,7 +40,7 @@ namespace TBTIoT
 	MQTTPublisher::MQTTPublisher(const string& topic)
 	:	m_Topic(topic)
 	{
-		ESP_LOGI(tag, "In Constructor");
+		ESP_LOGI(tag, "In Constructor : topic = %s", topic.c_str());
 	}
 
 	MQTTPublisher::~MQTTPublisher()
@@ -85,6 +85,19 @@ namespace TBTIoT
 		Message.payloadlen = strlen(payload) + 1;
 
 		return MQTTPublish(&client, m_Topic.c_str(), &Message);
+	}
+
+	int MQTTPublisher::Publish(const uint8_t& uint8Val, QoS qos, bool retained)
+	{
+		char szBuffer[5];
+		snprintf(szBuffer, 5, "%i", uint8Val);
+
+		return Publish(szBuffer, qos, retained);
+	}
+
+	int MQTTPublisher::Publish(const bool& boolVal, QoS qos, bool retained)
+	{
+		return Publish(boolVal ? "true" : "false", qos, retained);
 	}
 
 } /* namespace TBTIoT */

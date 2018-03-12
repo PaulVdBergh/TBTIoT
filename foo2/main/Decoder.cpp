@@ -13,50 +13,34 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
+ * 
  * =====================================================================
- *	This file is part of the TBTIoT project.
+ *	This file is part of the TBTIoT project.  
  *	For more info see http://paulvandenbergh.be
  * =====================================================================
  */
 
 /*
- * MQTTPublisher.h
+ * Decoder.cpp
  *
  *  Created on: Mar 10, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef IOTMQTT_INCLUDE_MQTTPUBLISHER_H_
-#define IOTMQTT_INCLUDE_MQTTPUBLISHER_H_
-
-#include "../MQTTClient-C/src/linux/MQTTClient.h"
-
-#include <string>
-using namespace std;
+#include "Decoder.h"
 
 namespace TBTIoT
 {
 
-	class MQTTPublisher
+	Decoder::Decoder(const DCCAddress_t& address)
+	:	m_DccAddress(address)
 	{
-		public:
-			MQTTPublisher(const string& topic);
-			virtual ~MQTTPublisher();
+	// TODO Auto-generated constructor stub
+	}
 
-			int Publish(const string& payload, QoS qos = QOS0, bool retained = false);
-			int Publish(const char* payload, QoS qos = QOS0, bool retained = false);
-			int Publish(const uint8_t& uint8Val, QoS qos = QOS0, bool retained = false);
-			int Publish(const bool& boolVal, QoS qos = QOS0, bool retained = false);
-
-			int Publish(void* payload, size_t payloadlen, QoS qos = QOS0, bool retained = false);
-
-		protected:
-			string	m_Topic;
-
-		private:
-	};
+	Decoder::~Decoder()
+	{
+	// TODO Auto-generated destructor stub
+	}
 
 } /* namespace TBTIoT */
-
-#endif /* IOTMQTT_INCLUDE_MQTTPUBLISHER_H_ */
