@@ -27,8 +27,8 @@
  *      Author: paulvdbergh
  */
 
-#ifndef MAIN_DECODER_H_
-#define MAIN_DECODER_H_
+#ifndef DECODERS_SRC_DECODER_H_
+#define DECODERS_SRC_DECODER_H_
 
 #include <stdint.h>
 
@@ -46,6 +46,8 @@ namespace TBTIoT
 			Decoder(const DCCAddress_t& address);
 			virtual ~Decoder();
 
+			const DCCAddress_t	getDCCAddress(void) { return m_DccAddress; }
+
 			virtual void onNewMQTTData(const string& topic, const string& payload) = 0;
 
 		protected:
@@ -58,4 +60,4 @@ namespace TBTIoT
 
 } /* namespace TBTIoT */
 
-#endif /* MAIN_DECODER_H_ */
+#endif /* DECODERS_SRC_DECODER_H_ */

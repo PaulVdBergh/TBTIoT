@@ -27,10 +27,10 @@
  *      Author: paulvdbergh
  */
 
-#ifndef MAIN_LOCDECODER_H_
-#define MAIN_LOCDECODER_H_
+#ifndef DECODERS_INCLUDE_LOCDECODER_H_
+#define DECODERS_INCLUDE_LOCDECODER_H_
 
-#include "Decoder.h"
+#include "../src/Decoder.h"
 #include "MQTTPublisher.h"
 
 namespace TBTIoT
@@ -43,6 +43,10 @@ namespace TBTIoT
 			virtual ~LocDecoder();
 
 			virtual void onNewMQTTData(const string& topic, const string& payload);
+
+			void	getLANLocInfo(uint8_t* pMsg);
+			uint8_t	getLocMode(void) { return m_LocMode; }
+			uint8_t	setLocMode(const uint8_t& newMode);
 
 			uint8_t	getSpeed(void);
 			bool	getBusy(void);
@@ -58,6 +62,7 @@ namespace TBTIoT
 			uint8_t	getFunctionGroup3(void);
 			uint8_t	getFunctionGroup4(void);
 			uint8_t	getFunctionGroup5(void);
+
 			bool	getLight(void);
 			bool	getF0(void);
 			bool	getF1(void);
@@ -104,6 +109,7 @@ namespace TBTIoT
 			void	setFunctionGroup3(const uint8_t& newValue);
 			void	setFunctionGroup4(const uint8_t& newValue);
 			void	setFunctionGroup5(const uint8_t& newValue);
+
 			void	setLight(const bool& newValue);
 			void	setF0(const bool& newValue);
 			void	setF1(const bool& newValue);
@@ -135,6 +141,7 @@ namespace TBTIoT
 			void	setF27(const bool& newValue);
 			void	setF28(const bool& newValue);
 
+
 		protected:
 
 			struct  locInfo_t
@@ -152,6 +159,7 @@ namespace TBTIoT
 				uint8_t		XOR 		= 0x00;
 			}__attribute__((packed));
 
+			uint8_t		m_LocMode;
 			locInfo_t	m_LocInfo;
 			string		m_BaseTopic;
 		private:
@@ -160,4 +168,4 @@ namespace TBTIoT
 
 } /* namespace TBTIoT */
 
-#endif /* MAIN_LOCDECODER_H_ */
+#endif /* DECODERS_INCLUDE_LOCDECODER_H_ */

@@ -30,13 +30,35 @@
 #ifndef MAIN_Z21CLIENT_H_
 #define MAIN_Z21CLIENT_H_
 
-namespace TBTIoT {
+#include "Z21Interface.h"
+#include "LocDecoder.h"
 
-class Z21Client {
-public:
-	Z21Client();
-	virtual ~Z21Client();
-};
+namespace TBTIoT
+{
+
+	class Z21Client
+	{
+		public:
+			Z21Client(Z21Interface* pinterface, const sockaddr_in& address);
+			virtual ~Z21Client();
+
+			void	broadcastPowerStateChange(const bool& newState);
+			void	broadcastLocInfoChanged(LocDecoder* pLoc);
+			void	broadcastEmergencyStop(void);
+			void	broadcastOvercurrent(void);
+
+			const sockaddr_in&	getAddress(void) { return m_Address; }
+			const uint32_t&		getBroadcastFlags(void);
+			void				setBroadcastFlags(uint32_t& newFlags) { m_BroadcastFlags = newFlags; }
+
+		protected:
+
+		private:
+			Z21Interface*		m_pInterface;
+			const sockaddr_in	m_Address;
+			uint32_t			m_BroadcastFlags;
+
+	};
 
 } /* namespace TBTIoT */
 

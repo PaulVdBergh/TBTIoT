@@ -29,10 +29,12 @@
 
 #include "Decoders.h"
 
+#include <cstring>
+#include <algorithm>
+
 #include "AccessoryDecoder.h"
 #include "LocDecoder.h"
-
-#include <cstring>
+using namespace std;
 
 #include <esp_log.h>
 static char tag[] = "Decoders";
@@ -53,7 +55,10 @@ namespace TBTIoT
 
 	Decoders::~Decoders()
 	{
-	// TODO Auto-generated destructor stub
+		for(auto decoderpair : m_Decoders)
+		{
+			delete decoderpair.second;
+		}
 	}
 
 	void Decoders::OnNewData(IoTMQTTMessageQueueItem* pItem)
@@ -84,10 +89,10 @@ namespace TBTIoT
 			return nullptr;
 		}
 
-		lock_guard<recursive_mutex> lock(sm_MDecoders);
+		lock_guard<recursive_mutex> lock(m_MDecoders);
 
-		auto pair = sm_Decoders.find(address);
-		if(sm_Decoders.end() != pair)
+		auto pair = m_Decoders.find(address);
+		if(m_Decoders.end() != pair)
 		{
 			return pair->second;
 		}
@@ -95,17 +100,17 @@ namespace TBTIoT
 		if((0x0000 < address) && (address < 0x0080))
 		{
 			//	LocDecoder with 7-bit addressing
-			return sm_Decoders[address] = new LocDecoder(address);
+			return m_Decoders[address] = new LocDecoder(address);
 		}
 		else if((0xC07F < address) && (address < 0xE800))
 		{
 			//	LocDecoder with 14-bit addressing
-			return sm_Decoders[address] = new LocDecoder(address);
+			return m_Decoders[address] = new LocDecoder(address);
 		}
 		else if((0x7FFF < address) && (address < 0xC07F))
 		{
 			//	AccessoryDecoder
-			return sm_Decoders[address] = new AccessoryDecoder(address);
+			return m_Decoders[address] = new AccessoryDecoder(address);
 		}
 		return nullptr;
 	}

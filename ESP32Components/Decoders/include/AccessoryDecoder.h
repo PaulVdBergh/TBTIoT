@@ -21,55 +21,34 @@
  */
 
 /*
- * DCCDecoders.h
+ * AccessoryDecoder.h
  *
- *  Created on: Mar 10, 2018
+ *  Created on: Mar 11, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef MAIN_DECODERS_H_
-#define MAIN_DECODERS_H_
+#ifndef DECODERS_INCLUDE_ACCESSORYDECODER_H_
+#define DECODERS_INCLUDE_ACCESSORYDECODER_H_
 
-#include "MQTTSubscription.h"
 #include "Decoder.h"
-
-#include <map>
-#include <mutex>
-#include <string>
-using namespace std;
-
-#ifndef DCCDECODERS_TOPICBASEPATH
-#define DCCDECODERS_TOPICBASEPATH "TBTIoT/Decoders/"
-#endif
 
 namespace TBTIoT
 {
 
-	typedef map<DCCAddress_t, Decoder*> DecodersMap_t;
-
-	class Decoders : public MQTTSubscription
+	class AccessoryDecoder: public Decoder
 	{
 		public:
-			static Decoders* getInstance();
+			AccessoryDecoder(const DCCAddress_t& address);
+			virtual ~AccessoryDecoder();
 
-			virtual ~Decoders();
-
-			void OnNewData(IoTMQTTMessageQueueItem* pItem);
+			virtual void onNewMQTTData(const string& topic, const string& payload);
 
 		protected:
-			Decoders(const string& MQTTTopicBasePath = DCCDECODERS_TOPICBASEPATH);
-
-			Decoder* getDecoder(const DCCAddress_t& address);
 
 		private:
-			string				m_TopicBasePath;
 
-			static Decoders*	sm_Instance;
-
-			DecodersMap_t		sm_Decoders;
-			recursive_mutex		sm_MDecoders;
 	};
 
 } /* namespace TBTIoT */
 
-#endif /* MAIN_DECODERS_H_ */
+#endif /* DECODERS_INCLUDE_ACCESSORYDECODER_H_ */

@@ -38,8 +38,12 @@ static char tag[] = "LocDecoder";
 namespace TBTIoT
 {
 
+#define LOCMODE_DCC	0
+#define LOCMODE_MM	1
+
 	LocDecoder::LocDecoder(const DCCAddress_t& address)
 	:	Decoder(address)
+	,	m_LocMode(LOCMODE_DCC)
 	{
 		ESP_LOGI(tag, "LocDecoder(%i)", address);
 
@@ -47,10 +51,26 @@ namespace TBTIoT
 		snprintf(szTopic, 256, "TBTIoT/Decoders/%i/", m_DccAddress);
 		m_BaseTopic = string(szTopic);
 
+		m_LocInfo.Addr_MSB = (m_DccAddress >> 8) & 0x3F;
+		m_LocInfo.Addr_LSB = (m_DccAddress & 0xFF);
+		setSpeedSteps(4);
 	}
 
 	LocDecoder::~LocDecoder()
 	{
+	}
+
+	uint8_t LocDecoder::setLocMode(const uint8_t& newMode)
+	{
+		if(256 > m_DccAddress)
+		{
+			m_LocMode = newMode;
+		}
+		else
+		{
+			m_LocMode = LOCMODE_DCC;
+		}
+		return m_LocMode;
 	}
 
 	void LocDecoder::onNewMQTTData(const string& topic, const string& payload)
@@ -117,106 +137,22 @@ namespace TBTIoT
 					else if(0 == strcmp("FunctionGroup1", szAttribute))
 					{
 						lock_guard<recursive_mutex> lock(m_MDecoder);
-						m_LocInfo.DB4 &= 0x1F;
+						m_LocInfo.DB4 &= ~(0x1F);
 						m_LocInfo.DB4 |= (0x1F & atoi(szValue));
-						return;
-					}
-					else if(0 == strcmp("Light", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB4 &= ~(0x10) : m_LocInfo.DB4 |= 0x10;
-						return;
-					}
-					else if(0 == strcmp("F0", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB4 &= ~(0x10) : m_LocInfo.DB4 |= 0x10;
-						return;
-					}
-					else if(0 == strcmp("F1", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB4 &= ~(0x01) : m_LocInfo.DB4 |= 0x01;
-						return;
-					}
-					else if(0 == strcmp("F2", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB4 &= ~(0x02) : m_LocInfo.DB4 |= 0x02;
-						return;
-					}
-					else if(0 == strcmp("F3", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB4 &= ~(0x04) : m_LocInfo.DB4 |= 0x04;
-						return;
-					}
-					else if(0 == strcmp("F4", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB4 &= ~(0x08) : m_LocInfo.DB4 |= 0x08;
 						return;
 					}
 					else if(0 == strcmp("FunctionGroup2", szAttribute))
 					{
 						lock_guard<recursive_mutex> lock(m_MDecoder);
-						m_LocInfo.DB5 &= 0x0F;
+						m_LocInfo.DB5 &= ~(0x0F);
 						m_LocInfo.DB5 |= (0x0F & atoi(szValue));
-						return;
-					}
-					else if(0 == strcmp("F5", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB5 &= ~(0x01) : m_LocInfo.DB5 |= 0x01;
-						return;
-					}
-					else if(0 == strcmp("F6", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB5 &= ~(0x02) : m_LocInfo.DB5 |= 0x02;
-						return;
-					}
-					else if(0 == strcmp("F7", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB5 &= ~(0x04) : m_LocInfo.DB5 |= 0x04;
-						return;
-					}
-					else if(0 == strcmp("F8", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB5 &= ~(0x08) : m_LocInfo.DB5 |= 0x08;
 						return;
 					}
 					else if(0 == strcmp("FunctionGroup3", szAttribute))
 					{
 						lock_guard<recursive_mutex> lock(m_MDecoder);
-						m_LocInfo.DB5 &= 0x0F;
-						m_LocInfo.DB5 |= ((0x0F & atoi(szValue)) << 4);
-						return;
-					}
-					else if(0 == strcmp("F9", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB5 &= ~(0x10) : m_LocInfo.DB5 |= 0x10;
-						return;
-					}
-					else if(0 == strcmp("F10", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB5 &= ~(0x20) : m_LocInfo.DB5 |= 0x20;
-						return;
-					}
-					else if(0 == strcmp("F11", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB5 &= ~(0x40) : m_LocInfo.DB5 |= 0x40;
-						return;
-					}
-					else if(0 == strcmp("F12", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB5 &= ~(0x80) : m_LocInfo.DB5 |= 0x80;
+						m_LocInfo.DB5 &= ~(0xF0);
+						m_LocInfo.DB5 |= ((0xF0 & atoi(szValue)));
 						return;
 					}
 					else if(0 == strcmp("FunctionGroup4", szAttribute))
@@ -225,106 +161,10 @@ namespace TBTIoT
 						m_LocInfo.DB6 = atoi(szValue);
 						return;
 					}
-					else if(0 == strcmp("F13", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB6 &= ~(0x01) : m_LocInfo.DB6 |= 0x01;
-						return;
-					}
-					else if(0 == strcmp("F14", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB6 &= ~(0x02) : m_LocInfo.DB6 |= 0x02;
-						return;
-					}
-					else if(0 == strcmp("F15", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB6 &= ~(0x04) : m_LocInfo.DB6 |= 0x04;
-						return;
-					}
-					else if(0 == strcmp("F16", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB6 &= ~(0x08) : m_LocInfo.DB6 |= 0x08;
-						return;
-					}
-					else if(0 == strcmp("F17", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB6 &= ~(0x10) : m_LocInfo.DB6 |= 0x10;
-						return;
-					}
-					else if(0 == strcmp("F18", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB6 &= ~(0x20) : m_LocInfo.DB6 |= 0x20;
-						return;
-					}
-					else if(0 == strcmp("F19", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB6 &= ~(0x40) : m_LocInfo.DB6 |= 0x40;
-						return;
-					}
-					else if(0 == strcmp("F20", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB6 &= ~(0x80) : m_LocInfo.DB6 |= 0x80;
-						return;
-					}
 					else if(0 == strcmp("FunctionGroup5", szAttribute))
 					{
 						lock_guard<recursive_mutex> lock(m_MDecoder);
 						m_LocInfo.DB7 = atoi(szValue);
-						return;
-					}
-					else if(0 == strcmp("F21", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB7 &= ~(0x01) : m_LocInfo.DB7 |= 0x01;
-						return;
-					}
-					else if(0 == strcmp("F22", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB7 &= ~(0x02) : m_LocInfo.DB7 |= 0x02;
-						return;
-					}
-					else if(0 == strcmp("F23", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB7 &= ~(0x04) : m_LocInfo.DB7 |= 0x04;
-						return;
-					}
-					else if(0 == strcmp("F24", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB7 &= ~(0x08) : m_LocInfo.DB7 |= 0x08;
-						return;
-					}
-					else if(0 == strcmp("F25", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB7 &= ~(0x10) : m_LocInfo.DB7 |= 0x10;
-						return;
-					}
-					else if(0 == strcmp("F26", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB7 &= ~(0x20) : m_LocInfo.DB7 |= 0x20;
-						return;
-					}
-					else if(0 == strcmp("F27", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB7 &= ~(0x40) : m_LocInfo.DB7 |= 0x40;
-						return;
-					}
-					else if(0 == strcmp("F28", szAttribute))
-					{
-						lock_guard<recursive_mutex> lock(m_MDecoder);
-						strcmp("true", szValue) ? m_LocInfo.DB5 &= ~(0x80) : m_LocInfo.DB5 |= 0x80;
 						return;
 					}
 					else
@@ -334,6 +174,17 @@ namespace TBTIoT
 				}
 			}
 		}
+	}
+
+	void LocDecoder::getLANLocInfo(uint8_t* pMsg)
+	{
+		lock_guard<recursive_mutex> guard(m_MDecoder);
+		m_LocInfo.XOR = 0;
+		for(uint8_t i = 4; i < *((uint8_t*)&m_LocInfo.DataLen); i++)
+		{
+			m_LocInfo.XOR ^= ((uint8_t*)&m_LocInfo)[i];
+		}
+		memcpy(pMsg, &m_LocInfo, *((uint8_t*)&m_LocInfo.DataLen));
 	}
 
 	void LocDecoder::setSpeed(const uint8_t& newValue)
@@ -413,152 +264,152 @@ namespace TBTIoT
 
 	void LocDecoder::setLight(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "Light").Publish(newValue);
+		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x10 : getFunctionGroup1() & ~(0x10));
 	}
 
 	void LocDecoder::setF0(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F0").Publish(newValue);
+		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x10 : getFunctionGroup1() & ~(0x10));
 	}
 
 	void LocDecoder::setF1(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F1").Publish(newValue);
+		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x01 : getFunctionGroup1() & ~(0x01));
 	}
 
 	void LocDecoder::setF2(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F2").Publish(newValue);
+		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x02 : getFunctionGroup1() & ~(0x02));
 	}
 
 	void LocDecoder::setF3(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F3").Publish(newValue);
+		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x04 : getFunctionGroup1() & ~(0x04));
 	}
 
 	void LocDecoder::setF4(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F4").Publish(newValue);
+		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x08 : getFunctionGroup1() & ~(0x08));
 	}
 
 	void LocDecoder::setF5(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F5").Publish(newValue);
+		setFunctionGroup2(newValue ? getFunctionGroup2() | 0x01 : getFunctionGroup2() & ~(0x01));
 	}
 
 	void LocDecoder::setF6(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F6").Publish(newValue);
+		setFunctionGroup2(newValue ? getFunctionGroup2() | 0x02 : getFunctionGroup2() & ~(0x02));
 	}
 
 	void LocDecoder::setF7(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F7").Publish(newValue);
+		setFunctionGroup2(newValue ? getFunctionGroup2() | 0x04 : getFunctionGroup2() & ~(0x04));
 	}
 
 	void LocDecoder::setF8(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F8").Publish(newValue);
+		setFunctionGroup2(newValue ? getFunctionGroup2() | 0x08 : getFunctionGroup2() & ~(0x08));
 	}
 
 	void LocDecoder::setF9(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F9").Publish(newValue);
+		setFunctionGroup3(newValue ? getFunctionGroup3() | 0x10 : getFunctionGroup3() & ~(0x10));
 	}
 
 	void LocDecoder::setF10(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F10").Publish(newValue);
+		setFunctionGroup3(newValue ? getFunctionGroup3() | 0x20 : getFunctionGroup3() & ~(0x20));
 	}
 
 	void LocDecoder::setF11(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F11").Publish(newValue);
+		setFunctionGroup3(newValue ? getFunctionGroup3() | 0x40 : getFunctionGroup3() & ~(0x40));
 	}
 
 	void LocDecoder::setF12(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F12").Publish(newValue);
+		setFunctionGroup3(newValue ? getFunctionGroup3() | 0x80 : getFunctionGroup3() & ~(0x80));
 	}
 
 	void LocDecoder::setF13(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F13").Publish(newValue);
+		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x01 : getFunctionGroup4() & ~(0x01));
 	}
 
 	void LocDecoder::setF14(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F14").Publish(newValue);
+		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x02 : getFunctionGroup4() & ~(0x02));
 	}
 
 	void LocDecoder::setF15(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F15").Publish(newValue);
+		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x04 : getFunctionGroup4() & ~(0x04));
 	}
 
 	void LocDecoder::setF16(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F16").Publish(newValue);
+		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x08 : getFunctionGroup4() & ~(0x08));
 	}
 
 	void LocDecoder::setF17(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F17").Publish(newValue);
+		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x10 : getFunctionGroup4() & ~(0x10));
 	}
 
 	void LocDecoder::setF18(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F18").Publish(newValue);
+		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x20 : getFunctionGroup4() & ~(0x20));
 	}
 
 	void LocDecoder::setF19(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F19").Publish(newValue);
+		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x40 : getFunctionGroup4() & ~(0x40));
 	}
 
 	void LocDecoder::setF20(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F20").Publish(newValue);
+		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x80 : getFunctionGroup4() & ~(0x80));
 	}
 
 	void LocDecoder::setF21(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F21").Publish(newValue);
+		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x01 : getFunctionGroup5() & ~(0x01));
 	}
 
 	void LocDecoder::setF22(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F22").Publish(newValue);
+		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x02 : getFunctionGroup5() & ~(0x02));
 	}
 
 	void LocDecoder::setF23(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F23").Publish(newValue);
+		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x04 : getFunctionGroup5() & ~(0x04));
 	}
 
 	void LocDecoder::setF24(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F24").Publish(newValue);
+		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x08 : getFunctionGroup5() & ~(0x08));
 	}
 
 	void LocDecoder::setF25(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F25").Publish(newValue);
+		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x10 : getFunctionGroup5() & ~(0x10));
 	}
 
 	void LocDecoder::setF26(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F26").Publish(newValue);
+		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x20 : getFunctionGroup5() & ~(0x20));
 	}
 
 	void LocDecoder::setF27(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F27").Publish(newValue);
+		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x40 : getFunctionGroup5() & ~(0x40));
 	}
 
 	void LocDecoder::setF28(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "F28").Publish(newValue);
+		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x80 : getFunctionGroup5() & ~(0x80));
 	}
 
 	uint8_t	LocDecoder::getSpeed(void)
@@ -824,6 +675,5 @@ namespace TBTIoT
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB7 & 0x80;
 	}
-
 
 } /* namespace TBTIoT */

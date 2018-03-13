@@ -30,6 +30,11 @@
 #include "Z21Interface.h"
 #include "Z21Client.h"
 
+#include <algorithm>
+using namespace std;
+
+static const char* Tag = "Z21Interface";
+
 void* addZ21Interface(uint16_t port /* = 21105 */)
 {
 	return new TBTIoT::Z21Interface(port);
@@ -52,22 +57,22 @@ namespace TBTIoT
 //		m_fdStop = eventfd(0, 0);
 
 		m_fdsock_me = ::socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-		ESP_LOGI(m_TAG, "::socket(...) returned %i", m_fdsock_me);
+		ESP_LOGI(Tag, "::socket(...) returned %i", m_fdsock_me);
 
 		int optVal = 1;
 		int result = ::setsockopt(m_fdsock_me, SOL_SOCKET, SO_REUSEADDR, &optVal, sizeof(optVal));
-		ESP_LOGI(m_TAG, "setsockopt(SO_REUSEADDR) returned %i", result);
+		ESP_LOGI(Tag, "setsockopt(SO_REUSEADDR) returned %i", result);
 
 		result = ::setsockopt(m_fdsock_me, SOL_SOCKET, SO_REUSEPORT, &optVal, sizeof(optVal));
-		ESP_LOGI(m_TAG, "setsockopt(SO_REUSEPORT) returned %i", result);
+		ESP_LOGI(Tag, "setsockopt(SO_REUSEPORT) returned %i", result);
 
 		memset(&m_sockaddr_me, 0, sizeof(sockaddr_in));
 		m_sockaddr_me.sin_family = AF_INET;
-		m_sockaddr_me.sin_port = htons(m_port);
-		m_sockaddr_me.sin_addr.s_addr = htonl(INADDR_ANY);
+		m_sockaddr_me.sin_port = lwip_htons(m_port);
+		m_sockaddr_me.sin_addr.s_addr = lwip_htonl(INADDR_ANY);
 
-		result = ::bind(m_fdsock_me, (struct sockaddr*)&m_sockaddr_me, sizeof(m_sockaddr_me));
-		ESP_LOGI(m_TAG, "bind(...) returned %i", result);
+		result = ::bind(m_fdsock_me, (const struct sockaddr*)&m_sockaddr_me, sizeof(m_sockaddr_me));
+		ESP_LOGI(Tag, "bind(...) returned %i", result);
 
 	    m_thread = thread([this]{threadFunc();});
 	}
@@ -84,14 +89,84 @@ namespace TBTIoT
 		ssize_t size = sendto(m_fdsock_me, pMsg, pMsg[0], 0, address, sizeof(struct sockaddr_in));
 		if(-1 == size)
 		{
-			ESP_LOGE(m_TAG, "Error sending to UDP address %s:%i", inet_ntoa(((struct sockaddr_in*)address)->sin_addr), ((struct sockaddr_in*)address)->sin_port);
+			ESP_LOGE(Tag, "Error sending to UDP address %s:%i", inet_ntoa(((struct sockaddr_in*)address)->sin_addr), ((struct sockaddr_in*)address)->sin_port);
 		}
 		return size;
 	}
 
+	void Z21Interface::broadcastPowerStateChange(const bool& newState)
+	{
+		lock_guard<recursive_mutex> lock(m_MClients);
+		for(auto client : m_Clients)
+		{
+			client->broadcastPowerStateChange(newState);
+		}
+	}
+
+	void Z21Interface::broadcastLocInfoChanged(LocDecoder* pLoc)
+	{
+		lock_guard<recursive_mutex> lock(m_MClients);
+		for(auto client : m_Clients)
+		{
+			client->broadcastLocInfoChanged(pLoc);
+		}
+	}
+
+	void Z21Interface::broadcastEmergencyStop()
+	{
+		lock_guard<recursive_mutex> lock(m_MClients);
+		for(auto client : m_Clients)
+		{
+			client->broadcastEmergencyStop();
+		}
+	}
+
+	void Z21Interface::broadcastOvercurrent()
+	{
+		lock_guard<recursive_mutex> lock(m_MClients);
+		for(auto client : m_Clients)
+		{
+			client->broadcastOvercurrent();
+		}
+	}
+
+	Z21Client* Z21Interface::findClient(const sockaddr_in& address)
+	{
+		lock_guard<recursive_mutex> lock(m_MClients);
+		auto client = find_if(m_Clients.begin(), m_Clients.end(), [&address](Z21Client* p){
+			const sockaddr_in& otheraddress = p->getAddress();
+			return (
+					(otheraddress.sin_addr.s_addr == address.sin_addr.s_addr)
+				&& 	(otheraddress.sin_port == address.sin_port)
+					);
+		});
+
+		if(m_Clients.end() == client)
+		{
+			Z21Client* pClient = new Z21Client(this, address);
+			m_Clients.push_back(pClient);
+			return pClient;
+		}
+
+		return *client;
+	}
+
+	bool Z21Interface::removeClient(Z21Client* pClient)
+	{
+		lock_guard<recursive_mutex> lock(m_MClients);
+		auto it = find(m_Clients.begin(), m_Clients.end(), pClient);
+		if(m_Clients.end() != it)
+		{
+			m_Clients.erase(it);
+			delete pClient;
+			return true;
+		}
+		return false;
+	}
+
 	void Z21Interface::threadFunc(void)
 	{
-		ESP_LOGI(m_TAG, "entered threadFunc()");
+		ESP_LOGI(Tag, "entered threadFunc()");
 		uint8_t recvbuffer[128];
 		sockaddr_in	si_other;
 		socklen_t slen = sizeof(si_other);
@@ -99,10 +174,12 @@ namespace TBTIoT
 
 		while(bContinue)
 		{
-			ESP_LOGI(m_TAG, "Waiting for message...");
+			ESP_LOGI(Tag, "Waiting for message...");
 			int recv_len = recvfrom(m_fdsock_me, recvbuffer, 128, 0, (sockaddr*)&si_other, &slen);
-			ESP_LOGI(m_TAG, "Received message from %s:%i, %i bytes.", inet_ntoa(si_other.sin_addr), si_other.sin_port, recv_len);
+			ESP_LOGI(Tag, "Received message from %s:%i, %i bytes.", inet_ntoa(si_other.sin_addr), si_other.sin_port, recv_len);
 			uint8_t* payload = recvbuffer;
+
+			Z21Client* pClient = findClient(si_other);
 
 			while(payload < (recvbuffer + recv_len))
 			{
@@ -127,7 +204,7 @@ namespace TBTIoT
 					 */
 					case 0x00100004:
 					{
-						ESP_LOGI(m_TAG, "LAN_GET_SERIAL_NUMBER");
+						ESP_LOGI(Tag, "LAN_GET_SERIAL_NUMBER");
 						static const uint8_t LAN_SERIAL_NUMBER[] = {0x08, 0x00, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00};
 						sendToSocket(LAN_SERIAL_NUMBER, (sockaddr*)&si_other);
 						break;
@@ -162,7 +239,7 @@ namespace TBTIoT
 					 */
 					case 0x00180004:
 					{
-						ESP_LOGI(m_TAG, "LAN_GET_CODE");
+						ESP_LOGI(Tag, "LAN_GET_CODE");
 						static const uint8_t LAN_CODE[] = {0x05, 0x00, 0x18, 0x00, 0x00};
 						sendToSocket(LAN_CODE, (sockaddr*)&si_other);
 						break;
@@ -199,7 +276,7 @@ namespace TBTIoT
 					 */
 					case 0x001A0004: //  LAN_GET_HWINFO
 					{
-						ESP_LOGI(m_TAG, "LAN_GET_HWINFO\n");
+						ESP_LOGI(Tag, "LAN_GET_HWINFO\n");
 						static const uint8_t LAN_HWINFO[] = {0x0C, 0x00, 0x1A, 0x00, 0x01, 0x02, 0x00, 0x00, 0x30, 0x01, 0x00, 0x00};
 						sendToSocket(LAN_HWINFO, (sockaddr*)&si_other);
 						break;
@@ -225,8 +302,8 @@ namespace TBTIoT
 					 */
 					case 0x00300004:
 					{
-						ESP_LOGW(m_TAG, "LAN_LOGOFF TODO Implementation");
-//						removeClient(pClient);
+						ESP_LOGW(Tag, "LAN_LOGOFF");
+						removeClient(pClient);
 						break;
 					}
 
@@ -250,11 +327,11 @@ namespace TBTIoT
 					 */
 					case 0x00510004:
 					{
-						ESP_LOGW(m_TAG, "LAN_GET_BROADCASTFLAGS TODO Implementation");
-/*						static uint8_t LAN_BROADCASTFLAGS[] = {0x08, 0x00, 0x51, 0x00, 0x00, 0x00, 0x00, 0x00};
+						ESP_LOGW(Tag, "LAN_GET_BROADCASTFLAGS");
+						static uint8_t LAN_BROADCASTFLAGS[] = {0x08, 0x00, 0x51, 0x00, 0x00, 0x00, 0x00, 0x00};
 						*((uint32_t*)(&LAN_BROADCASTFLAGS[4])) = pClient->getBroadcastFlags();
 						sendToSocket(LAN_BROADCASTFLAGS, (struct sockaddr*)&si_other);
-*/						break;
+						break;
 					}
 
 					/** ---
@@ -271,7 +348,7 @@ namespace TBTIoT
 					 */
 					case 0x00850004: //  LAN_SYSTEMSTATE_GETDATA
 					{
-						ESP_LOGW(m_TAG, "LAN_SYSTEMSTATE_GETDATA TODO Implementation");
+						ESP_LOGW(Tag, "LAN_SYSTEMSTATE_GETDATA TODO Implementation");
 /*						SystemState state;
 						pClient->getInterface()->getManager()->getSystemState(&state);
 						sendToSocket((uint8_t*)&state, (struct sockaddr*)&si_other);
@@ -293,7 +370,7 @@ namespace TBTIoT
 					 */
 					case 0x00A20004: //  LAN_LOCONET_FROM_LAN
 					{
-						ESP_LOGW(m_TAG, "LAN_LOCONET_FROM_LAN TODO Implementation");
+						ESP_LOGW(Tag, "LAN_LOCONET_FROM_LAN TODO Implementation");
 						//	TODO implementation
 						break;
 					}
@@ -335,7 +412,7 @@ namespace TBTIoT
 					 */
 					case 0x00810005: //  LAN_RMBUS_GETDATA
 					{
-						ESP_LOGW(m_TAG, "LAN_RMBUS_GETDATA TODO Implementation");
+						ESP_LOGW(Tag, "LAN_RMBUS_GETDATA TODO Implementation");
 						//	TODO implementation
 						break;
 					}
@@ -364,7 +441,7 @@ namespace TBTIoT
 					 */
 					case 0x00820005: //  LAN_RMBUS_PROGRAMMODULE
 					{
-						ESP_LOGW(m_TAG, "LAN_RMBUS_PROGRAMMODULE TODO Implementation");
+						ESP_LOGW(Tag, "LAN_RMBUS_PROGRAMMODULE TODO Implementation");
 						//	TODO implementation
 						break;
 					}
@@ -394,19 +471,15 @@ namespace TBTIoT
 					 */
 					case 0x00600006: //  LAN_GET_LOCOMODE
 					{
-						ESP_LOGW(m_TAG, "LAN_GET_LOC0MODE TODO Implementation");
-/*						Manager* pManager = pClient->getInterface()->getManager();
+						ESP_LOGW(Tag, "LAN_GET_LOC0MODE TODO Implementation");
 						uint16_t dccAddress = (payload[4] << 8) + payload[5];
 						if(dccAddress > 127)
 						{
 							dccAddress |= 0xC000;
 						}
-						Decoder* pDecoder = pManager->findDecoder(dccAddress);
-						if (pDecoder == NULL)
-						{
-							pDecoder = new LocDecoder(pManager, dccAddress);
-						}
-						LocDecoder* pLoc = dynamic_cast<LocDecoder*>(pDecoder);
+						Decoder* pDecoder = findDecoder(dccAddress);
+//	TODO						LocDecoder* pLoc = dynamic_cast<LocDecoder*>(pDecoder);
+						LocDecoder* pLoc = (LocDecoder*)findDecoder(dccAddress);
 						if (pLoc)
 						{
 							uint8_t locMode[] = { 0x07, 0x00, 0x60, 0x00, 0x00, 0x00, 0x00};
@@ -415,7 +488,7 @@ namespace TBTIoT
 							locMode[6] = pLoc->getLocMode();
 							sendToSocket(locMode, (struct sockaddr*)&si_other);
 						}
-*/						break;
+						break;
 					}
 
 					/** ---
@@ -434,10 +507,10 @@ namespace TBTIoT
 					 */
 					case 0x00400006:
 					{
-						ESP_LOGW(m_TAG, "LAN_X_SET_STOP TODO Implementation");
+						ESP_LOGW(Tag, "LAN_X_SET_STOP");
 						if(payload[4] == 0x80)
 						{
-//							pClient->getInterface()->getManager()->setEmergencyStop();
+							broadcastEmergencyStop();
 						}
 						break;
 					}
@@ -470,14 +543,14 @@ namespace TBTIoT
 					 */
 					case 0x00700006: //  LAN_GET_TURNOUTMODE
 					{
-						ESP_LOGW(m_TAG, "LAN_GET_TURNOUTMODE TODO Implementation");
+						ESP_LOGW(Tag, "LAN_GET_TURNOUTMODE TODO Implementation");
 						//	TODO implementation
 						break;
 					}
 
 					case 0x00A30006: //  LAN_LOCONET_DISPATCH_ADDR
 					{
-						ESP_LOGW(m_TAG, "LAN_LOCONET_DISPATCH_ADDR TODO Implementation");
+						ESP_LOGW(Tag, "LAN_LOCONET_DISPATCH_ADDR TODO Implementation");
 						//	TODO implementation
 						break;
 					}
@@ -509,7 +582,7 @@ namespace TBTIoT
 							 */
 							case 0x2121: //  LAN_X_GET_VERSION
 							{
-								ESP_LOGI(m_TAG, "LAN_X_GET_VERSION");
+								ESP_LOGI(Tag, "LAN_X_GET_VERSION");
 								if (payload[6] == 0x00) //  xor check
 								{
 									const uint8_t LAN_X_VERSION[] = {0x09, 0x00, 0x40, 0x00, 0x63, 0x21, 0x30, 0x12, 0x60};
@@ -542,7 +615,7 @@ namespace TBTIoT
 							 */
 							case 0x2421: //  LAN_X_GET_STATUS
 							{
-								ESP_LOGW(m_TAG, "LAN_X_GET_STATUS TODO Implementation");
+								ESP_LOGW(Tag, "LAN_X_GET_STATUS TODO Implementation");
 								if (payload[6] == 0x05)
 								{
 									uint8_t LAN_X_STATUS[] = {0x08, 0x00, 0x40, 0x00, 0x62, 0x22, 0x00, 0x00};
@@ -571,10 +644,10 @@ namespace TBTIoT
 							 */
 							case 0x8021: //  LAN_X_SET_TRACK_POWER_OFF
 							{
-								ESP_LOGW(m_TAG, "LAN_X_SET_TRACK_POWER_OFF TODO Implementation");
+								ESP_LOGW(Tag, "LAN_X_SET_TRACK_POWER_OFF");
 								if (payload[6] == 0xA1)
 								{
-//									pClient->getInterface()->getManager()->setPowerState(PowerOff);
+									broadcastPowerStateChange(PowerOff);
 								}
 								break;
 							}
@@ -595,10 +668,10 @@ namespace TBTIoT
 							 */
 							case 0x8121: //  LAN_X_SET_TRACK_POWER_ON
 							{
-								ESP_LOGW(m_TAG, "LAN_X_SET_TRACK_POWER_ON TODO Implementation");
+								ESP_LOGW(Tag, "LAN_X_SET_TRACK_POWER_ON");
 								if (payload[6] == 0xA0)
 								{
-//									pClient->getInterface()->getManager()->setPowerState(PowerOn);
+									broadcastPowerStateChange(PowerOn);
 								}
 								break;
 							}
@@ -630,7 +703,7 @@ namespace TBTIoT
 							 */
 							case 0x0AF1:
 							{
-								ESP_LOGI(m_TAG, "LAN_X_GET_FIRMWARE_VERSION");
+								ESP_LOGI(Tag, "LAN_X_GET_FIRMWARE_VERSION");
 								if (payload[6] == 0xFB)
 								{
 									const uint8_t LAN_X_FIRMWARE_VERSION[] = {0x09, 0x00, 0x40, 0x00, 0xF3, 0x0A, 0x01, 0x30, 0xC8};
@@ -669,7 +742,7 @@ namespace TBTIoT
 					 */
 					case 0x00610007: //  LAN_SET_LOCOMODE
 					{
-						ESP_LOGW(m_TAG, "LAN_SET_LOCOMODE TODO Implementation");
+						ESP_LOGW(Tag, "LAN_SET_LOCOMODE TODO Implementation");
 /*						Manager* pManager = pClient->getInterface()->getManager();
 						uint16_t dccAddress = (payload[4] << 8) + payload[5];
 						if(dccAddress > 127)
@@ -711,7 +784,7 @@ namespace TBTIoT
 					 */
 					case 0x00710007: //  LAN_SET_TURNOUTMODE
 					{
-						ESP_LOGW(m_TAG, "LAN_SET_TURNOUTMODE TODO Implementation");
+						ESP_LOGW(Tag, "LAN_SET_TURNOUTMODE TODO Implementation");
 						//	TODO implementation
 						break;
 					}
@@ -730,21 +803,21 @@ namespace TBTIoT
 					 */
 					case 0x00890007: //  LAN_RAILCOM_GETDATA
 					{
-						ESP_LOGW(m_TAG, "LAN_RAILCOM_GETDATA TODO Implementation");
+						ESP_LOGW(Tag, "LAN_RAILCOM_GETDATA TODO Implementation");
 						//	TODO implementation
 						break;
 					}
 
 					case 0x00A40007: //  LAN_LOCONET_DETECTOR
 					{
-						ESP_LOGW(m_TAG, "LAN_LOCONET_DETECTOR TODO Implementation");
+						ESP_LOGW(Tag, "LAN_LOCONET_DETECTOR TODO Implementation");
 						//	TODO implementation
 						break;
 					}
 
 					case 0x00C40007: //  LAN_CAN_DETECTOR
 					{
-						ESP_LOGW(m_TAG, "LAN_CAN_DETECTOR TODO Implementation");
+						ESP_LOGW(Tag, "LAN_CAN_DETECTOR TODO Implementation");
 						//	TODO implementation
 						break;
 					}
@@ -757,7 +830,7 @@ namespace TBTIoT
 							{
 								if (payload[5] == 0x11) //  LAN_X_DCC_READ_REGISTER
 								{
-									ESP_LOGW(m_TAG, "LAN_X_DCC_READ_REGISTER TODO Implementation");
+									ESP_LOGW(Tag, "LAN_X_DCC_READ_REGISTER TODO Implementation");
 									//	TODO implementation
 								}
 								break;
@@ -765,7 +838,7 @@ namespace TBTIoT
 
 							case 0x43: //  LAN_X_GET_TURNOUT_INFO
 							{
-								ESP_LOGW(m_TAG, "LAN_X_GET_TURNOUT_INFO TODO Implementation");
+								ESP_LOGW(Tag, "LAN_X_GET_TURNOUT_INFO TODO Implementation");
 /*								Manager* pManager = pClient->getInterface()->getManager();
 
 								uint16_t FAddr = (payload[5] << 8) + payload[6];
@@ -809,7 +882,7 @@ namespace TBTIoT
 
 					case 0x00500008: //  LAN_SET_BROADCASTFLAGS
 					{
-						ESP_LOGW(m_TAG, "LAN_SET_BROADCASTFLAGS TODO Implementation");
+						ESP_LOGW(Tag, "LAN_SET_BROADCASTFLAGS TODO Implementation");
 //						pClient->setBroadcastFlags(*(uint32_t*)&payload[4]);
 						break;
 					}
@@ -824,14 +897,14 @@ namespace TBTIoT
 								{
 									case 0x11: //  LAN_X_CV_READ
 									{
-										ESP_LOGW(m_TAG, "LAN_X_CV_READ TODO Implementation");
+										ESP_LOGW(Tag, "LAN_X_CV_READ TODO Implementation");
 										//	TODO implementation
 										break;
 									}
 
 									case 0x12: //  LAN_X_DCC_WRITE_REGISTER
 									{
-										ESP_LOGW(m_TAG, "LAN_X_DCC_WRITE_REGISTER TODO Implementation");
+										ESP_LOGW(Tag, "LAN_X_DCC_WRITE_REGISTER TODO Implementation");
 										//	TODO implementation
 										break;
 									}
@@ -846,7 +919,7 @@ namespace TBTIoT
 
 							case 0x53: //  LAN_X_SET_TURNOUT
 							{
-								ESP_LOGW(m_TAG, "LAN_X_SET_TURNOUT TODO Implementation");
+								ESP_LOGW(Tag, "LAN_X_SET_TURNOUT TODO Implementation");
 /*								Manager* pManager = pClient->getInterface()->getManager();
 								uint16_t FAddr = (payload[5] << 8) + payload[6];
 								uint16_t dccAddress = 0x8000 | (FAddr >> 2);
@@ -866,7 +939,7 @@ namespace TBTIoT
 
 							case 0xE3: //  LAN_X_GET_LOCO_INFO
 							{
-								ESP_LOGW(m_TAG, "LAN_X_GET_LOCO_INFO TODO Implementation");
+								ESP_LOGW(Tag, "LAN_X_GET_LOCO_INFO TODO Implementation");
 /*								Manager* pManager = pClient->getInterface()->getManager();
 								uint16_t dccAddress = ((payload[6] & 0x3F) << 8) + payload[7];
 								if(dccAddress > 127)
@@ -919,7 +992,7 @@ namespace TBTIoT
 							{
 */								if (payload[5] == 0xF8) //  LAN_X_SET_LOCO_FUNCTION
 								{
-									ESP_LOGW(m_TAG, "LAN_X_SET_LOCO_FUNCTION TODO Implementation");
+									ESP_LOGW(Tag, "LAN_X_SET_LOCO_FUNCTION TODO Implementation");
 									uint8_t FunctionIndex = payload[8] & 0x3F;
 									uint8_t Type = payload[8] >> 5;
 /*									switch (FunctionIndex)
@@ -1286,28 +1359,28 @@ namespace TBTIoT
 										case 0:
 										case 1:
 										{
-											ESP_LOGW(m_TAG, "LAN_X_SET_LOCO_DRIVE (14 Steps) TODO Implementation");
+											ESP_LOGW(Tag, "LAN_X_SET_LOCO_DRIVE (14 Steps) TODO Implementation");
 //											pLoc->setLocoDrive14(payload[8]);
 											break;
 										}
 
 										case 2:
 										{
-											ESP_LOGW(m_TAG, "LAN_X_SET_LOCO_DRIVE (28 Steps) TODO Implementation");
+											ESP_LOGW(Tag, "LAN_X_SET_LOCO_DRIVE (28 Steps) TODO Implementation");
 //											pLoc->setLocoDrive28(payload[8]);
 											break;
 										}
 
 										case 3:
 										{
-											ESP_LOGW(m_TAG, "LAN_X_SET_LOCO_DRIVE (128 Steps) TODO Implementation");
+											ESP_LOGW(Tag, "LAN_X_SET_LOCO_DRIVE (128 Steps) TODO Implementation");
 											//pLoc->setLocoDrive128(payload[8]);
 											break;
 										}
 
 										default:
 										{
-											ESP_LOGE(m_TAG, "LAN_X_SET_LOCO_DRIVE !!! UNKNOWN STEPS !!!");
+											ESP_LOGE(Tag, "LAN_X_SET_LOCO_DRIVE !!! UNKNOWN STEPS !!!");
 											break;
 										}
 									}
@@ -1322,12 +1395,12 @@ namespace TBTIoT
 						{
 							if (payload[5] == 0x12) //  LAN_X_CV_WRITE
 							{
-								ESP_LOGW(m_TAG, "LAN_X_CV_WRITE TODO Implementation");
+								ESP_LOGW(Tag, "LAN_X_CV_WRITE TODO Implementation");
 								//	TODO implementation
 							}
 							else if (payload[5] == 0xFF) //  LAN_X_MM_WRITE_BYTE
 							{
-								ESP_LOGW(m_TAG, "LAN_X_MM_WRITE_BYTE TODO Implementation");
+								ESP_LOGW(Tag, "LAN_X_MM_WRITE_BYTE TODO Implementation");
 								//	TODO	implementation
 							}
 						}
@@ -1342,12 +1415,12 @@ namespace TBTIoT
 							{
 								if ((payload[8] & 0xFC) == 0xEC) //  LAN_X_CV_POM_WRITE_BYTE
 								{
-									ESP_LOGW(m_TAG, "LAN_X_CV_POM_WRITE_BYTE TODO Implementation");
+									ESP_LOGW(Tag, "LAN_X_CV_POM_WRITE_BYTE TODO Implementation");
 									//	TODO	implementation
 								}
 								else if ((payload[8] & 0xFC) == 0xE8)//  LAN_X_CV_POM_WRITE_BIT
 								{
-									ESP_LOGW(m_TAG, "LAN_X_CV_POM_WRITE_BIT TODO Implementation");
+									ESP_LOGW(Tag, "LAN_X_CV_POM_WRITE_BIT TODO Implementation");
 									//	TODO	implementation
 								}
 								else if((payload[8] & 0xFC) == 0xE4) // LAN_X_CV_POM_READ_BYTE
@@ -1362,17 +1435,17 @@ namespace TBTIoT
 							{
 								if ((payload[8] & 0xFC) == 0xEC) //  LAN_X_CV_POM_ACCESSORY_WRITE_BYTE
 								{
-									ESP_LOGW(m_TAG, "LAN_X_CV_POM_ACCESSORY_WRITE_BYTE TODO Implementation");
+									ESP_LOGW(Tag, "LAN_X_CV_POM_ACCESSORY_WRITE_BYTE TODO Implementation");
 									//	TODO	implementation
 								}
 								else if ((payload[8] & 0xFC) == 0xE8) //  LAN_X_CV_POM_ACCESSORY_WRITE_BIT
 								{
-									ESP_LOGW(m_TAG, "LAN_X_CV_POM_ACCESSORY_WRITE_BIT TODO Implementation");
+									ESP_LOGW(Tag, "LAN_X_CV_POM_ACCESSORY_WRITE_BIT TODO Implementation");
 									//	TODO	implementation
 								}
 								else if((payload[8] & 0xFC) == 0xE4) //  LAN_X_CV_POM_ACCESSORY_READ_BYTE
 								{
-									ESP_LOGW(m_TAG, "LAN_X_CV_POM_ACCESSORY_READ_BYTE TODO Implementation");
+									ESP_LOGW(Tag, "LAN_X_CV_POM_ACCESSORY_READ_BYTE TODO Implementation");
 									//	TODO	implementation
 								}
 								break;
@@ -1388,7 +1461,7 @@ namespace TBTIoT
 
 					default:
 					{
-						ESP_LOGW(m_TAG, "LAN_X_UNKNOWN_COMMAND");
+						ESP_LOGW(Tag, "LAN_X_UNKNOWN_COMMAND");
 
 						static const uint8_t LAN_X_UNKNOWN_COMMAND[] = {0x07, 0x00, 0x40, 0x00, 0x61, 0x82, 0xE3};
 						sendToSocket(LAN_X_UNKNOWN_COMMAND, (sockaddr*)&si_other);
@@ -1399,7 +1472,5 @@ namespace TBTIoT
 			}
 		}
 	}
-
-	const char* Z21Interface::m_TAG = "Z21Interface";
 
 } /* namespace TBTIoT */

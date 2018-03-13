@@ -48,18 +48,71 @@ extern "C" {
 #include <thread>
 using namespace std;
 
+#include "LocDecoder.h"
+
 namespace TBTIoT
 {
 	class Z21Client;	//	forward declaration
+
+	/**
+	 * Class Z21Interface represents the interface for UDP clients
+	 * using the Z21 Lan Protocol.
+	 *
+	 * # Basics
+	 * ## Communication:
+	 * Communication with the Z21 protocol over UDP port 21105 or 21106.
+	 * Control applications on the client (PC, App, ...) should primarily use port 21105.
+	 * The communication is always asynchronous, i.e. between a request and the
+	 * corresponding response other broadcast messages can occur.
+	 *
+	 * It is expected that each client communicates with the Z21 once per minute, otherwise
+	 * it will be removed from the list of active participants. If possible, a client
+	 * should log off when exiting with the LAN_LOGOFF command.
+	 *
+	 * ## Z21 Datagram layout
+	 * A Z21 datagram, i.e. a request or response is structured as follows:
+	 *
+	 <table>
+	 <caption>Z21 Datagram Layout</caption>
+	 <tr><th>DataLen<th>Header<th>Data
+	 <tr><td>2 Bytes<td>2 Bytes<td>n Bytes
+	 </table>
+	 *	- <b>DataLen</b> (little endian):
+	 *
+	 *		Total length over the entire data set including DataLen, Header and Data,
+	 *		i.e. DataLen = 2 + 2 + n.
+	 *	- <b>Header</b> (little endian):
+	 *
+	 *		Describes the command or protocol group.
+	 *	- <b>Data</b>:
+	 *
+	 *		Structure and length depend on command. Exact description see respective command.
+	 *
+	 * Unless otherwise stated, the byte order is little-endian, i.e. first the low byte, then
+	 * the high byte.
+	 *
+	 */
 	class Z21Interface
 	{
 		public:
+			///	Z21Interface constructor
 			Z21Interface(in_port_t port = 21105);
+
+			///	Z21Interface destructor
 			virtual ~Z21Interface();
 
 			ssize_t sendToSocket(const uint8_t* pMsg, sockaddr* address);
 
+			void	broadcastPowerStateChange(const bool& newState);
+			void	broadcastLocInfoChanged(LocDecoder* pLoc);
+			void	broadcastEmergencyStop(void);
+			void	broadcastOvercurrent(void);
+
 		protected:
+			Z21Client*	findClient(const sockaddr_in& address);
+			bool		removeClient(Z21Client* pClient);
+
+			Decoder*	findDecoder(DCCAddress_t address) { return nullptr; }
 
 		private:
 			void			threadFunc(void);
@@ -72,8 +125,6 @@ namespace TBTIoT
 			sockaddr_in			m_sockaddr_me;
 			vector<Z21Client*>	m_Clients;
 			recursive_mutex		m_MClients;
-
-			static const char*	m_TAG;
 	};
 
 } /* namespace TBTIoT */
