@@ -46,12 +46,16 @@ namespace TBTIoT
 			Decoder(const DCCAddress_t& address);
 			virtual ~Decoder();
 
-			const DCCAddress_t	getDCCAddress(void) { return m_DccAddress; }
+			const DCCAddress_t&	getDCCAddress(void) { return m_DCCAddress; }
 
+			virtual bool getNextDCCCommand(uint8_t* pBuffer) = 0;
 			virtual void onNewMQTTData(const string& topic, const string& payload) = 0;
 
 		protected:
-			const DCCAddress_t	m_DccAddress;
+			void insertXOR(uint8_t* pMsg);
+
+			uint8_t				m_DCCCommandBuffer[64];
+			const DCCAddress_t	m_DCCAddress;
 			recursive_mutex		m_MDecoder;
 
 		private:

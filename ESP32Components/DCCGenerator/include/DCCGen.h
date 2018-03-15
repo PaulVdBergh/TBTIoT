@@ -38,7 +38,12 @@ using namespace std;
 
 namespace TBTIoT
 {
-	class DCCMessage;	//	Forward declaration
+#define ZERO_PULSE_LENGTH (8640)
+#define ONE_PULSE_LENGTH (4640)
+
+#define PREAMBLE_WAIT_TIME ((TickType_t)1000000000)
+
+//	class DCCMessage;	//	Forward declaration
 
 	class DCCGen
 	{
@@ -56,9 +61,10 @@ namespace TBTIoT
 
 			virtual ~DCCGen();
 
-		protected:
-			virtual DCCMessage*	getNextDccMessage(void);
+			static const rmt_item32_t	DCC_ZERO_BIT;
+			static const rmt_item32_t	DCC_ONE_BIT;
 
+		protected:
 
 		private:
 			void threadFunc(void);

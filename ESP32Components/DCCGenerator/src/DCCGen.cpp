@@ -36,7 +36,8 @@
 #include <iostream>
 
 #include "MQTTSubscription.h"
-#include "DCCMessage.h"
+//#include "DCCMessage.h"
+#include "Decoders.h"
 
 #include <esp_log.h>
 static char tag[] = "DCCGen";
@@ -59,6 +60,16 @@ namespace TBTIoT
 	,	m_DccGPIONum(DccGPIONum)
 	,	m_Channel(channel)
 	{
+		(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->duration0 = ZERO_PULSE_LENGTH;
+		(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->duration1 = ZERO_PULSE_LENGTH;
+		(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->level0 = 1;
+		(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->level1 = 0;
+
+		(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->duration0 = ONE_PULSE_LENGTH;
+		(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->duration1 = ONE_PULSE_LENGTH;
+		(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->level0 = 1;
+		(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->level1 = 0;
+
 		gpio_set_direction(m_PowerGPIONum, GPIO_MODE_OUTPUT);
 		gpio_set_direction(m_RailcomGPIONum, GPIO_MODE_OUTPUT);
 
@@ -87,30 +98,36 @@ namespace TBTIoT
 		m_thread.join();
 	}
 
-	DCCMessage* DCCGen::getNextDccMessage()
-	{
-		//	TODO write implementation
-		return nullptr;
-	}
-
 	void DCCGen::threadFunc()
 	{
+		static Decoder* currentDecoder = nullptr;
+		static Decoders* pDecoders = Decoders::getInstance();
 
-		const uint8_t _idleMsg[] = {0x03, 0xFF, 0x00, 0xFF};
-		DCCMessage IdleMessage(_idleMsg);
+		uint8_t			pCmd[8];
+		rmt_item32_t	pItems[64];
+		uint16_t		itemCount;
 
-		const rmt_item32_t preamble_items[PREAMBLE_NBR_CYCLES] =
+		static const rmt_item32_t preamble_items[] =
 		{
-			DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT,
-			DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT,
-			DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT,
-			DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT, DCCMessage::DCC_ONE_BIT
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT
 		};
 
-		rmt_item32_t pItems[64];
-		uint16_t ItemCount = 0;
-
-		DCCMessage* pNextMessage = nullptr;
+		static const rmt_item32_t idle_items[] =
+		{
+			DCC_ZERO_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ZERO_BIT,
+			DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT,
+			DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT,
+			DCC_ZERO_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT
+		};
 
 		TaskHandle_t taskHandle = (TaskHandle_t)(m_thread.native_handle());
 		UBaseType_t priority = uxTaskPriorityGet(taskHandle) + 1;
@@ -119,7 +136,10 @@ namespace TBTIoT
 		while(m_bContinue)
 		{
 			//	send the preamble_items
-			ESP_ERROR_CHECK(rmt_write_items(m_rmtConfig.channel, preamble_items, PREAMBLE_NBR_CYCLES, false));
+			ESP_ERROR_CHECK(rmt_write_items(	m_rmtConfig.channel,
+												preamble_items,
+												sizeof(preamble_items) / sizeof(rmt_item32_t),
+												false));
 
 			//	RailCom Gap.
 			// meanwhile  (we have 1856 µS to spend...)
@@ -139,23 +159,54 @@ namespace TBTIoT
 				gpio_set_level(m_PowerGPIONum, 1);
 			}
 
-
-			if(nullptr == (pNextMessage = getNextDccMessage()))
+			itemCount = 0;
+			currentDecoder = pDecoders->getNextDecoder(currentDecoder);
+			if(currentDecoder)
 			{
-				pNextMessage = &IdleMessage;
+				if(currentDecoder->getNextDCCCommand(pCmd))
+				{
+					if(pCmd[0])
+					{
+						itemCount = ((pCmd[0]) * 9) + 1;
+						rmt_item32_t* p = pItems;
+						for(uint8_t i = 1; i < (pCmd[0] + 1); i++)
+						{
+							*p++ = DCC_ZERO_BIT;
+							for(uint8_t j = 0x80; j; j >>= 1)
+							{
+								*p++ = (pCmd[i] & j) ? DCC_ONE_BIT : DCC_ZERO_BIT;
+							}
+						}
+						*p = DCC_ONE_BIT;
+					}
+				}
 			}
-
-			ItemCount = pNextMessage->getItemCount();
-			ItemCount = (ItemCount > 64) ? 64 : ItemCount;
-			memcpy(pItems, pNextMessage->getItems(), ItemCount * sizeof(rmt_item32_t));
-
 			//	wait until preamble items finished
 			ESP_ERROR_CHECK(rmt_wait_tx_done(m_rmtConfig.channel, PREAMBLE_WAIT_TIME));
 
 			//	send dcc data items and wait until end of transmission
-			ESP_ERROR_CHECK(rmt_write_items(m_rmtConfig.channel, pItems, ItemCount, true));
+			if(itemCount)
+			{
+				ESP_ERROR_CHECK(rmt_write_items(
+						m_rmtConfig.channel,
+						pItems,
+						itemCount,
+						true));
+			}
+			else
+			{
+				ESP_ERROR_CHECK(rmt_write_items(
+						m_rmtConfig.channel,
+						idle_items,
+						sizeof(idle_items) / sizeof(rmt_item32_t),
+						true));
+			}
 		}
 
 		ESP_ERROR_CHECK(rmt_driver_uninstall(m_rmtConfig.channel));
 	}
+
+	const rmt_item32_t DCCGen::DCC_ZERO_BIT;
+	const rmt_item32_t DCCGen::DCC_ONE_BIT;
+
 }	//	namespace TBTIoT

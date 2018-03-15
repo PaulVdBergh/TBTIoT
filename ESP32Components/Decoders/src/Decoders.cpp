@@ -47,7 +47,7 @@ namespace TBTIoT
 	}
 
 	Decoders::Decoders(const string& MQTTTopicBasePath)
-	:	MQTTSubscription(MQTTTopicBasePath + "#")
+	:	MQTTSubscription(MQTTTopicBasePath + "#", PRIORITY_HIGH)
 	,	m_TopicBasePath(MQTTTopicBasePath)
 	{
 		ESP_LOGI(tag, "Decoders constructed");
@@ -79,6 +79,28 @@ namespace TBTIoT
 				}
 			}
 		}
+	}
+
+	Decoder* Decoders::getNextDecoder(Decoder* currentDecoder)
+	{
+		lock_guard<recursive_mutex> lock(m_MDecoders);
+
+		if(m_Decoders.empty())
+		{
+			return nullptr;
+		}
+
+		if(nullptr == currentDecoder)
+		{
+			return m_Decoders.begin()->second;
+		}
+
+		auto current = m_Decoders.find(currentDecoder->getDCCAddress());
+		if(++current == m_Decoders.end())
+		{
+			return m_Decoders.begin()->second;
+		}
+		return current->second;
 	}
 
 	Decoder* Decoders::getDecoder(const DCCAddress_t& address)

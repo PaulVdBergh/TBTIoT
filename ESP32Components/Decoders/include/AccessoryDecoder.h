@@ -41,6 +41,7 @@ namespace TBTIoT
 			AccessoryDecoder(const DCCAddress_t& address);
 			virtual ~AccessoryDecoder();
 
+			virtual bool getNextDCCCommand(uint8_t* pBuffer);
 			virtual void onNewMQTTData(const string& topic, const string& payload);
 
 		protected:

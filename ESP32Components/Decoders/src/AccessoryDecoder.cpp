@@ -46,6 +46,11 @@ namespace TBTIoT
 	// TODO Auto-generated destructor stub
 	}
 
+	bool AccessoryDecoder::getNextDCCCommand(uint8_t* pBuffer)
+	{
+		return false;
+	}
+
 	void AccessoryDecoder::onNewMQTTData(const string& topic, const string& payload)
 	{
 		ESP_LOGI(tag, "onNewMQTTData(%s, %s)", topic.c_str(), payload.c_str());

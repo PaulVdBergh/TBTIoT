@@ -58,6 +58,7 @@ namespace TBTIoT
 		Message.payload = const_cast<char*>(payload.c_str());
 		Message.payloadlen = payload.length();
 
+		ESP_LOGI(tag, "Publishing \"%s\" in topic \"%s\"", payload.c_str(), m_Topic.c_str());
 		return MQTTPublish(&client, m_Topic.c_str(), &Message);
 	}
 
@@ -71,6 +72,7 @@ namespace TBTIoT
 		Message.payload = payload;
 		Message.payloadlen = payloadlen;
 
+		ESP_LOGI(tag, "Publishing \"binary\" in topic \"%s\"", m_Topic.c_str());
 		return MQTTPublish(&client, m_Topic.c_str(), &Message);
 	}
 
@@ -84,6 +86,7 @@ namespace TBTIoT
 		Message.payload = const_cast<char*>(payload);
 		Message.payloadlen = strlen(payload) + 1;
 
+		ESP_LOGI(tag, "Publishing \"%s\" in topic \"%s\"", payload, m_Topic.c_str());
 		return MQTTPublish(&client, m_Topic.c_str(), &Message);
 	}
 
@@ -97,6 +100,8 @@ namespace TBTIoT
 
 	int MQTTPublisher::Publish(const bool& boolVal, QoS qos, bool retained)
 	{
+		ESP_LOGI(tag, "Publishing \"%s\" in topic \"%s\"", boolVal ? "true" : "false", m_Topic.c_str());
+
 		return Publish(boolVal ? "true" : "false", qos, retained);
 	}
 

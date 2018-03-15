@@ -46,6 +46,7 @@ namespace TBTIoT
 {
 
 	typedef map<DCCAddress_t, Decoder*> DecodersMap_t;
+	typedef DecodersMap_t::iterator		DecodersMapIterator_t;
 
 	class Decoders : public MQTTSubscription
 	{
@@ -54,12 +55,14 @@ namespace TBTIoT
 
 			virtual ~Decoders();
 
-			virtual void OnNewData(IoTMQTTMessageQueueItem* pItem);
+			Decoder* getNextDecoder(Decoder* currentDecoder);
+
+			Decoder* getDecoder(const DCCAddress_t& address);
 
 		protected:
 			Decoders(const string& MQTTTopicBasePath = DCCDECODERS_TOPICBASEPATH);
 
-			Decoder* getDecoder(const DCCAddress_t& address);
+			virtual void OnNewData(IoTMQTTMessageQueueItem* pItem);
 
 		private:
 			string				m_TopicBasePath;

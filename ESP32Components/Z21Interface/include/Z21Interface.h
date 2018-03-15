@@ -48,7 +48,9 @@ extern "C" {
 #include <thread>
 using namespace std;
 
+#include "Decoders.h"
 #include "LocDecoder.h"
+#include "MQTTSubscription.h"
 
 namespace TBTIoT
 {
@@ -92,11 +94,11 @@ namespace TBTIoT
 	 * the high byte.
 	 *
 	 */
-	class Z21Interface
+	class Z21Interface : public MQTTSubscription
 	{
 		public:
 			///	Z21Interface constructor
-			Z21Interface(in_port_t port = 21105);
+			Z21Interface(in_port_t port = 21105, const string& MQTTTopicBasePath = "TBTIoT/");
 
 			///	Z21Interface destructor
 			virtual ~Z21Interface();
@@ -109,14 +111,17 @@ namespace TBTIoT
 			void	broadcastOvercurrent(void);
 
 		protected:
+			virtual void OnNewData(IoTMQTTMessageQueueItem* pItem);
 			Z21Client*	findClient(const sockaddr_in& address);
 			bool		removeClient(Z21Client* pClient);
 
-			Decoder*	findDecoder(DCCAddress_t address) { return nullptr; }
+			Decoder*	findDecoder(const DCCAddress_t& address);
 
 		private:
 			void			threadFunc(void);
 
+			Decoders*			m_pDecoders;
+			const string		m_TopicBasePath;
 			in_port_t			m_port;
 			thread				m_thread;
 			int					m_fdStop;

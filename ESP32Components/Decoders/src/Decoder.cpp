@@ -33,7 +33,7 @@ namespace TBTIoT
 {
 
 	Decoder::Decoder(const DCCAddress_t& address)
-	:	m_DccAddress(address)
+	:	m_DCCAddress(address)
 	{
 	// TODO Auto-generated constructor stub
 	}
@@ -41,6 +41,17 @@ namespace TBTIoT
 	Decoder::~Decoder()
 	{
 	// TODO Auto-generated destructor stub
+	}
+
+	void Decoder::insertXOR(uint8_t* pMsg)
+	{
+		uint8_t* pXOR = pMsg + (pMsg[0]);
+
+		*pXOR = 0;
+		for(uint8_t* pIndex = &pMsg[1]; pIndex < pXOR; pIndex++)
+		{
+			*pXOR ^= *pIndex;
+		}
 	}
 
 } /* namespace TBTIoT */

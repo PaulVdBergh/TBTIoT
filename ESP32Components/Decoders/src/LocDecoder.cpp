@@ -43,16 +43,17 @@ namespace TBTIoT
 
 	LocDecoder::LocDecoder(const DCCAddress_t& address)
 	:	Decoder(address)
+	,	m_DCCState(0)
 	,	m_LocMode(LOCMODE_DCC)
 	{
 		ESP_LOGI(tag, "LocDecoder(%i)", address);
 
 		char szTopic[256];
-		snprintf(szTopic, 256, "TBTIoT/Decoders/%i/", m_DccAddress);
+		snprintf(szTopic, 256, "TBTIoT/Decoders/%i/", m_DCCAddress);
 		m_BaseTopic = string(szTopic);
 
-		m_LocInfo.Addr_MSB = (m_DccAddress >> 8) & 0x3F;
-		m_LocInfo.Addr_LSB = (m_DccAddress & 0xFF);
+		m_LocInfo.Addr_MSB = (m_DCCAddress >> 8) & 0x3F;
+		m_LocInfo.Addr_LSB = (m_DCCAddress & 0xFF);
 		setSpeedSteps(4);
 	}
 
@@ -62,7 +63,7 @@ namespace TBTIoT
 
 	uint8_t LocDecoder::setLocMode(const uint8_t& newMode)
 	{
-		if(256 > m_DccAddress)
+		if(256 > m_DCCAddress)
 		{
 			m_LocMode = newMode;
 		}
@@ -73,10 +74,83 @@ namespace TBTIoT
 		return m_LocMode;
 	}
 
+	bool LocDecoder::getNextDCCCommand(uint8_t* pBuffer)
+	{
+		switch(m_DCCState)
+		{
+			case 0:	// Speed Message
+			{
+//				m_DCCState++;
+				return getDCCSpeedMessage(pBuffer);
+			}
+
+			default:
+			{
+				m_DCCState = 0;
+			}
+		}	//	switch(m_DCCState)
+		return false;
+	}
+
+	uint8_t* LocDecoder::insertDCCAddress(uint8_t* pMsg)
+	{
+		uint8_t* pCurrent = &pMsg[1];
+		if(m_DCCAddress < 128)
+		{
+			*pCurrent++ = m_DCCAddress & 0xFF;
+		}
+		else
+		{
+			*pCurrent++ = (m_DCCAddress >> 8);
+			*pCurrent++ = m_DCCAddress & 0xFF;
+		}
+		return pCurrent;
+	}
+
+	bool LocDecoder::getDCCSpeedMessage(uint8_t* pBuffer)
+	{
+		uint8_t* pCurrent = insertDCCAddress(pBuffer);
+
+		switch(getSpeedSteps())
+		{
+			case 0:
+			case 1:
+			{
+				//	14 speed steps + light
+				*pCurrent++ =	0x40
+							|	(getDirection() ? 0x20 : 0x00)
+							|	(getSpeed() & 0x0F)
+							|	(getLight() ? 0x10 : 0x00);
+				break;
+			}
+
+			case 2:
+			{
+				//	28 speed steps
+				*pCurrent++ = 	0x40
+							|	(getDirection() ? 0x20 : 0x00)
+							|	((getSpeed() >> 1) & 0x0F)
+							|	((getSpeed() & 0x01) ? 0x10 : 0x00);
+				break;
+			}
+
+			case 4:
+			{
+				//	128 speed steps
+				*pCurrent++ = 0x3F;
+				*pCurrent++ =	(getSpeed() & 0x7F)
+							|	(getDirection() ? 0x80 : 0x00);
+			}
+		}
+		pBuffer[0] = (pCurrent - pBuffer);
+		insertXOR(pBuffer);
+		return true;
+	}
+
 	void LocDecoder::onNewMQTTData(const string& topic, const string& payload)
 	{
 		ESP_LOGI(tag, "onNewMQTTData(%s, %s)", topic.c_str(), payload.c_str());
-		if(m_DccAddress == atoi(topic.c_str()))
+		if(m_DCCAddress == atoi(topic.c_str()))
 		{
 			char* szAttribute = strchr(topic.c_str(), '/');
 			if(szAttribute && *(++szAttribute))

@@ -16,7 +16,9 @@
 #include "esp_log.h"
 static char tag[] = "app_main";
 
-#include "../../ESP32Components/Decoders/include/Decoders.h"
+#include "DCCGen.h"
+//#include "Decoders.h"
+#include "Z21Interface.h"
 
 using namespace TBTIoT;
 
@@ -30,6 +32,7 @@ esp_err_t event_handler(void *ctx, system_event_t *event)
 	if (event->event_id == SYSTEM_EVENT_STA_GOT_IP)
 	{
 		xTaskCreatePinnedToCore(&task_paho, "task_paho", 8048, NULL, 5, NULL, 0);
+		Z21Interface* pZ21 = new Z21Interface();
 	}
     return ESP_OK;
 }
@@ -54,7 +57,9 @@ void app_main(void)
     ESP_ERROR_CHECK( esp_wifi_start() );
     ESP_ERROR_CHECK( esp_wifi_connect() );
 
-    Decoders* pDecoders = Decoders::getInstance();
+//    Decoders* pDecoders = Decoders::getInstance();
+    DCCGen* DccGenerator = new DCCGen();
+
 
     gpio_set_direction(GPIO_NUM_4, GPIO_MODE_OUTPUT);
     int level = 0;

@@ -39,8 +39,9 @@ static char tag[] = "MQTTSubscription";
 namespace TBTIoT
 {
 
-	MQTTSubscription::MQTTSubscription(const string& topic)
+	MQTTSubscription::MQTTSubscription(const string& topic, Priority priority /* = PRIORITY_NORMAL */)
 	:	m_Topic(topic)
+	,	m_Priority(priority)
 	{
 		MQTTMessageHandler::getInstance()->RegisterSubscription(this);
 		ESP_LOGI(tag, "Registration complete for topic %s", (char*)m_Topic.c_str());

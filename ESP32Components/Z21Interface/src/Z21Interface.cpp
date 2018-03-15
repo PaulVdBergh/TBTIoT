@@ -51,28 +51,13 @@ void removeZ21Interface(void* interface)
 namespace TBTIoT
 {
 
-	Z21Interface::Z21Interface(in_port_t port)
-	:	m_port(port)
+	Z21Interface::Z21Interface(in_port_t port, const string& MQTTTopicBasePath)
+	:	MQTTSubscription(MQTTTopicBasePath + "#")
+	,	m_pDecoders(Decoders::getInstance())
+	,	m_TopicBasePath(MQTTTopicBasePath)
+	,	m_port(port)
 	{
 //		m_fdStop = eventfd(0, 0);
-
-		m_fdsock_me = ::socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
-		ESP_LOGI(Tag, "::socket(...) returned %i", m_fdsock_me);
-
-		int optVal = 1;
-		int result = ::setsockopt(m_fdsock_me, SOL_SOCKET, SO_REUSEADDR, &optVal, sizeof(optVal));
-		ESP_LOGI(Tag, "setsockopt(SO_REUSEADDR) returned %i", result);
-
-		result = ::setsockopt(m_fdsock_me, SOL_SOCKET, SO_REUSEPORT, &optVal, sizeof(optVal));
-		ESP_LOGI(Tag, "setsockopt(SO_REUSEPORT) returned %i", result);
-
-		memset(&m_sockaddr_me, 0, sizeof(sockaddr_in));
-		m_sockaddr_me.sin_family = AF_INET;
-		m_sockaddr_me.sin_port = lwip_htons(m_port);
-		m_sockaddr_me.sin_addr.s_addr = lwip_htonl(INADDR_ANY);
-
-		result = ::bind(m_fdsock_me, (const struct sockaddr*)&m_sockaddr_me, sizeof(m_sockaddr_me));
-		ESP_LOGI(Tag, "bind(...) returned %i", result);
 
 	    m_thread = thread([this]{threadFunc();});
 	}
@@ -81,6 +66,30 @@ namespace TBTIoT
 	{
 //		bContinue = false;
 		m_thread.join();
+	}
+
+	void Z21Interface::OnNewData(IoTMQTTMessageQueueItem* pItem)
+	{
+		ESP_LOGI(Tag, "OnNewData : topic = %s, m_TopicBasePath = %s", pItem->m_Topic, m_TopicBasePath.c_str());
+		if(0 == strncmp(m_TopicBasePath.c_str(), pItem->m_Topic, m_TopicBasePath.length()))
+		{
+			char* szSubTopic = &(pItem->m_Topic[m_TopicBasePath.length()]);
+			if(0 == strncmp("Decoders/", szSubTopic, strlen("Decoders/")))
+			{
+				char* szAddress = &(szSubTopic[strlen("Decoders/")]);
+				DCCAddress_t DccAddress = atoi(szAddress);
+				if(DccAddress)
+				{
+					Decoder* pDecoder = m_pDecoders->getDecoder(DccAddress);
+					LocDecoder* pLoc = dynamic_cast<LocDecoder*>(pDecoder);
+					if(pLoc)
+					{
+//						pLoc->onNewMQTTData(string(szAddress), string((char*)pItem->m_payload));
+						broadcastLocInfoChanged(pLoc);
+					}
+				}
+			}
+		}
 	}
 
 	ssize_t Z21Interface::sendToSocket(const uint8_t* pMsg, sockaddr* address)
@@ -164,9 +173,33 @@ namespace TBTIoT
 		return false;
 	}
 
+	Decoder* Z21Interface::findDecoder(const DCCAddress_t& address)
+	{
+		return Decoders::getInstance()->getDecoder(address);
+	}
+
 	void Z21Interface::threadFunc(void)
 	{
 		ESP_LOGI(Tag, "entered threadFunc()");
+
+		m_fdsock_me = ::socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
+		ESP_LOGI(Tag, "::socket(...) returned %i", m_fdsock_me);
+
+		int optVal = 1;
+		int result = ::setsockopt(m_fdsock_me, SOL_SOCKET, SO_REUSEADDR, &optVal, sizeof(optVal));
+		ESP_LOGI(Tag, "setsockopt(SO_REUSEADDR) returned %i", result);
+
+		result = ::setsockopt(m_fdsock_me, SOL_SOCKET, SO_REUSEPORT, &optVal, sizeof(optVal));
+		ESP_LOGI(Tag, "setsockopt(SO_REUSEPORT) returned %i", result);
+
+		memset(&m_sockaddr_me, 0, sizeof(sockaddr_in));
+		m_sockaddr_me.sin_family = AF_INET;
+		m_sockaddr_me.sin_port = htons(m_port);
+		m_sockaddr_me.sin_addr.s_addr = htonl(INADDR_ANY);
+
+		result = ::bind(m_fdsock_me, (const struct sockaddr*)&m_sockaddr_me, sizeof(m_sockaddr_me));
+		ESP_LOGI(Tag, "bind(...) returned %i", result);
+
 		uint8_t recvbuffer[128];
 		sockaddr_in	si_other;
 		socklen_t slen = sizeof(si_other);
@@ -176,7 +209,18 @@ namespace TBTIoT
 		{
 			ESP_LOGI(Tag, "Waiting for message...");
 			int recv_len = recvfrom(m_fdsock_me, recvbuffer, 128, 0, (sockaddr*)&si_other, &slen);
-			ESP_LOGI(Tag, "Received message from %s:%i, %i bytes.", inet_ntoa(si_other.sin_addr), si_other.sin_port, recv_len);
+/*			ESP_LOGI(Tag, "Received message from %s:%i, %i bytes.", inet_ntoa(si_other.sin_addr), si_other.sin_port, recv_len);
+
+			char	szDumpBuffer[256] = "";
+			for(uint8_t i = 0; i < recv_len; i++)
+			{
+				char szByte[16] = "";
+				sprintf(szByte, ": %02X ", recvbuffer[i]);
+				strcat(szDumpBuffer, szByte);
+			}
+			ESP_LOGI(Tag, "\t%s", szDumpBuffer);
+
+*/
 			uint8_t* payload = recvbuffer;
 
 			Z21Client* pClient = findClient(si_other);
@@ -302,7 +346,7 @@ namespace TBTIoT
 					 */
 					case 0x00300004:
 					{
-						ESP_LOGW(Tag, "LAN_LOGOFF");
+						ESP_LOGI(Tag, "LAN_LOGOFF");
 						removeClient(pClient);
 						break;
 					}
@@ -327,7 +371,7 @@ namespace TBTIoT
 					 */
 					case 0x00510004:
 					{
-						ESP_LOGW(Tag, "LAN_GET_BROADCASTFLAGS");
+						ESP_LOGI(Tag, "LAN_GET_BROADCASTFLAGS");
 						static uint8_t LAN_BROADCASTFLAGS[] = {0x08, 0x00, 0x51, 0x00, 0x00, 0x00, 0x00, 0x00};
 						*((uint32_t*)(&LAN_BROADCASTFLAGS[4])) = pClient->getBroadcastFlags();
 						sendToSocket(LAN_BROADCASTFLAGS, (struct sockaddr*)&si_other);
@@ -478,8 +522,7 @@ namespace TBTIoT
 							dccAddress |= 0xC000;
 						}
 						Decoder* pDecoder = findDecoder(dccAddress);
-//	TODO						LocDecoder* pLoc = dynamic_cast<LocDecoder*>(pDecoder);
-						LocDecoder* pLoc = (LocDecoder*)findDecoder(dccAddress);
+						LocDecoder* pLoc = dynamic_cast<LocDecoder*>(pDecoder);
 						if (pLoc)
 						{
 							uint8_t locMode[] = { 0x07, 0x00, 0x60, 0x00, 0x00, 0x00, 0x00};
@@ -644,10 +687,10 @@ namespace TBTIoT
 							 */
 							case 0x8021: //  LAN_X_SET_TRACK_POWER_OFF
 							{
-								ESP_LOGW(Tag, "LAN_X_SET_TRACK_POWER_OFF");
+								ESP_LOGI(Tag, "LAN_X_SET_TRACK_POWER_OFF");
 								if (payload[6] == 0xA1)
 								{
-									broadcastPowerStateChange(PowerOff);
+									broadcastPowerStateChange(false);
 								}
 								break;
 							}
@@ -668,10 +711,10 @@ namespace TBTIoT
 							 */
 							case 0x8121: //  LAN_X_SET_TRACK_POWER_ON
 							{
-								ESP_LOGW(Tag, "LAN_X_SET_TRACK_POWER_ON");
+								ESP_LOGI(Tag, "LAN_X_SET_TRACK_POWER_ON");
 								if (payload[6] == 0xA0)
 								{
-									broadcastPowerStateChange(PowerOn);
+									broadcastPowerStateChange(true);
 								}
 								break;
 							}
@@ -939,29 +982,20 @@ namespace TBTIoT
 
 							case 0xE3: //  LAN_X_GET_LOCO_INFO
 							{
-								ESP_LOGW(Tag, "LAN_X_GET_LOCO_INFO TODO Implementation");
-/*								Manager* pManager = pClient->getInterface()->getManager();
-								uint16_t dccAddress = ((payload[6] & 0x3F) << 8) + payload[7];
+								ESP_LOGI(Tag, "LAN_X_GET_LOCO_INFO");
+								DCCAddress_t dccAddress = ((payload[6] & 0x3F) << 8) + payload[7];
 								if(dccAddress > 127)
 								{
 									dccAddress |= 0xC000;
 								}
-								Decoder* pDecoder = pManager->findDecoder(dccAddress);
-								if (pDecoder == NULL)
-								{
-									pDecoder = new LocDecoder(pManager, dccAddress);
-								}
+								Decoder* pDecoder = findDecoder(dccAddress);
 								LocDecoder* pLoc = dynamic_cast<LocDecoder*>(pDecoder);
 								if (pLoc)
-								{
-									pClient->broadcastLocInfoChanged(pLoc);
-//----------
-									uint8_t infoMessage[14];
+								{uint8_t infoMessage[14];
 									pLoc->getLANLocInfo(infoMessage);
 									sendto(m_fdsock_me, infoMessage, infoMessage[0], 0, (struct sockaddr*)&si_other, sizeof(si_other));
-//---------------
 								}
-*/								break;
+								break;
 							}
 
 							default:
@@ -976,26 +1010,21 @@ namespace TBTIoT
 					{
 						if (payload[4] == 0xE4)
 						{
-/*							Manager* pManager = pClient->getInterface()->getManager();
-							uint16_t dccAddress = ((payload[6] & 0x3F) << 8) + payload[7];
+							DCCAddress_t dccAddress = ((payload[6] & 0x3F) << 8) + payload[7];
 							if(dccAddress > 127)
 							{
 								dccAddress |= 0xC000;
 							}
-							Decoder* pDecoder = pManager->findDecoder(dccAddress);
-							if (pDecoder == NULL)
-							{
-								pDecoder = new LocDecoder(pManager, dccAddress);
-							}
+							Decoder* pDecoder = findDecoder(dccAddress);
 							LocDecoder* pLoc = dynamic_cast<LocDecoder*>(pDecoder);
 							if (pLoc)
 							{
-*/								if (payload[5] == 0xF8) //  LAN_X_SET_LOCO_FUNCTION
+								if (payload[5] == 0xF8) //  LAN_X_SET_LOCO_FUNCTION
 								{
 									ESP_LOGW(Tag, "LAN_X_SET_LOCO_FUNCTION TODO Implementation");
 									uint8_t FunctionIndex = payload[8] & 0x3F;
 									uint8_t Type = payload[8] >> 5;
-/*									switch (FunctionIndex)
+									switch (FunctionIndex)
 									{
 										case 0:
 										{
@@ -1350,31 +1379,31 @@ namespace TBTIoT
 											break;
 										}
 									}
-*/								}
+								}
 								else if ((payload[5] & 0xF0) == 0x10) //  LAN_X_SET_LOCO_DRIVE
 								{
-//									printf("LAN_X_SET_LOCO_DRIVE");
+									ESP_LOGI(Tag, "LAN_X_SET_LOCO_DRIVE");
 									switch(payload[5] & 0x0F)
 									{
 										case 0:
 										case 1:
 										{
-											ESP_LOGW(Tag, "LAN_X_SET_LOCO_DRIVE (14 Steps) TODO Implementation");
-//											pLoc->setLocoDrive14(payload[8]);
+											ESP_LOGI(Tag, "LAN_X_SET_LOCO_DRIVE (14 Steps)");
+											pLoc->setLocoDrive14(payload[8]);
 											break;
 										}
 
 										case 2:
 										{
-											ESP_LOGW(Tag, "LAN_X_SET_LOCO_DRIVE (28 Steps) TODO Implementation");
-//											pLoc->setLocoDrive28(payload[8]);
+											ESP_LOGI(Tag, "LAN_X_SET_LOCO_DRIVE (28 Steps)");
+											pLoc->setLocoDrive28(payload[8]);
 											break;
 										}
 
 										case 3:
 										{
-											ESP_LOGW(Tag, "LAN_X_SET_LOCO_DRIVE (128 Steps) TODO Implementation");
-											//pLoc->setLocoDrive128(payload[8]);
+											ESP_LOGI(Tag, "LAN_X_SET_LOCO_DRIVE (128 Steps)");
+											pLoc->setLocoDrive128(payload[8]);
 											break;
 										}
 
@@ -1389,7 +1418,7 @@ namespace TBTIoT
 								{
 									break;
 								}
-//							}
+							}
 						}
 						else if (payload[4] == 0x24)
 						{

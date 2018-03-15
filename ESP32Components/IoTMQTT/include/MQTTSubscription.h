@@ -42,15 +42,27 @@ namespace TBTIoT
 	class MQTTSubscription
 	{
 		public:
-			MQTTSubscription(const string& topic);
+			typedef enum
+			{
+				PRIORITY_HIGHEST = 0,
+				PRIORITY_HIGH,
+				PRIORITY_NORMAL,
+				PRIORITY_LOW,
+				PRIORITY_LOWEST
+			} Priority;
+
+			MQTTSubscription(const string& topic, Priority priority = PRIORITY_NORMAL);
 			virtual ~MQTTSubscription();
 
 			bool isTopicMatched(IoTMQTTMessageQueueItem* pItem);
 
 			virtual void OnNewData(IoTMQTTMessageQueueItem* pItem);
 
+			Priority getPriority(void) { return m_Priority; }
+
 		protected:
 			const string	m_Topic;
+			const Priority	m_Priority;
 
 		private:
 

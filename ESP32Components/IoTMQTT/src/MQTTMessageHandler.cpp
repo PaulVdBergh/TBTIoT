@@ -29,6 +29,8 @@
 
 #include "MQTTMessageHandler.h"
 
+#include <algorithm>
+
 #include "esp_log.h"
 static char tag[] = "MQTTMessageHandler";
 
@@ -38,7 +40,7 @@ namespace TBTIoT
 	{
 		public:
 			BackupSubscription(MQTTMessageHandler* pHandler)
-			:	MQTTSubscription("#")
+			:	MQTTSubscription("#", PRIORITY_LOWEST)
 			,	m_pHandler(pHandler)
 			{
 
@@ -79,8 +81,14 @@ namespace TBTIoT
 		// TODO Auto-generated destructor stub
 	}
 
+	bool sortfunc(MQTTSubscription* pA, MQTTSubscription* pB)
+	{
+		return pA->getPriority() < pB->getPriority();
+	};
+
 	void MQTTMessageHandler::RegisterSubscription(MQTTSubscription* pSub)
 	{
+
 		bool bNewSubscription = false;
 		{
 			lock_guard<recursive_mutex> lock(m_MSubscriptions);
@@ -89,6 +97,7 @@ namespace TBTIoT
 			if(bNewSubscription)
 			{
 				m_Subscriptions.push_back(pSub);
+				sort(m_Subscriptions.begin(), m_Subscriptions.end(), sortfunc);
 			}
 		}
 		if(bNewSubscription)

@@ -42,6 +42,7 @@ namespace TBTIoT
 			LocDecoder(const DCCAddress_t& address);
 			virtual ~LocDecoder();
 
+			virtual bool getNextDCCCommand(uint8_t* pBuffer);
 			virtual void onNewMQTTData(const string& topic, const string& payload);
 
 			void	getLANLocInfo(uint8_t* pMsg);
@@ -143,6 +144,7 @@ namespace TBTIoT
 
 
 		protected:
+			bool	getDCCSpeedMessage(uint8_t* pBuffer);
 
 			struct  locInfo_t
 			{
@@ -159,10 +161,13 @@ namespace TBTIoT
 				uint8_t		XOR 		= 0x00;
 			}__attribute__((packed));
 
+			uint8_t		m_DCCState;
 			uint8_t		m_LocMode;
 			locInfo_t	m_LocInfo;
 			string		m_BaseTopic;
+
 		private:
+			uint8_t* insertDCCAddress(uint8_t* pMsg);
 
 	};
 
