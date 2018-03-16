@@ -145,6 +145,11 @@ namespace TBTIoT
 
 		protected:
 			bool	getDCCSpeedMessage(uint8_t* pBuffer);
+			bool	getDCCFG1Message(uint8_t* pBuffer);
+			bool	getDCCFG2Message(uint8_t* pBuffer);
+			bool	getDCCFG3Message(uint8_t* pBuffer);
+			bool	getDCCFG4Message(uint8_t* pBuffer);
+			bool	getDCCFG5Message(uint8_t* pBuffer);
 
 			struct  locInfo_t
 			{

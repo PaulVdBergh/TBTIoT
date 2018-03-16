@@ -80,8 +80,38 @@ namespace TBTIoT
 		{
 			case 0:	// Speed Message
 			{
-//				m_DCCState++;
+				m_DCCState++;
 				return getDCCSpeedMessage(pBuffer);
+			}
+
+			case 1:	//	Function group 1
+			{
+				m_DCCState++;
+				return getDCCFG1Message(pBuffer);
+			}
+
+			case 2:	//	Function group 2
+			{
+				m_DCCState++;
+				return getDCCFG2Message(pBuffer);
+			}
+
+			case 3:	//	Function group 3
+			{
+				m_DCCState++;
+				return getDCCFG3Message(pBuffer);
+			}
+
+			case 4:	//	Function group 4
+			{
+				m_DCCState++;
+				return getDCCFG4Message(pBuffer);
+			}
+
+			case 5:	//	Function group 5
+			{
+				m_DCCState++;
+				return getDCCFG5Message(pBuffer);
 			}
 
 			default:
@@ -142,6 +172,53 @@ namespace TBTIoT
 							|	(getDirection() ? 0x80 : 0x00);
 			}
 		}
+		pBuffer[0] = (pCurrent - pBuffer);
+		insertXOR(pBuffer);
+		return true;
+	}
+
+	bool LocDecoder::getDCCFG1Message(uint8_t* pBuffer)
+	{
+		uint8_t* pCurrent = insertDCCAddress(pBuffer);
+		*pCurrent++ = 0x80 | getFunctionGroup1();
+		pBuffer[0] = (pCurrent - pBuffer);
+		insertXOR(pBuffer);
+		return true;
+	}
+
+	bool LocDecoder::getDCCFG2Message(uint8_t* pBuffer)
+	{
+		uint8_t* pCurrent = insertDCCAddress(pBuffer);
+		*pCurrent++ = 0xB0 | getFunctionGroup2();
+		pBuffer[0] = (pCurrent - pBuffer);
+		insertXOR(pBuffer);
+		return true;
+	}
+
+	bool LocDecoder::getDCCFG3Message(uint8_t* pBuffer)
+	{
+		uint8_t* pCurrent = insertDCCAddress(pBuffer);
+		*pCurrent++ = 0xA0 | getFunctionGroup3();
+		pBuffer[0] = (pCurrent - pBuffer);
+		insertXOR(pBuffer);
+		return true;
+	}
+
+	bool LocDecoder::getDCCFG4Message(uint8_t* pBuffer)
+	{
+		uint8_t* pCurrent = insertDCCAddress(pBuffer);
+		*pCurrent++ = 0xDE;
+		*pCurrent++ = getFunctionGroup4();
+		pBuffer[0] = (pCurrent - pBuffer);
+		insertXOR(pBuffer);
+		return true;
+	}
+
+	bool LocDecoder::getDCCFG5Message(uint8_t* pBuffer)
+	{
+		uint8_t* pCurrent = insertDCCAddress(pBuffer);
+		*pCurrent++ = 0xDF;
+		*pCurrent++ = getFunctionGroup5();
 		pBuffer[0] = (pCurrent - pBuffer);
 		insertXOR(pBuffer);
 		return true;

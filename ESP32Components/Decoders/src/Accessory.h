@@ -21,41 +21,45 @@
  */
 
 /*
- * AccessoryDecoder.h
+ * Accessory.h
  *
- *  Created on: Mar 11, 2018
+ *  Created on: Mar 16, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef DECODERS_INCLUDE_ACCESSORYDECODER_H_
-#define DECODERS_INCLUDE_ACCESSORYDECODER_H_
+#ifndef DECODERS_SRC_ACCESSORY_H_
+#define DECODERS_SRC_ACCESSORY_H_
 
-#include "Decoder.h"
+#include "AccessoryDecoder.h"
 
 namespace TBTIoT
 {
-	class Accessory;	//	forward declaration
 
-	class AccessoryDecoder: public Decoder
+	class Accessory
 	{
 		public:
-			AccessoryDecoder(const DCCAddress_t& address);
-			virtual ~AccessoryDecoder();
+			Accessory(AccessoryDecoder* pAccessoryDecoder, const uint8_t port);
+			virtual ~Accessory();
 
-			Accessory*	getAccessory(const uint8_t port) { return m_pAccessories[port]; }
-			uint8_t		getState(const uint8_t port);
-			void		setState(const uint8_t port, const uint8_t outputNbr, const uint8_t state);
+			uint8_t getUDPState(void);
+			void	setUDPState(const uint8_t newState);
+			bool	getDCCMessage(uint8_t* pBuffer);
+			void	setState(const uint8_t outputNbr, const uint8_t state);
 
-			virtual bool getNextDCCCommand(uint8_t* pBuffer);
-			virtual void onNewMQTTData(const string& topic, const string& payload);
+			AccessoryDecoder* getDecoder(void) { return m_pAccessoryDecoder; }
+			const uint8_t getPort(void) { return m_Port; }
 
 		protected:
-			Accessory*	m_pAccessories[4];
 
 		private:
+			AccessoryDecoder*	m_pAccessoryDecoder;
+			uint8_t				m_Port;
+			uint8_t				m_CurrentState[2];
+			uint8_t				m_DesiredState[2];
+			uint8_t				m_UDPState;
 
 	};
 
 } /* namespace TBTIoT */
 
-#endif /* DECODERS_INCLUDE_ACCESSORYDECODER_H_ */
+#endif /* DECODERS_SRC_ACCESSORY_H_ */

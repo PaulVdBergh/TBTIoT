@@ -25,6 +25,7 @@
 #include <freertos/task.h>
 #include <stdio.h>
 
+#include <inttypes.h>
 
 #include "MQTTClient.h"
 #include "sdkconfig.h"
@@ -54,29 +55,72 @@ void task_paho(void *ignore) {
 		sizeof(readBuf)  //readbuf_size
 	);
 
-  MQTTString clientId = MQTTString_initializer;
-  clientId.cstring = "MYCLIENT1";
+	union
+	{
+		uint64_t	llmac;
+		uint8_t		mac[6];
+	} mac_t;
+
+	ESP_ERROR_CHECK(esp_efuse_mac_get_default(mac_t.mac));
+	char szMac[21];
+	snprintf(szMac, sizeof(szMac), "%" PRIu64, mac_t.llmac);
+
+	MQTTString clientId = MQTTString_initializer;
+	clientId.cstring = szMac;
+
+	char szStatusTopic[256];
+	snprintf(szStatusTopic, sizeof(szStatusTopic), "TBTIoT/Devices/%s/Status", szMac);
+
+	MQTTString willTopic = MQTTString_initializer;
+	willTopic.cstring = szStatusTopic;
+
+	MQTTString willMessage = MQTTString_initializer;
+	willMessage.cstring = "Offline";
+
+	MQTTPacket_willOptions willOptions = MQTTPacket_willOptions_initializer;
+	willOptions.topicName = willTopic;
+	willOptions.message = willMessage;
+	willOptions.retained = true;
 
 	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
 	data.clientID          = clientId;
-	data.willFlag          = 0;
+	data.willFlag          = 1;
 	data.MQTTVersion       = 4;
 	data.keepAliveInterval = 0;
 	data.cleansession      = 1;
+	data.will			   = willOptions;
 
 	ESP_LOGI(tag, "::MQTTConnect  ...");
 	rc = MQTTConnect(&client, &data);
-	if (rc != SUCCESS) {
+	if (rc != SUCCESS)
+	{
 		ESP_LOGE(tag, "MQTTConnect: %d", rc);
+	}
+
+	MQTTMessage statusMessage;
+	statusMessage.qos = QOS0;
+	statusMessage.retained = true;
+	statusMessage.dup = 0;
+	statusMessage.id = 0;
+	statusMessage.payload = "Online";
+	statusMessage.payloadlen = sizeof(statusMessage.payload);
+
+	ESP_LOGI(tag, "::MQTTPublish ...");
+	rc = MQTTPublish(&client, szStatusTopic, &statusMessage);
+	if (rc != SUCCESS)
+	{
+		ESP_LOGE(tag, "::MQTTPublish: %d", rc);
 	}
 
 	ESP_LOGI(tag, "::MQTTSubscribe  ...");
 	rc = MQTTSubscribe(&client, "#", QOS0, IoTMQTTMessageHandler_func);
-	if (rc != SUCCESS) {
+	if (rc != SUCCESS)
+	{
 		ESP_LOGE(tag, "::MQTTSubscribe: %d", rc);
 	}
 
-	while(1) {
+	while(1)
+	{
 		MQTTYield(&client, 1000);
 	}
 	vTaskDelete(NULL);
