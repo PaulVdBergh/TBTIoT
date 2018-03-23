@@ -54,6 +54,7 @@ namespace TBTIoT
 		protected:
 			void insertXOR(uint8_t* pMsg);
 
+			string				m_BaseTopic;
 			uint8_t				m_DCCCommandBuffer[64];
 			const DCCAddress_t	m_DCCAddress;
 			recursive_mutex		m_MDecoder;

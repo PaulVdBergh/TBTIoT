@@ -61,10 +61,10 @@ void app_main(void)
     DCCGen* DccGenerator = new DCCGen();
 
 
-    gpio_set_direction(GPIO_NUM_4, GPIO_MODE_OUTPUT);
+//    gpio_set_direction(GPIO_NUM_4, GPIO_MODE_OUTPUT);
     int level = 0;
     while (true) {
-        gpio_set_level(GPIO_NUM_4, level);
+//        gpio_set_level(GPIO_NUM_4, level);
         level = !level;
         vTaskDelay(300 / portTICK_PERIOD_MS);
     }

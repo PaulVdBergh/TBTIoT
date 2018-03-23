@@ -96,10 +96,17 @@ namespace TBTIoT
 		}
 
 		auto current = m_Decoders.find(currentDecoder->getDCCAddress());
+		if(current == m_Decoders.end())
+		{
+			ESP_LOGW(tag, "getNextDecoder() couldn't find currentDecoder (address %i)", currentDecoder->getDCCAddress());
+			return m_Decoders.begin()->second;
+		}
+
 		if(++current == m_Decoders.end())
 		{
 			return m_Decoders.begin()->second;
 		}
+
 		return current->second;
 	}
 

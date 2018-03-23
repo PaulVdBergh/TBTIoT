@@ -49,6 +49,7 @@ extern "C" {
 using namespace std;
 
 #include "Decoders.h"
+#include "AccessoryDecoder.h"
 #include "LocDecoder.h"
 #include "MQTTSubscription.h"
 
@@ -107,6 +108,7 @@ namespace TBTIoT
 
 			void	broadcastPowerStateChange(const bool& newState);
 			void	broadcastLocInfoChanged(LocDecoder* pLoc);
+			void	broadcastAccessoryInfoChanged(Accessory* pAccessory);
 			void	broadcastEmergencyStop(void);
 			void	broadcastOvercurrent(void);
 

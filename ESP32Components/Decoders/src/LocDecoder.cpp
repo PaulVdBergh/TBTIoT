@@ -43,14 +43,25 @@ namespace TBTIoT
 
 	LocDecoder::LocDecoder(const DCCAddress_t& address)
 	:	Decoder(address)
+	,	m_SpeedPublisher(m_BaseTopic + "Speed")
+	,	m_BusyPublisher(m_BaseTopic + "Busy")
+	,	m_SpeedStepsPublisher(m_BaseTopic + "SpeedSteps")
+	,	m_LocoDrive14Publisher(m_BaseTopic + "LocoDrive14")
+	,	m_LocoDrive27Publisher(m_BaseTopic + "LocoDrive27")
+	,	m_LocoDrive28Publisher(m_BaseTopic + "LocoDrive28")
+	,	m_LocoDrive128Publisher(m_BaseTopic + "LocoDrive128")
+	,	m_DirectionPublisher(m_BaseTopic + "Direction")
+	,	m_DualTractionPublisher(m_BaseTopic + "DualTraction")
+	,	m_SmartSearchPublisher(m_BaseTopic + "SmartSearch")
+	,	m_FunctionGroup1Publisher(m_BaseTopic + "FunctionGroup1")
+	,	m_FunctionGroup2Publisher(m_BaseTopic + "FunctionGroup2")
+	,	m_FunctionGroup3Publisher(m_BaseTopic + "FunctionGroup3")
+	,	m_FunctionGroup4Publisher(m_BaseTopic + "FunctionGroup4")
+	,	m_FunctionGroup5Publisher(m_BaseTopic + "FunctionGroup5")
 	,	m_DCCState(0)
 	,	m_LocMode(LOCMODE_DCC)
 	{
 		ESP_LOGI(tag, "LocDecoder(%i)", address);
-
-		char szTopic[256];
-		snprintf(szTopic, 256, "TBTIoT/Decoders/%i/", m_DCCAddress);
-		m_BaseTopic = string(szTopic);
 
 		m_LocInfo.Addr_MSB = (m_DCCAddress >> 8) & 0x3F;
 		m_LocInfo.Addr_LSB = (m_DCCAddress & 0xFF);
@@ -340,77 +351,77 @@ namespace TBTIoT
 
 	void LocDecoder::setSpeed(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "Speed").Publish(newValue);
+		m_SpeedPublisher.Publish(newValue);
 	}
 
 	void LocDecoder::setBusy(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "Busy").Publish(newValue);
+		m_BusyPublisher.Publish(newValue);
 	}
 
 	void LocDecoder::setSpeedSteps(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "SpeedSteps").Publish(newValue);
+		m_SpeedStepsPublisher.Publish(newValue);
 	}
 
 	void LocDecoder::setLocoDrive14(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "LocoDrive14").Publish(newValue);
+		m_LocoDrive14Publisher.Publish(newValue);
 	}
 
 	void LocDecoder::setLocoDrive27(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "LocoDrive27").Publish(newValue);
+		m_LocoDrive27Publisher.Publish(newValue);
 	}
 
 	void LocDecoder::setLocoDrive28(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "LocoDrive28").Publish(newValue);
+		m_LocoDrive28Publisher.Publish(newValue);
 	}
 
 	void LocDecoder::setLocoDrive128(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "LocoDrive128").Publish(newValue);
+		m_LocoDrive128Publisher.Publish(newValue);
 	}
 
 	void LocDecoder::setDirection(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "Direction").Publish(newValue);
+		m_DirectionPublisher.Publish(newValue);
 	}
 
 	void LocDecoder::setDualTraction(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "DualTraction").Publish(newValue);
+		m_DualTractionPublisher.Publish(newValue);
 	}
 
 	void LocDecoder::setSmartSearch(const bool& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "SmartSearch").Publish(newValue);
+		m_SmartSearchPublisher.Publish(newValue);
 	}
 
 	void LocDecoder::setFunctionGroup1(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "FunctionGroup1").Publish(newValue);
+		m_FunctionGroup1Publisher.Publish(newValue);
 	}
 
 	void LocDecoder::setFunctionGroup2(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "FunctionGroup2").Publish(newValue);
+		m_FunctionGroup2Publisher.Publish(newValue);
 	}
 
 	void LocDecoder::setFunctionGroup3(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "FunctionGroup3").Publish(newValue);
+		m_FunctionGroup3Publisher.Publish(newValue);
 	}
 
 	void LocDecoder::setFunctionGroup4(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "FunctionGroup4").Publish(newValue);
+		m_FunctionGroup4Publisher.Publish(newValue);
 	}
 
 	void LocDecoder::setFunctionGroup5(const uint8_t& newValue)
 	{
-		MQTTPublisher(m_BaseTopic + "FunctionGroup5").Publish(newValue);
+		m_FunctionGroup5Publisher.Publish(newValue);
 	}
 
 	void LocDecoder::setLight(const bool& newValue)

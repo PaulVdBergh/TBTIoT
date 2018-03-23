@@ -29,6 +29,11 @@
 
 #include "AccessoryDecoder.h"
 #include "Accessory.h"
+#include "MQTTPublisher.h"
+
+#include <cstdio>
+#include <cstring>
+using namespace std;
 
 #include <esp_log.h>
 static char tag[] = "AccessoryDecoder";
@@ -77,14 +82,42 @@ namespace TBTIoT
 		return m_pAccessories[port]->getUDPState();
 	}
 
-	void AccessoryDecoder::setState(const uint8_t port, const uint8_t outputNbr, const uint8_t state)
+	void AccessoryDecoder::setDesiredState(const uint8_t& port, const uint8_t& outputNbr, const uint8_t& state)
 	{
-		m_pAccessories[port]->setState(outputNbr, state);
+		char szTopic[256];
+		snprintf(szTopic, 256, "%sDesired/%i/%i", m_BaseTopic.c_str(), port, outputNbr);
+		MQTTPublisher(szTopic).Publish(state);
 	}
 
 	void AccessoryDecoder::onNewMQTTData(const string& topic, const string& payload)
 	{
 		ESP_LOGI(tag, "onNewMQTTData(%s, %s)", topic.c_str(), payload.c_str());
+		if(m_DCCAddress == atoi(topic.c_str()))
+		{
+			char* szAction = strchr(topic.c_str(), '/');
+			if(szAction && *(++szAction))
+			{
+				if(0 == strncmp("Desired", szAction, strlen("Desired")))
+				{
+					char* szPort = strchr(szAction, '/');
+					if(szPort && *(++szPort))
+					{
+						uint8_t port = atoi(szPort);
+						ESP_LOGI(tag, "\tPort = \"%i\"", port);
+						char* szOutput = strchr(szPort, '/');
+						if(szOutput && *(++szOutput))
+						{
+							uint8_t outputNbr = atoi(szOutput);
+							ESP_LOGI(tag, "\tOutputNbr = \"%i\"", outputNbr);
+
+							uint8_t value = atoi(payload.c_str());
+
+							m_pAccessories[port]->setState(outputNbr, value);
+						}
+					}
+				}
+			}
+		}
 	}
 
 } /* namespace TBTIoT */

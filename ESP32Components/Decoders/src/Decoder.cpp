@@ -29,6 +29,9 @@
 
 #include "Decoder.h"
 
+#include <cstdio>
+using namespace std;
+
 namespace TBTIoT
 {
 
@@ -36,6 +39,10 @@ namespace TBTIoT
 	:	m_DCCAddress(address)
 	{
 	// TODO Auto-generated constructor stub
+
+		char szTopic[256];
+		snprintf(szTopic, 256, "TBTIoT/Decoders/%i/", m_DCCAddress);
+		m_BaseTopic = string(szTopic);
 	}
 
 	Decoder::~Decoder()

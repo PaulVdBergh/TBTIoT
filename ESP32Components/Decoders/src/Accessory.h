@@ -41,13 +41,13 @@ namespace TBTIoT
 			Accessory(AccessoryDecoder* pAccessoryDecoder, const uint8_t port);
 			virtual ~Accessory();
 
-			uint8_t getUDPState(void);
-			void	setUDPState(const uint8_t newState);
+			const uint8_t& getUDPState(void) { return m_UDPState; }
+			void	publishCurrentState(const uint8_t& newState);
 			bool	getDCCMessage(uint8_t* pBuffer);
-			void	setState(const uint8_t outputNbr, const uint8_t state);
+			void	setState(const uint8_t& outputNbr, const uint8_t& state);
 
 			AccessoryDecoder* getDecoder(void) { return m_pAccessoryDecoder; }
-			const uint8_t getPort(void) { return m_Port; }
+			const uint8_t& getPort(void) { return m_Port; }
 
 		protected:
 

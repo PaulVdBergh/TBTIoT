@@ -51,12 +51,7 @@ namespace TBTIoT
 	// TODO Auto-generated destructor stub
 	}
 
-	uint8_t Accessory::getUDPState()
-	{
-		return m_UDPState;
-	}
-
-	void Accessory::setUDPState(const uint8_t newState)
+	void Accessory::publishCurrentState(const uint8_t& newState)
 	{
 		if(m_UDPState != newState)
 		{
@@ -91,7 +86,7 @@ namespace TBTIoT
 			retval = true;
 			if(++m_CurrentState[0] == ACCESSORYREPEATCOUNT)
 			{
-				setUDPState(1);
+				publishCurrentState(1);
 			}
 		}
 		else if((m_DesiredState[1] == ACCESSORYREPEATCOUNT) && (m_CurrentState[1] != ACCESSORYREPEATCOUNT))
@@ -100,13 +95,18 @@ namespace TBTIoT
 			retval = true;
 			if(++m_CurrentState[1] == ACCESSORYREPEATCOUNT)
 			{
-				setUDPState(2);
+				publishCurrentState(2);
 			}
 		}
 
 		pBuffer[3] = pBuffer[1] ^ pBuffer[2];
 
-return retval;
+		return retval;
+	}
+
+	void Accessory::setState(const uint8_t& outputNbr, const uint8_t& state)
+	{
+		m_DesiredState[outputNbr] = state;
 	}
 
 } /* namespace TBTIoT */

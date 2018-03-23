@@ -32,6 +32,7 @@
 
 #include "Z21Interface.h"
 #include "LocDecoder.h"
+#include "../src/Accessory.h"
 
 namespace TBTIoT
 {
@@ -44,6 +45,7 @@ namespace TBTIoT
 
 			void	broadcastPowerStateChange(const bool& newState);
 			void	broadcastLocInfoChanged(LocDecoder* pLoc);
+			void	broadcastAccessoryInfoChanged(Accessory* pAccessory);
 			void	broadcastEmergencyStop(void);
 			void	broadcastOvercurrent(void);
 

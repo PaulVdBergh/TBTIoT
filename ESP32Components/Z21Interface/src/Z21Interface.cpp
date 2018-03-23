@@ -121,6 +121,15 @@ namespace TBTIoT
 		}
 	}
 
+	void Z21Interface::broadcastAccessoryInfoChanged(Accessory* pAccessory)
+	{
+		lock_guard<recursive_mutex> lock(m_MClients);
+		for(auto client : m_Clients)
+		{
+			client->broadcastAccessoryInfoChanged(pAccessory);
+		}
+	}
+
 	void Z21Interface::broadcastEmergencyStop()
 	{
 		lock_guard<recursive_mutex> lock(m_MClients);
@@ -963,21 +972,16 @@ namespace TBTIoT
 							case 0x53: //  LAN_X_SET_TURNOUT
 							{
 								ESP_LOGW(Tag, "LAN_X_SET_TURNOUT TODO Implementation");
-/*								Manager* pManager = pClient->getInterface()->getManager();
 								uint16_t FAddr = (payload[5] << 8) + payload[6];
 								uint16_t dccAddress = 0x8000 | (FAddr >> 2);
 								uint8_t Port = payload[6] & 0x03;
-								Decoder* pDecoder = pManager->findDecoder(dccAddress);
-								if(!pDecoder)
-								{
-									pDecoder = new AccessoryDecoder(pManager, dccAddress);
-								}
+								Decoder* pDecoder = findDecoder(dccAddress);
 								AccessoryDecoder* pAccessoryDecoder = dynamic_cast<AccessoryDecoder*>(pDecoder);
 								if(pAccessoryDecoder)
 								{
 									pAccessoryDecoder->setDesiredState(Port, ~(payload[7] | 0xFE), (payload[7] & 0x08) >> 3);
 								}
-*/								break;
+								break;
 							}
 
 							case 0xE3: //  LAN_X_GET_LOCO_INFO

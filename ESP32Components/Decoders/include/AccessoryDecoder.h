@@ -30,7 +30,7 @@
 #ifndef DECODERS_INCLUDE_ACCESSORYDECODER_H_
 #define DECODERS_INCLUDE_ACCESSORYDECODER_H_
 
-#include "Decoder.h"
+#include "../src/Decoder.h"
 
 namespace TBTIoT
 {
@@ -42,9 +42,9 @@ namespace TBTIoT
 			AccessoryDecoder(const DCCAddress_t& address);
 			virtual ~AccessoryDecoder();
 
-			Accessory*	getAccessory(const uint8_t port) { return m_pAccessories[port]; }
+			Accessory*	getAccessory(const uint8_t& port) { return m_pAccessories[port]; }
 			uint8_t		getState(const uint8_t port);
-			void		setState(const uint8_t port, const uint8_t outputNbr, const uint8_t state);
+			void		setDesiredState(const uint8_t& port, const uint8_t& outputNbr, const uint8_t& state);
 
 			virtual bool getNextDCCCommand(uint8_t* pBuffer);
 			virtual void onNewMQTTData(const string& topic, const string& payload);

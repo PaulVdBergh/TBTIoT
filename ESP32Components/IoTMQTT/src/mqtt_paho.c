@@ -81,6 +81,7 @@ void task_paho(void *ignore) {
 	willOptions.topicName = willTopic;
 	willOptions.message = willMessage;
 	willOptions.retained = true;
+	willOptions.qos = QOS0;
 
 	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
 	data.clientID          = clientId;
@@ -103,7 +104,7 @@ void task_paho(void *ignore) {
 	statusMessage.dup = 0;
 	statusMessage.id = 0;
 	statusMessage.payload = "Online";
-	statusMessage.payloadlen = sizeof(statusMessage.payload);
+	statusMessage.payloadlen = strlen("Online");
 
 	ESP_LOGI(tag, "::MQTTPublish ...");
 	rc = MQTTPublish(&client, szStatusTopic, &statusMessage);

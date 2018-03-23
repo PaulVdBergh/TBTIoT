@@ -151,6 +151,22 @@ namespace TBTIoT
 			bool	getDCCFG4Message(uint8_t* pBuffer);
 			bool	getDCCFG5Message(uint8_t* pBuffer);
 
+			MQTTPublisher	m_SpeedPublisher;
+			MQTTPublisher	m_BusyPublisher;
+			MQTTPublisher	m_SpeedStepsPublisher;
+			MQTTPublisher	m_LocoDrive14Publisher;
+			MQTTPublisher	m_LocoDrive27Publisher;
+			MQTTPublisher	m_LocoDrive28Publisher;
+			MQTTPublisher	m_LocoDrive128Publisher;
+			MQTTPublisher	m_DirectionPublisher;
+			MQTTPublisher	m_DualTractionPublisher;
+			MQTTPublisher	m_SmartSearchPublisher;
+			MQTTPublisher	m_FunctionGroup1Publisher;
+			MQTTPublisher	m_FunctionGroup2Publisher;
+			MQTTPublisher	m_FunctionGroup3Publisher;
+			MQTTPublisher	m_FunctionGroup4Publisher;
+			MQTTPublisher	m_FunctionGroup5Publisher;
+
 			struct  locInfo_t
 			{
 				uint32_t	DataLen		= 0x0040000E;
@@ -169,7 +185,6 @@ namespace TBTIoT
 			uint8_t		m_DCCState;
 			uint8_t		m_LocMode;
 			locInfo_t	m_LocInfo;
-			string		m_BaseTopic;
 
 		private:
 			uint8_t* insertDCCAddress(uint8_t* pMsg);

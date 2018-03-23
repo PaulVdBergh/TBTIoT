@@ -84,7 +84,7 @@ namespace TBTIoT
 		Message.dup = 0;
 		Message.id = 0;
 		Message.payload = const_cast<char*>(payload);
-		Message.payloadlen = strlen(payload) + 1;
+		Message.payloadlen = strlen(payload);
 
 		ESP_LOGI(tag, "Publishing \"%s\" in topic \"%s\"", payload, m_Topic.c_str());
 		return MQTTPublish(&client, m_Topic.c_str(), &Message);
