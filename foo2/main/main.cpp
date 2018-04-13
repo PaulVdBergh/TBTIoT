@@ -29,10 +29,69 @@ extern "C" void task_paho(void *ignore);
 extern "C"
 esp_err_t event_handler(void *ctx, system_event_t *event)
 {
-	if (event->event_id == SYSTEM_EVENT_STA_GOT_IP)
+	switch(event->event_id)
 	{
-		xTaskCreatePinnedToCore(&task_paho, "task_paho", 8048, NULL, 5, NULL, 0);
-		Z21Interface* pZ21 = new Z21Interface();
+		case SYSTEM_EVENT_WIFI_READY:
+		{
+			ESP_LOGI(tag, "SYSTEM_EVENT_WIFI_READY");
+			break;
+		}
+
+		case SYSTEM_EVENT_SCAN_DONE:
+		{
+			ESP_LOGI(tag, "SYSTEM_EVENT_SCAN_DONE");
+			break;
+		}
+
+		case SYSTEM_EVENT_STA_START:
+		{
+			ESP_LOGI(tag, "SYSTEM_EVENT_STA_START");
+			break;
+		}
+
+		case SYSTEM_EVENT_STA_STOP:
+		{
+			ESP_LOGI(tag, "SYSTEM_EVENT_STA_STOP");
+			break;
+		}
+
+		case SYSTEM_EVENT_STA_CONNECTED:
+		{
+			ESP_LOGI(tag, "SYSTEM_EVENT_STA_CONNECTED");
+			break;
+		}
+
+		case SYSTEM_EVENT_STA_DISCONNECTED:
+		{
+			ESP_LOGI(tag, "SYSTEM_EVENT_STA_DISCONNECTED");
+			break;
+		}
+
+		case SYSTEM_EVENT_STA_AUTHMODE_CHANGE:
+		{
+			ESP_LOGI(tag, "SYSTEM_EVENT_STA_AUTHMODE_CHANGE");
+			break;
+		}
+
+		case SYSTEM_EVENT_STA_GOT_IP:
+		{
+			ESP_LOGI(tag, "SYSTEM_EVENT_STA_GOT_IP");
+			xTaskCreatePinnedToCore(&task_paho, "task_paho", 8048, NULL, 5, NULL, 0);
+			Z21Interface* pZ21 = new Z21Interface();
+			break;
+		}
+
+		case SYSTEM_EVENT_STA_LOST_IP:
+		{
+			ESP_LOGI(tag, "SYSTEM_EVENT_STA_LOST_IP");
+			break;
+		}
+
+		default:
+		{
+			ESP_LOGI(tag, "EventHandler received %i", event->event_id);
+			break;
+		}
 	}
     return ESP_OK;
 }

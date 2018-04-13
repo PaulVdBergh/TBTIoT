@@ -44,59 +44,68 @@ void task_paho(void *ignore) {
 	ESP_LOGI(tag, "Starting ...");
 	int rc;
 	NetworkInit(&network);
-	ESP_LOGI(tag, "::NetworkConnect  ...");
-	NetworkConnect(&network, "192.168.1.105", 1883);
-	ESP_LOGI(tag, "::MQTTClientInit  ...");
-	MQTTClientInit(&client, &network,
-		1000,            // command_timeout_ms
-		sendBuf,         //sendbuf,
-		sizeof(sendBuf), //sendbuf_size,
-		readBuf,         //readbuf,
-		sizeof(readBuf)  //readbuf_size
-	);
-
-	union
-	{
-		uint64_t	llmac;
-		uint8_t		mac[6];
-	} mac_t;
-
-	ESP_ERROR_CHECK(esp_efuse_mac_get_default(mac_t.mac));
-	char szMac[21];
-	snprintf(szMac, sizeof(szMac), "%" PRIu64, mac_t.llmac);
-
-	MQTTString clientId = MQTTString_initializer;
-	clientId.cstring = szMac;
 
 	char szStatusTopic[256];
-	snprintf(szStatusTopic, sizeof(szStatusTopic), "TBTIoT/Devices/%s/Status", szMac);
 
-	MQTTString willTopic = MQTTString_initializer;
-	willTopic.cstring = szStatusTopic;
-
-	MQTTString willMessage = MQTTString_initializer;
-	willMessage.cstring = "Offline";
-
-	MQTTPacket_willOptions willOptions = MQTTPacket_willOptions_initializer;
-	willOptions.topicName = willTopic;
-	willOptions.message = willMessage;
-	willOptions.retained = true;
-	willOptions.qos = QOS0;
-
-	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
-	data.clientID          = clientId;
-	data.willFlag          = 1;
-	data.MQTTVersion       = 4;
-	data.keepAliveInterval = 0;
-	data.cleansession      = 1;
-	data.will			   = willOptions;
-
-	ESP_LOGI(tag, "::MQTTConnect  ...");
-	rc = MQTTConnect(&client, &data);
-	if (rc != SUCCESS)
+	do
 	{
-		ESP_LOGE(tag, "MQTTConnect: %d", rc);
-	}
+		do
+		{
+			ESP_LOGI(tag, "::NetworkConnect  ...");
+			rc = NetworkConnect(&network, "192.168.1.105", 1883);
+		} while(rc);
+
+		ESP_LOGI(tag, "::MQTTClientInit  ...");
+		MQTTClientInit(&client, &network,
+			1000,            // command_timeout_ms
+			sendBuf,         //sendbuf,
+			sizeof(sendBuf), //sendbuf_size,
+			readBuf,         //readbuf,
+			sizeof(readBuf)  //readbuf_size
+		);
+
+		union
+		{
+			uint64_t	llmac;
+			uint8_t		mac[6];
+		} mac_t;
+
+		ESP_ERROR_CHECK(esp_efuse_mac_get_default(mac_t.mac));
+		char szMac[21];
+		snprintf(szMac, sizeof(szMac), "%" PRIu64, mac_t.llmac);
+
+		MQTTString clientId = MQTTString_initializer;
+		clientId.cstring = szMac;
+
+		snprintf(szStatusTopic, sizeof(szStatusTopic), "TBTIoT/Devices/%s/Status", szMac);
+
+		MQTTString willTopic = MQTTString_initializer;
+		willTopic.cstring = szStatusTopic;
+
+		MQTTString willMessage = MQTTString_initializer;
+		willMessage.cstring = "Offline";
+
+		MQTTPacket_willOptions willOptions = MQTTPacket_willOptions_initializer;
+		willOptions.topicName = willTopic;
+		willOptions.message = willMessage;
+		willOptions.retained = true;
+		willOptions.qos = QOS0;
+
+		MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
+		data.clientID          = clientId;
+		data.willFlag          = 1;
+		data.MQTTVersion       = 4;
+		data.keepAliveInterval = 0;
+		data.cleansession      = 1;
+		data.will			   = willOptions;
+
+		ESP_LOGI(tag, "::MQTTConnect  ...");
+		rc = MQTTConnect(&client, &data);
+		if (rc != SUCCESS)
+		{
+			ESP_LOGE(tag, "MQTTConnect returned: %d", rc);
+		}
+	} while(rc != SUCCESS);
 
 	MQTTMessage statusMessage;
 	statusMessage.qos = QOS0;
