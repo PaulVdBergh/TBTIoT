@@ -61,9 +61,6 @@ namespace TBTIoT
 
 			virtual ~DCCGen();
 
-			static const rmt_item32_t	DCC_ZERO_BIT;
-			static const rmt_item32_t	DCC_ONE_BIT;
-
 		protected:
 
 		private:
@@ -80,6 +77,11 @@ namespace TBTIoT
 			gpio_num_t		m_RailcomGPIONum;
 			gpio_num_t		m_DccGPIONum;
 			rmt_channel_t	m_Channel;
+
+			static const rmt_item32_t	DCC_ZERO_BIT;
+			static const rmt_item32_t	DCC_ONE_BIT;
+			static const rmt_item32_t 	preamble_items[];
+			static const rmt_item32_t 	idle_items[];
 	};
 }	//	namespace TBTIoT
 

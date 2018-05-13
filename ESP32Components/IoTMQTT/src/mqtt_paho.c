@@ -47,12 +47,39 @@ void task_paho(void *ignore) {
 
 	char szStatusTopic[256];
 
+	union
+	{
+		uint64_t	llmac;
+		uint8_t		mac[6];
+	} mac_t;
+
+	ESP_ERROR_CHECK(esp_efuse_mac_get_default(mac_t.mac));
+	char szMac[21];
+	snprintf(szMac, sizeof(szMac), "%" PRIu64, mac_t.llmac);
+
+	MQTTString clientId = MQTTString_initializer;
+	clientId.cstring = szMac;
+
+	snprintf(szStatusTopic, sizeof(szStatusTopic), "TBTIoT/Devices/%s/Status", szMac);
+
+	MQTTString willTopic = MQTTString_initializer;
+	willTopic.cstring = szStatusTopic;
+
+	MQTTString willMessage = MQTTString_initializer;
+	willMessage.cstring = "Offline";
+
+	MQTTPacket_willOptions willOptions = MQTTPacket_willOptions_initializer;
+	willOptions.topicName = willTopic;
+	willOptions.message = willMessage;
+	willOptions.retained = true;
+	willOptions.qos = QOS0;
+
 	do
 	{
 		do
 		{
 			ESP_LOGI(tag, "::NetworkConnect  ...");
-			rc = NetworkConnect(&network, "192.168.1.105", 1883);
+			rc = NetworkConnect(&network, "192.168.1.100", 1883);
 		} while(rc);
 
 		ESP_LOGI(tag, "::MQTTClientInit  ...");
@@ -63,33 +90,6 @@ void task_paho(void *ignore) {
 			readBuf,         //readbuf,
 			sizeof(readBuf)  //readbuf_size
 		);
-
-		union
-		{
-			uint64_t	llmac;
-			uint8_t		mac[6];
-		} mac_t;
-
-		ESP_ERROR_CHECK(esp_efuse_mac_get_default(mac_t.mac));
-		char szMac[21];
-		snprintf(szMac, sizeof(szMac), "%" PRIu64, mac_t.llmac);
-
-		MQTTString clientId = MQTTString_initializer;
-		clientId.cstring = szMac;
-
-		snprintf(szStatusTopic, sizeof(szStatusTopic), "TBTIoT/Devices/%s/Status", szMac);
-
-		MQTTString willTopic = MQTTString_initializer;
-		willTopic.cstring = szStatusTopic;
-
-		MQTTString willMessage = MQTTString_initializer;
-		willMessage.cstring = "Offline";
-
-		MQTTPacket_willOptions willOptions = MQTTPacket_willOptions_initializer;
-		willOptions.topicName = willTopic;
-		willOptions.message = willMessage;
-		willOptions.retained = true;
-		willOptions.qos = QOS0;
 
 		MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
 		data.clientID          = clientId;
@@ -104,6 +104,9 @@ void task_paho(void *ignore) {
 		if (rc != SUCCESS)
 		{
 			ESP_LOGE(tag, "MQTTConnect returned: %d", rc);
+	        vTaskDelay(300 / portTICK_PERIOD_MS);
+	        MQTTDisconnect(&client);
+	        NetworkDisconnect(&network);
 		}
 	} while(rc != SUCCESS);
 

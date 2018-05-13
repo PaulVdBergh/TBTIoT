@@ -47,6 +47,40 @@ using namespace std;
 namespace TBTIoT
 {
 
+	const rmt_item32_t DCCGen::DCC_ZERO_BIT =
+		{
+				ZERO_PULSE_LENGTH, 1,
+				ZERO_PULSE_LENGTH, 0
+		};
+
+	const rmt_item32_t DCCGen::DCC_ONE_BIT =
+		{
+				ONE_PULSE_LENGTH, 1,
+				ONE_PULSE_LENGTH, 0
+		};
+
+	const rmt_item32_t DCCGen::preamble_items[] =
+	{
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT
+	};
+
+	const rmt_item32_t DCCGen::idle_items[] =
+	{
+			DCC_ZERO_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ZERO_BIT,
+			DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT,
+			DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT,
+			DCC_ZERO_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
+			DCC_ONE_BIT
+	};
+
 	DCCGen::DCCGen(	gpio_num_t RailcomGPIONum /* = GPIO_NUM_4 */,
 					gpio_num_t PowerGPIONum /* = GPIO_NUM_2 */,
 					gpio_num_t DccGPIONum /* = GPIO_NUM_0 */,
@@ -59,16 +93,6 @@ namespace TBTIoT
 	,	m_DccGPIONum(DccGPIONum)
 	,	m_Channel(channel)
 	{
-		(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->duration0 = ZERO_PULSE_LENGTH;
-		(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->duration1 = ZERO_PULSE_LENGTH;
-		(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->level0 = 1;
-		(const_cast<rmt_item32_t*>(&DCC_ZERO_BIT))->level1 = 0;
-
-		(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->duration0 = ONE_PULSE_LENGTH;
-		(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->duration1 = ONE_PULSE_LENGTH;
-		(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->level0 = 1;
-		(const_cast<rmt_item32_t*>(&DCC_ONE_BIT))->level1 = 0;
-
 		gpio_set_direction(m_PowerGPIONum, GPIO_MODE_OUTPUT);
 		gpio_set_direction(m_RailcomGPIONum, GPIO_MODE_OUTPUT);
 
@@ -105,28 +129,6 @@ namespace TBTIoT
 		uint8_t			pCmd[8];
 		rmt_item32_t	pItems[64];
 		uint16_t		itemCount;
-
-		static const rmt_item32_t preamble_items[] =
-		{
-			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
-			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
-			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
-			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT
-		};
-
-		static const rmt_item32_t idle_items[] =
-		{
-			DCC_ZERO_BIT,
-			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
-			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
-			DCC_ZERO_BIT,
-			DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT,
-			DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT, DCC_ZERO_BIT,
-			DCC_ZERO_BIT,
-			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
-			DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT, DCC_ONE_BIT,
-			DCC_ONE_BIT
-		};
 
 		TaskHandle_t taskHandle = (TaskHandle_t)(m_thread.native_handle());
 		UBaseType_t priority = uxTaskPriorityGet(taskHandle) + 1;
@@ -204,8 +206,5 @@ namespace TBTIoT
 
 		ESP_ERROR_CHECK(rmt_driver_uninstall(m_rmtConfig.channel));
 	}
-
-	const rmt_item32_t DCCGen::DCC_ZERO_BIT;
-	const rmt_item32_t DCCGen::DCC_ONE_BIT;
 
 }	//	namespace TBTIoT

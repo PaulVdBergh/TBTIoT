@@ -1,0 +1,230 @@
+/**
+ * Copyright (C) 2018 Paul Van den Bergh <admin@paulvandenbergh.be>
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * =====================================================================
+ *	This file is part of the IoT&Trains project.  
+ *	For more info see http://paulvandenbergh.be
+ * =====================================================================
+ */
+
+/*
+ * main.cpp
+ *
+ *  Created on: May 10, 2018
+ *      Author: paulvdbergh
+ */
+
+
+#include <iwlib.h>
+#include <unistd.h>
+
+#include <sys/socket.h>
+#include <sys/time.h>
+
+#include <cstdio>
+#include <cstring>
+
+/****************************** TYPES ******************************/
+
+/*
+ * Scan state and meta-information, used to decode events...
+ */
+typedef struct iwscan_state
+{
+  /* State */
+  int			ap_num;		/* Access Point number 1->N */
+  int			val_index;	/* Value in table 0->(N-1) */
+} iwscan_state;
+
+/*
+ * Bit to name mapping
+ */
+typedef struct iwmask_name
+{
+  unsigned int	mask;	/* bit mask for the value */
+  const char *	name;	/* human readable name for the value */
+} iwmask_name;
+
+/*
+ * Types of authentication parameters
+ */
+typedef struct iw_auth_descr
+{
+  int				value;		/* Type of auth value */
+  const char *			label;		/* User readable version */
+  const struct iwmask_name *	names;		/* Names for this value */
+  const int			num_names;	/* Number of names */
+} iw_auth_descr;
+
+int main(void)
+{
+	const char* interfaceName = "wlan0";
+
+	struct iw_range range;
+	bool	hasRange;
+
+	struct iwreq request;
+	struct timeval tv;
+	int	timeout = 15000000;
+
+	unsigned char*	buffer = NULL;
+	int				buflen = IW_SCAN_MAX_DATA;
+
+	int sockfd = socket(AF_INET, SOCK_DGRAM, 0);
+
+	if(-1 == sockfd)
+	{
+		perror("socket");
+		exit(EXIT_FAILURE);
+	}
+
+	hasRange = (0 <= iw_get_range_info(sockfd, interfaceName, &range));
+	if((!hasRange || (range.we_version_compiled < 14)))
+	{
+		printf("%s - interface doesn't support scanning\n", interfaceName);
+		exit(EXIT_FAILURE);
+	}
+
+	tv.tv_sec = 0;
+	tv.tv_usec = 250000;
+
+	__u8 wev = range.we_version_compiled;
+
+	request.u.data.pointer = NULL;
+	request.u.data.flags = 0;
+	request.u.data.length = 0;
+
+
+	if(0 > iw_set_ext(sockfd, interfaceName, SIOCSIWSCAN, &request))
+	{
+		if(errno != EPERM)
+		{
+			perror("iw_set_ext(SIOCSIWSCAN)");
+			exit(EXIT_FAILURE);
+		}
+	}
+
+	timeout -= tv.tv_usec;
+
+	while(true)
+	{
+		fd_set	rfds;
+		int		last_fd;
+		int		ret;
+
+		FD_ZERO(&rfds);
+		last_fd = -1;
+
+		ret = select(last_fd + 1, &rfds, NULL, NULL, &tv);
+
+		if(0 > ret)
+		{
+			if(EAGAIN == errno || EINTR == errno)
+			{
+				continue;
+			}
+			fprintf(stderr, "Unhandled signal - exiting...\n");
+			exit(EXIT_FAILURE);
+		}
+
+		if(0 == ret)
+		{
+			unsigned char* newbuf;
+
+			realloc:
+			newbuf = (unsigned char*)realloc(buffer, buflen);
+			if(NULL == newbuf)
+			{
+				if(buffer)
+				{
+					free(buffer);
+					fprintf(stderr, "%s: Allocation failed\n", __FUNCTION__);
+					exit(EXIT_FAILURE);
+				}
+			}
+
+			buffer = newbuf;
+
+			request.u.data.pointer = buffer;
+			request.u.data.flags = 0;
+			request.u.data.length = buflen;
+
+			if(0 > iw_get_ext(sockfd, interfaceName, SIOCGIWSCAN, &request))
+			{
+				if((E2BIG == errno) && (16 < range.we_version_compiled))
+				{
+					if(request.u.data.length > buflen)
+					{
+						buflen = request.u.data.length;
+					}
+					else
+					{
+						buflen *= 2;
+					}
+					goto realloc;
+				}
+
+				if(EAGAIN == errno)
+				{
+					tv.tv_sec = 0;
+					tv.tv_usec = 100000;
+					timeout -= tv.tv_usec;
+					if(0 < timeout)
+					{
+						continue;
+					}
+				}
+
+				free(buffer);
+				fprintf(stderr, "%s Failed to read scan data : %s\n", interfaceName, strerror(errno));
+				exit(EXIT_FAILURE);
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+
+	if(request.u.data.length)
+	{
+		struct iw_event		iwe;
+		struct stream_descr	stream;
+		struct iwscan_state	state;
+
+		state.ap_num = 1;
+		state.val_index = 0;
+
+		int	ret;
+
+		iw_init_event_stream(&stream, (char*)buffer, request.u.data.length);
+		do
+		{
+			ret = iw_extract_event_stream(&stream, &iwe, range.we_version_compiled);
+			if(0 < ret)
+			{
+
+			}
+		}
+		while(0 < ret);
+
+	free(buffer);
+	}
+
+	close(sockfd);
+}
+
+
