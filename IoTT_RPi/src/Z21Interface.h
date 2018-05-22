@@ -33,6 +33,7 @@
 #include "MqttSubscription.h"
 
 #include "Decoders.h"
+#include "AccessoryDecoder.h"
 #include "LocDecoder.h"
 
 #include <sys/socket.h>
@@ -94,7 +95,7 @@ namespace IoTT
 			ssize_t sendToSocket(const uint8_t* pMsg, sockaddr* address);
 
 			void	broadcastPowerStateChange(const bool& newState);
-//			void	broadcastAccessoryInfoChanged(Accessory* pAccessory);
+			void	broadcastAccessoryInfoChanged(Accessory* pAccessory);
 			void	broadcastEmergencyStop(void);
 			void	broadcastOvercurrent(void);
 

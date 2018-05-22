@@ -28,6 +28,7 @@
  */
 
 #include "Decoders.h"
+#include "AccessoryDecoder.h"
 #include "LocDecoder.h"
 
 #include <cstring>
@@ -82,14 +83,11 @@ namespace IoTT
 			//	LocDecoder with 14-bit addressing
 			return m_Decoders[address] = new LocDecoder(address);
 		}
-/*	TODO implementation
- *
 		else if((0x7FFF < address) && (address < 0xC07F))
 		{
 			//	AccessoryDecoder
 			return m_Decoders[address] = new AccessoryDecoder(address);
 		}
-*/
 		return nullptr;
 	}
 

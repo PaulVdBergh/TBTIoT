@@ -21,47 +21,43 @@
  */
 
 /*
- * Z21Client.h
+ * Accessory.h
  *
  *  Created on: May 22, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef SRC_Z21CLIENT_H_
-#define SRC_Z21CLIENT_H_
+#ifndef SRC_ACCESSORY_H_
+#define SRC_ACCESSORY_H_
 
-#include "Z21Interface.h"
-#include "Accessory.h"
-#include "LocDecoder.h"
+#include "AccessoryDecoder.h"
 
 namespace IoTT
 {
 
-	class Z21Client
+	class Accessory
 	{
 		public:
-			Z21Client(Z21Interface* pinterface, const sockaddr_in& address);
-			virtual ~Z21Client();
+			Accessory(AccessoryDecoder* pDecoder, const uint8_t& port);
+			virtual ~Accessory();
 
-			void	broadcastPowerStateChange(const bool& newState);
-			void	broadcastLocInfoChanged(LocDecoder* pLoc);
-			void	broadcastAccessoryInfoChanged(Accessory* pAccessory);
-			void	broadcastEmergencyStop(void);
-			void	broadcastOvercurrent(void);
+			const uint8_t& 	getUDPState(void) { return m_UDPState; }
+			void			setState(const uint8_t& outputNbr, const uint8_t& state);
 
-			const sockaddr_in&	getAddress(void) { return m_Address; }
-			const uint32_t&		getBroadcastFlags(void);
-			void				setBroadcastFlags(uint32_t& newFlags) { m_BroadcastFlags = newFlags; }
+			AccessoryDecoder*	getDecoder(void) { return m_pAccessoryDecoder; }
+			const uint8_t&		getPort(void) { return m_Port; }
 
 		protected:
 
 		private:
-			Z21Interface*		m_pInterface;
-			const sockaddr_in	m_Address;
-			uint32_t			m_BroadcastFlags;
+			AccessoryDecoder*	m_pAccessoryDecoder;
+			uint8_t				m_Port;
+			uint8_t				m_UDPState;
+			uint8_t				m_CurrentState[2];
+			uint8_t				m_DesiredState[2];
 
 	};
 
 } /* namespace IoTT */
 
-#endif /* SRC_Z21CLIENT_H_ */
+#endif /* SRC_ACCESSORY_H_ */

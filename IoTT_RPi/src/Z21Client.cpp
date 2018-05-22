@@ -82,7 +82,7 @@ namespace IoTT
 
 		m_pInterface->sendToSocket(msg, (sockaddr*)&m_Address);
 	}
-/*
+
 	void Z21Client::broadcastAccessoryInfoChanged(Accessory* pAccessory)
 	{
 		uint8_t msg[] = { 0x09, 0x00, 0x40, 0x00, 0x43, 0x00, 0x00, 0x00, 0x00 };
@@ -97,7 +97,7 @@ namespace IoTT
 
 		m_pInterface->sendToSocket(msg, (sockaddr*)&m_Address);
 	}
-*/
+
 
 	/**
 	 *

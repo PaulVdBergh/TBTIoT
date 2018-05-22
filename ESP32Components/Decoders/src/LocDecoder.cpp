@@ -342,7 +342,7 @@ namespace TBTIoT
 	{
 		lock_guard<recursive_mutex> guard(m_MDecoder);
 		m_LocInfo.XOR = 0;
-		for(uint8_t i = 4; i < *((uint8_t*)&m_LocInfo.DataLen); i++)
+		for(uint8_t i = 4; i < (*((uint8_t*)&m_LocInfo.DataLen)) - 1; i++)
 		{
 			m_LocInfo.XOR ^= ((uint8_t*)&m_LocInfo)[i];
 		}

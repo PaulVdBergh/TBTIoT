@@ -31,6 +31,9 @@
 #include "Z21Client.h"
 
 #include <sys/eventfd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
 
 #include <cstring>
 #include <algorithm>
@@ -56,13 +59,14 @@ namespace IoTT
 
 	ssize_t Z21Interface::sendToSocket(const uint8_t* pMsg, sockaddr* address)
 	{
+/*
 		printf("Z21Interface::sendToSocket\n\tpMsg = ");
 		for(int i = 0; i < pMsg[0]; i++)
 		{
 			printf(" 0x%02X", pMsg[i]);
 		}
 		printf("\n");
-
+*/
 		lock_guard<recursive_mutex> lock(m_Mfdsock_me);
 		return sendto(m_fdsock_me, pMsg, pMsg[0], 0, address, sizeof(struct sockaddr_in));
 	}
@@ -113,7 +117,7 @@ namespace IoTT
 			client->broadcastLocInfoChanged(pLoc);
 		}
 	}
-/*
+
 	void Z21Interface::broadcastAccessoryInfoChanged(Accessory* pAccessory)
 	{
 		lock_guard<recursive_mutex> lock(m_MClients);
@@ -122,7 +126,7 @@ namespace IoTT
 			client->broadcastAccessoryInfoChanged(pAccessory);
 		}
 	}
-*/
+
 	void Z21Interface::broadcastEmergencyStop()
 	{
 		lock_guard<recursive_mutex> lock(m_MClients);
@@ -202,18 +206,17 @@ namespace IoTT
 		while(bContinue)
 		{
 			int recv_len = recvfrom(m_fdsock_me, recvbuffer, 128, 0, (sockaddr*)&si_other, &slen);
-/*			ESP_LOGI(Tag, "Received message from %s:%i, %i bytes.", inet_ntoa(si_other.sin_addr), si_other.sin_port, recv_len);
+			printf("Received message from %s:%i, %i bytes:\n", inet_ntoa(si_other.sin_addr), si_other.sin_port, recv_len);
 
 			char	szDumpBuffer[256] = "";
 			for(uint8_t i = 0; i < recv_len; i++)
 			{
 				char szByte[16] = "";
-				sprintf(szByte, ": %02X ", recvbuffer[i]);
+				sprintf(szByte, "0x%02X ", recvbuffer[i]);
 				strcat(szDumpBuffer, szByte);
 			}
-			ESP_LOGI(Tag, "\t%s", szDumpBuffer);
+			printf("\t%s\n", szDumpBuffer);
 
-*/
 			uint8_t* payload = recvbuffer;
 
 			Z21Client* pClient = findClient(si_other);
@@ -931,12 +934,12 @@ namespace IoTT
 								uint16_t dccAddress = 0x8000 | (FAddr >> 2);
 								uint8_t Port = payload[6] & 0x03;
 								Decoder* pDecoder = findDecoder(dccAddress);
-	/*							AccessoryDecoder* pAccessoryDecoder = dynamic_cast<AccessoryDecoder*>(pDecoder);
+								AccessoryDecoder* pAccessoryDecoder = dynamic_cast<AccessoryDecoder*>(pDecoder);
 								if(pAccessoryDecoder)
 								{
 									pAccessoryDecoder->setDesiredState(Port, ~(payload[7] | 0xFE), (payload[7] & 0x08) >> 3);
 								}
-	*/							break;
+								break;
 							}
 
 							case 0xE3: //  LAN_X_GET_LOCO_INFO

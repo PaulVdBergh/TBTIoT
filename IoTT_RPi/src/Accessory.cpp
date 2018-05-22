@@ -21,47 +21,35 @@
  */
 
 /*
- * Z21Client.h
+ * Accessory.cpp
  *
  *  Created on: May 22, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef SRC_Z21CLIENT_H_
-#define SRC_Z21CLIENT_H_
-
-#include "Z21Interface.h"
 #include "Accessory.h"
-#include "LocDecoder.h"
 
 namespace IoTT
 {
 
-	class Z21Client
+	Accessory::Accessory(AccessoryDecoder* pDecoder, const uint8_t& port)
+	:	m_pAccessoryDecoder(pDecoder)
+	,	m_Port(port)
+	,	m_UDPState(0)
+	,	m_CurrentState{0, 0}
+	,	m_DesiredState{0, 0}
 	{
-		public:
-			Z21Client(Z21Interface* pinterface, const sockaddr_in& address);
-			virtual ~Z21Client();
+	// TODO Auto-generated constructor stub
+	}
 
-			void	broadcastPowerStateChange(const bool& newState);
-			void	broadcastLocInfoChanged(LocDecoder* pLoc);
-			void	broadcastAccessoryInfoChanged(Accessory* pAccessory);
-			void	broadcastEmergencyStop(void);
-			void	broadcastOvercurrent(void);
+	Accessory::~Accessory()
+	{
+	// TODO Auto-generated destructor stub
+	}
 
-			const sockaddr_in&	getAddress(void) { return m_Address; }
-			const uint32_t&		getBroadcastFlags(void);
-			void				setBroadcastFlags(uint32_t& newFlags) { m_BroadcastFlags = newFlags; }
-
-		protected:
-
-		private:
-			Z21Interface*		m_pInterface;
-			const sockaddr_in	m_Address;
-			uint32_t			m_BroadcastFlags;
-
-	};
+	void Accessory::setState(const uint8_t& outputNbr, const uint8_t& state)
+	{
+		m_DesiredState[outputNbr] = state;
+	}
 
 } /* namespace IoTT */
-
-#endif /* SRC_Z21CLIENT_H_ */
