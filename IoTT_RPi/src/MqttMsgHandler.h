@@ -21,35 +21,59 @@
  */
 
 /*
- * mqttSettings.h
+ * MqttMsgHandler.h
  *
  *  Created on: May 21, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef SRC_MQTTSETTINGS_H_
-#define SRC_MQTTSETTINGS_H_
+#ifndef SRC_MQTTMSGHANDLER_H_
+#define SRC_MQTTMSGHANDLER_H_
 
-#include <string>
-#include <mqueue.h>
-#include <sys/stat.h>
+#include "MqttSubscription.h"
+
+#include <mutex>
+#include <thread>
+#include <vector>
 
 using namespace std;
 
 namespace IoTT
 {
-	extern string mqttAddress;
-	extern string mqttClientID;
-	extern string mqttTopic;
 
-	extern int mqttQOS;
-	extern int mqttTimeout;
+	class MqttMsgHandler
+	{
+		public:
+			static MqttMsgHandler* getInstance(void);
+			virtual ~MqttMsgHandler();
 
-	extern string mqttSubMQName;
-	extern string mqttPubMQName;
+			void RegisterSubscription(MqttSubscription* pSub);
+			void UnRegisterSubscription(MqttSubscription* pSub);
 
-	extern mq_attr	mqttMsgQueueAttribs;
+		protected:
+			MqttMsgHandler();
+
+		private:
+			void threadFunc(void);
+
+			class ExecSub
+			{
+				public:
+					ExecSub(mqttMessageQueueItem& item);
+					void operator()(MqttSubscription* pSub);
+
+				private:
+					mqttMessageQueueItem& m_Item;
+			};
+
+			thread	m_Thread;
+
+			vector<MqttSubscription*> m_Subscriptions;
+			recursive_mutex m_MSubscriptions;
+
+			static MqttMsgHandler*	sm_pInstance;
+	};
 
 } /* namespace IoTT */
 
-#endif /* SRC_MQTTSETTINGS_H_ */
+#endif /* SRC_MQTTMSGHANDLER_H_ */

@@ -21,35 +21,40 @@
  */
 
 /*
- * mqttSettings.h
+ * MqttSubscription.h
  *
  *  Created on: May 21, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef SRC_MQTTSETTINGS_H_
-#define SRC_MQTTSETTINGS_H_
+#ifndef SRC_MQTTSUBSCRIPTION_H_
+#define SRC_MQTTSUBSCRIPTION_H_
+
+#include "mqttMessageQueueItem.h"
 
 #include <string>
-#include <mqueue.h>
-#include <sys/stat.h>
 
 using namespace std;
 
 namespace IoTT
 {
-	extern string mqttAddress;
-	extern string mqttClientID;
-	extern string mqttTopic;
 
-	extern int mqttQOS;
-	extern int mqttTimeout;
+	class MqttSubscription
+	{
+		public:
+			MqttSubscription(const char* topic);
+			virtual ~MqttSubscription();
 
-	extern string mqttSubMQName;
-	extern string mqttPubMQName;
+			bool isTopicMatched(const mqttMessageQueueItem& item);
 
-	extern mq_attr	mqttMsgQueueAttribs;
+			virtual void OnNewData(const mqttMessageQueueItem& item) = 0;
+
+		protected:
+			const string	m_Topic;
+
+		private:
+	};
 
 } /* namespace IoTT */
 
-#endif /* SRC_MQTTSETTINGS_H_ */
+#endif /* SRC_MQTTSUBSCRIPTION_H_ */

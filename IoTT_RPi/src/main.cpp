@@ -34,6 +34,9 @@
 #include "config_thread.h"
 #include "mqtt_thread.h"
 
+#include "Z21Interface.h"
+#include "MqttMsgHandler.h"
+
 int main(int argc, char const *argv[])
 {
 	pthread_t conf_thread;
@@ -52,8 +55,13 @@ int main(int argc, char const *argv[])
 		printf("pthread_create(mqtt_thread_func) failed with exit code %i.\n", retVal);
 	}
 
+	IoTT::MqttMsgHandler* pMqttHandler = IoTT::MqttMsgHandler::getInstance();
+	IoTT::Z21Interface* pZ21 = new IoTT::Z21Interface();
+
 	while(true)
 	{
 		sleep(1);
 	}
+
+	delete pZ21;
 }

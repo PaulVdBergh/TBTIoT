@@ -21,43 +21,50 @@
  */
 
 /*
- * mqttcallback.h
+ * Decoders.h
  *
- *  Created on: May 19, 2018
+ *  Created on: May 21, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef MQTTCALLBACK_H_
-#define MQTTCALLBACK_H_
+#ifndef SRC_DECODERS_H_
+#define SRC_DECODERS_H_
 
-#include <mqtt/async_client.h>
+#include "MqttSubscription.h"
 
-#include "mqttactionListener.h"
+#include "Decoder.h"
+
+#include <map>
+#include <mutex>
+
+using namespace std;
 
 namespace IoTT
 {
 
-	class mqtt_callback: public virtual mqtt::callback, public virtual mqtt::iaction_listener
+	typedef map<DCCAddress_t, Decoder*> DecodersMap_t;
+	typedef DecodersMap_t::iterator		DecodersMapIterator_t;
+
+	class Decoders: public virtual MqttSubscription
 	{
 		public:
-			mqtt_callback(mqtt::async_client& cli, mqtt::connect_options& connOpts);
+			static Decoders* getInstance();
+			virtual ~Decoders();
+
+			Decoder* getDecoder(const DCCAddress_t& address);
+
+			virtual void OnNewData(const mqttMessageQueueItem& item) override;
 
 		protected:
+			Decoders(const string& MqttTopicBasePath = "IoTT/Decoders/");
 
 		private:
-			void reconnect(void);
-			void on_failure(const mqtt::token& tok);
-			void on_success(const mqtt::token& tok);
-			void connection_lost(const std::string& cause) override;
-			void message_arrived(mqtt::const_message_ptr msg) override;
-			void delivery_complete(mqtt::delivery_token_ptr token) override;
-
-			int		m_nretry;
-			mqtt::async_client& m_cli;
-			mqtt::connect_options& m_connOpts;
-			mqtt_actionListener	m_subListener;
+			static Decoders*	sm_pInstance;
+			string				m_TopicBasePath;
+			DecodersMap_t		m_Decoders;
+			recursive_mutex		m_MDecoders;
 	};
 
 } /* namespace IoTT */
 
-#endif /* MQTTCALLBACK_H_ */
+#endif /* SRC_DECODERS_H_ */

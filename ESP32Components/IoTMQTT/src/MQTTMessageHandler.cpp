@@ -88,6 +88,7 @@ namespace TBTIoT
 
 	void MQTTMessageHandler::RegisterSubscription(MQTTSubscription* pSub)
 	{
+		ESP_LOGI(tag, "Registering subscription [%d].", (uint32_t)pSub);
 
 		bool bNewSubscription = false;
 		{
@@ -96,6 +97,7 @@ namespace TBTIoT
 			bNewSubscription = (m_Subscriptions.end() == thisone);
 			if(bNewSubscription)
 			{
+				ESP_LOGI(tag, "Pushing new subscription...");
 				m_Subscriptions.push_back(pSub);
 				sort(m_Subscriptions.begin(), m_Subscriptions.end(), sortfunc);
 			}
@@ -141,9 +143,15 @@ namespace TBTIoT
 			exec_t(IoTMQTTMessageQueueItem* pItem) : m_pItem(pItem) {}
 			void operator()(MQTTSubscription* pS)
 			{
+				ESP_LOGI(tag, "Testing Subscription Topic %s against %s", pS->getTopic().c_str(), m_pItem->m_Topic);
 				if(pS->isTopicMatched(m_pItem))
 				{
+					ESP_LOGI(tag, "Test Succeeded !!");
 					pS->OnNewData(m_pItem);
+				}
+				else
+				{
+					ESP_LOGI(tag, "Test Failed !!");
 				}
 			}
 		} exec(&QueueItem);

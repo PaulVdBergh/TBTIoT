@@ -21,35 +21,68 @@
  */
 
 /*
- * mqttSettings.h
+ * mqttMessageQueueItem.h
  *
  *  Created on: May 21, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef SRC_MQTTSETTINGS_H_
-#define SRC_MQTTSETTINGS_H_
+#ifndef SRC_MQTTMESSAGEQUEUEITEM_H_
+#define SRC_MQTTMESSAGEQUEUEITEM_H_
 
-#include <string>
-#include <mqueue.h>
-#include <sys/stat.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <mqtt/MQTTAsync.h>
 
-using namespace std;
+#define MAX_TOPIC_SIZE 256
+#define MAX_PAYLOAD_SIZE 256
 
 namespace IoTT
 {
-	extern string mqttAddress;
-	extern string mqttClientID;
-	extern string mqttTopic;
 
-	extern int mqttQOS;
-	extern int mqttTimeout;
+	class mqttMessageQueueItem
+	{
+		public:
+			mqttMessageQueueItem(
+					const char*	topic = "",
+					int			qos = 0,
+					uint8_t		retained = 0,
+					uint8_t		dup = 0,
+					uint16_t	id = 0,
+					uint8_t*	payload = nullptr,
+					size_t		payloadLen = 0);
 
-	extern string mqttSubMQName;
-	extern string mqttPubMQName;
+			virtual ~mqttMessageQueueItem();
 
-	extern mq_attr	mqttMsgQueueAttribs;
+			const char* getTopic(void) const
+			{
+				return m_Topic;
+			}
+
+			const size_t getPayloadLen(void) const
+			{
+				return m_PayloadLen;
+			}
+
+			const uint8_t* getPayload(void) const
+			{
+				return m_Payload;
+			}
+
+			MQTTAsync_message* getMessage(void);
+
+		protected:
+
+		private:
+			char		m_Topic[MAX_TOPIC_SIZE];
+			int			m_QOS;
+			uint8_t		m_Retained;
+			uint8_t		m_Dup;
+			uint16_t	m_Id;
+			uint8_t		m_Payload[MAX_PAYLOAD_SIZE];
+			size_t		m_PayloadLen;
+	};
 
 } /* namespace IoTT */
 
-#endif /* SRC_MQTTSETTINGS_H_ */
+#endif /* SRC_MQTTMESSAGEQUEUEITEM_H_ */

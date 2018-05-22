@@ -60,7 +60,7 @@ void task_paho(void *ignore) {
 	MQTTString clientId = MQTTString_initializer;
 	clientId.cstring = szMac;
 
-	snprintf(szStatusTopic, sizeof(szStatusTopic), "TBTIoT/Devices/%s/Status", szMac);
+	snprintf(szStatusTopic, sizeof(szStatusTopic), "IoTT/Devices/%s/Status", szMac);
 
 	MQTTString willTopic = MQTTString_initializer;
 	willTopic.cstring = szStatusTopic;

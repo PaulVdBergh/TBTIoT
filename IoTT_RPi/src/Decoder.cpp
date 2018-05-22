@@ -21,35 +21,31 @@
  */
 
 /*
- * mqttSettings.h
+ * Decoder.cpp
  *
  *  Created on: May 21, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef SRC_MQTTSETTINGS_H_
-#define SRC_MQTTSETTINGS_H_
+#include "Decoder.h"
 
-#include <string>
-#include <mqueue.h>
-#include <sys/stat.h>
-
-using namespace std;
+#include <sstream>
 
 namespace IoTT
 {
-	extern string mqttAddress;
-	extern string mqttClientID;
-	extern string mqttTopic;
 
-	extern int mqttQOS;
-	extern int mqttTimeout;
+	Decoder::Decoder(const DCCAddress_t& address)
+	:	m_DCCAddress(address)
+	{
+		std::stringstream ss;
+		ss << "IoTT/Decoders/" << m_DCCAddress << "/";
+		m_BaseTopic = ss.str();
+		printf("Decode::Decoder(%d) : m_BaseTopic = '%s'\n", address, m_BaseTopic.c_str());
+	}
 
-	extern string mqttSubMQName;
-	extern string mqttPubMQName;
-
-	extern mq_attr	mqttMsgQueueAttribs;
+	Decoder::~Decoder()
+	{
+		// TODO Auto-generated destructor stub
+	}
 
 } /* namespace IoTT */
-
-#endif /* SRC_MQTTSETTINGS_H_ */

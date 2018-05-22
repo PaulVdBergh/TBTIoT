@@ -23,16 +23,31 @@
 /*
  * mqttSettings.cpp
  *
- *  Created on: May 19, 2018
+ *  Created on: May 21, 2018
  *      Author: paulvdbergh
  */
 
 #include "mqttSettings.h"
+#include "mqttMessageQueueItem.h"
 
-const int MQTT_RETRY_ATTEMPTS = 5;
-const std::string MQTT_ADDRESS("tcp://localhost:1883");
-const std::string MQTT_CLIENTID("IoTT_RPi");
-const std::string MQTT_TOPIC("#");
-const int MQTT_QOS  = 1;
+namespace IoTT
+{
+	string mqttAddress = "tcp://localhost:1883";
+	string mqttClientID = "IoTT_RPi";
+	string mqttTopic = "#";
 
-mqtt::token_ptr connect_token = nullptr;
+	int mqttQOS = 0;
+	int mqttTimeout = 10000L;
+
+	string mqttSubMQName = "/IoTT_RPi_Sub";
+	string mqttPubMQName = "/IoTT_RPi_Pub";
+
+	mq_attr mqttMsgQueueAttribs =
+	{
+		0, 		//	mq_flags
+		16, 	//	mq_maxmsg
+		sizeof(IoTT::mqttMessageQueueItem), 	//	mq_msgsize
+		0		//	mq_curmsg
+	};
+
+} /* namespace IoTT */

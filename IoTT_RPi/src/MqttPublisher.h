@@ -21,35 +21,44 @@
  */
 
 /*
- * mqttSettings.h
+ * MqttPublisher.h
  *
- *  Created on: May 21, 2018
+ *  Created on: May 22, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef SRC_MQTTSETTINGS_H_
-#define SRC_MQTTSETTINGS_H_
+#ifndef SRC_MQTTPUBLISHER_H_
+#define SRC_MQTTPUBLISHER_H_
+
+#include <mqueue.h>
 
 #include <string>
-#include <mqueue.h>
-#include <sys/stat.h>
-
 using namespace std;
 
 namespace IoTT
 {
-	extern string mqttAddress;
-	extern string mqttClientID;
-	extern string mqttTopic;
 
-	extern int mqttQOS;
-	extern int mqttTimeout;
+	class MqttPublisher
+	{
+		public:
+			MqttPublisher(const string& topic);
+			virtual ~MqttPublisher();
 
-	extern string mqttSubMQName;
-	extern string mqttPubMQName;
+			int Publish(const string& payload, int qos = 0, bool retained = false);
+			int Publish(const char* payload, int qos = 0, bool retained = false);
+			int Publish(const uint8_t& uint8Val, int qos = 0, bool retained = false);
+			int Publish(const bool& boolVal, int qos = 0, bool retained = false);
 
-	extern mq_attr	mqttMsgQueueAttribs;
+			int Publish(void* payload, size_t payloadlen, int qos = 0, bool retained = false);
+
+		protected:
+			const string	m_Topic;
+			mqd_t			m_QueueHandle;
+
+		private:
+
+	};
 
 } /* namespace IoTT */
 
-#endif /* SRC_MQTTSETTINGS_H_ */
+#endif /* SRC_MQTTPUBLISHER_H_ */

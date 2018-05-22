@@ -41,7 +41,7 @@ namespace TBTIoT
 	// TODO Auto-generated constructor stub
 
 		char szTopic[256];
-		snprintf(szTopic, 256, "TBTIoT/Decoders/%i/", m_DCCAddress);
+		snprintf(szTopic, 256, "IoTT/Decoders/%i/", m_DCCAddress);
 		m_BaseTopic = string(szTopic);
 	}
 

@@ -30,44 +30,202 @@
 #include "mqtt_thread.h"
 
 #include "mqttSettings.h"
+#include "mqttMessageQueueItem.h"
 
 #include <cstdlib>
 #include <cstring>
 #include <thread>
 #include <chrono>
-#include <mqtt/async_client.h>
+#include <mqtt/MQTTAsync.h>
 
-#include "mqttcallback.h"
+#include <mqueue.h>
+#include <sys/stat.h>
 
+static int finished = 0;
+static mqd_t mqttSubMQHandle;
+static mqd_t mqttPubMQHandle;
 
+/**
+ *
+ * @param context
+ * @param response
+ */
+static void onSubscribe(void* context, MQTTAsync_successData* response)
+{
+	printf("Subscribe succeeded\n");
+}
 
+/**
+ *
+ * @param context
+ * @param response
+ */
+static void onSubscribeFailure(void* context, MQTTAsync_failureData* response)
+{
+	printf("Subscribe failed, rc = %d ['%s']\n", response ? response->code : 0, response ? response->message : "--");
+}
+
+/**
+ *
+ * @param context
+ * @param response
+ */
+static void onConnect(void* context, MQTTAsync_successData* response)
+{
+	MQTTAsync client = (MQTTAsync)context;
+	MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;
+	int rc;
+
+	printf("Successful connection.\n");
+
+	printf("Subscribing to topic '%s'\n\tfor client '%s'\n\tusing Qos%d\n", IoTT::mqttTopic.c_str(), IoTT::mqttClientID.c_str(), IoTT::mqttQOS);
+
+	opts.onSuccess = onSubscribe;
+	opts.onFailure = onSubscribeFailure;
+	opts.context = client;
+
+	if(MQTTASYNC_SUCCESS != (rc = MQTTAsync_subscribe(client, IoTT::mqttTopic.c_str(), IoTT::mqttQOS, &opts)))
+	{
+		printf("Failed to start subscribe, return code = %d\n", rc);
+	}
+}
+
+/**
+ *
+ * @param context
+ * @param response
+ */
+static void onConnectFailure(void* context, MQTTAsync_failureData* response)
+{
+	printf("Connect failed, rc = %d ['%s']\n", response ? response->code : 0, response ? response->message : "--");
+	finished = 1;
+}
+
+/**
+ *
+ * @param context
+ * @param cause
+ */
+static void connlost(void* context, char* cause)
+{
+	MQTTAsync client = (MQTTAsync)context;
+	MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;
+	int rc;
+
+	printf("Connection lost\n\tcause = %s", cause);
+
+	conn_opts.keepAliveInterval = 20;
+	conn_opts.cleansession = 1;
+	if(MQTTASYNC_SUCCESS != (rc = MQTTAsync_connect(client, &conn_opts)))
+	{
+		printf("Failed to start connect, return code = %d\n", rc);
+		finished = 1;
+	}
+}
+
+/**
+ *
+ * @param context
+ * @param topicName
+ * @param topicLen
+ * @param message
+ * @return
+ */
+static int msgArrived(void* context, char* topicName, int topicLen, MQTTAsync_message* message)
+{
+	int i;
+	char* payloadptr = (char*)message->payload;
+
+	printf("Message arrived\n\ttopic : %s\n\tmessage : ", topicName);
+
+	for(i = 0; i < message->payloadlen; i++)
+	{
+		putchar(*payloadptr++);
+	}
+	putchar('\n');
+
+	IoTT::mqttMessageQueueItem msg(topicName,
+			message->qos,
+			message->retained,
+			message->dup,
+			message->msgid,
+			(uint8_t*)message->payload,
+			message->payloadlen);
+
+	int rc = mq_send(mqttSubMQHandle, (const char*)&msg, sizeof(msg), 0);
+	if(0 != rc)
+	{
+		perror("mq_send failed");
+	}
+
+	MQTTAsync_freeMessage(&message);
+	MQTTAsync_free(topicName);
+	return 1;
+}
+
+/**
+ * The thread function for MQTT connectivity
+ *
+ * @param
+ */
 void* mqtt_thread_func(void*)
 {
-	mqtt::connect_options connOpts;
-	connOpts.set_keep_alive_interval(20);
-	connOpts.set_clean_session(true);
+	MQTTAsync	client;
+	MQTTAsync_connectOptions conn_opts = MQTTAsync_connectOptions_initializer;
+	int rc;
 
-	mqtt::async_client client(MQTT_ADDRESS, MQTT_CLIENTID);
-
-	IoTT::mqtt_callback cb(client, connOpts);
-	client.set_callback(cb);
-
-	try
+	if(-1 == (mqttSubMQHandle = mq_open(IoTT::mqttSubMQName.c_str(), (O_CREAT | O_WRONLY), S_IRWXU, &IoTT::mqttMsgQueueAttribs)))
 	{
-		connect_token = client.connect(connOpts, nullptr, cb);
-	}
-	catch(const mqtt::exception&)
-	{
-
-		std::cerr << "\nERROR: Unable to connect to MQTT server: '"
-			<< MQTT_ADDRESS << "'" << std::endl;
-		//	TODO recovery
+		printf("Failed to open/create mqttSubMQHandle\n");
+		perror("error");
 	}
 
-	while(true)
+	if(-1 == (mqttPubMQHandle = mq_open(IoTT::mqttPubMQName.c_str(), (O_CREAT | O_RDONLY), S_IRWXU, &IoTT::mqttMsgQueueAttribs)))
 	{
-		std::this_thread::sleep_for(std::chrono::milliseconds(2500));
+		printf("Failed to open/create mqttPubMQHandle\n");
+		perror("error");
 	}
+
+	rc = MQTTAsync_create(&client,
+			IoTT::mqttAddress.c_str(),
+			IoTT::mqttClientID.c_str(),
+			MQTTCLIENT_PERSISTENCE_NONE,
+			nullptr);
+
+	rc = MQTTAsync_setCallbacks(client, client, connlost, msgArrived, nullptr);
+
+	conn_opts.keepAliveInterval = 20;
+	conn_opts.cleansession = 1;
+	conn_opts.onSuccess = onConnect;
+	conn_opts.onFailure = onConnectFailure;
+	conn_opts.context = client;
+
+	if(MQTTASYNC_SUCCESS != (rc = MQTTAsync_connect(client, &conn_opts)))
+	{
+		printf("Failed to start connect, return code = %d\n", rc);
+	}
+
+	IoTT::mqttMessageQueueItem rcvMsg;
+
+	while(!finished)
+	{
+		ssize_t size = mq_receive(mqttPubMQHandle, (char*)&rcvMsg, sizeof(IoTT::mqttMessageQueueItem), nullptr);
+		if(0 < size)
+		{
+			MQTTAsync_responseOptions opts = MQTTAsync_responseOptions_initializer;
+			if(MQTTASYNC_SUCCESS != (rc = MQTTAsync_sendMessage(client, rcvMsg.getTopic(), rcvMsg.getMessage(), &opts)))
+			{
+				printf("Failed to sendMessage, return code = %d\n", rc);
+			}
+		}
+		else
+		{
+			perror("mq_receive");
+		}
+	}
+
+	mq_close(mqttPubMQHandle);
+	mq_close(mqttSubMQHandle);
 
 	return nullptr;
 }

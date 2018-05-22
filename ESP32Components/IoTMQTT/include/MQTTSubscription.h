@@ -60,6 +60,8 @@ namespace TBTIoT
 
 			Priority getPriority(void) { return m_Priority; }
 
+			const string& getTopic(void) { return m_Topic; }
+
 		protected:
 			const string	m_Topic;
 			const Priority	m_Priority;

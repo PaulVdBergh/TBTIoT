@@ -39,7 +39,7 @@
 using namespace std;
 
 #ifndef DCCDECODERS_TOPICBASEPATH
-#define DCCDECODERS_TOPICBASEPATH "TBTIoT/Decoders/"
+#define DCCDECODERS_TOPICBASEPATH "IoTT/Decoders/"
 #endif
 
 namespace TBTIoT

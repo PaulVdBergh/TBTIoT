@@ -21,35 +21,44 @@
  */
 
 /*
- * mqttactionListener.h
+ * Decoder.h
  *
- *  Created on: May 19, 2018
+ *  Created on: May 21, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef SRC_MQTTACTIONLISTENER_H_
-#define SRC_MQTTACTIONLISTENER_H_
+#ifndef SRC_DECODER_H_
+#define SRC_DECODER_H_
 
-#include <cstring>
-#include <mqtt/async_client.h>
+#include <stdint.h>
+#include <mutex>
+#include <string>
+
+using namespace std;
 
 namespace IoTT
 {
+	typedef uint16_t DCCAddress_t;
 
-	class mqtt_actionListener: public virtual mqtt::iaction_listener
+	class Decoder
 	{
 		public:
-			mqtt_actionListener(const std::string& name);
+			Decoder(const DCCAddress_t& address);
+			virtual ~Decoder();
+
+			const DCCAddress_t&	getDCCAddress(void) { return m_DCCAddress; }
+
+			virtual void onNewMqttData(const string& topic, const size_t payloadLen, const uint8_t* payload) = 0;
 
 		protected:
+			const DCCAddress_t	m_DCCAddress;
+			string				m_BaseTopic;
+			recursive_mutex		m_MDecoder;
 
 		private:
-			void on_failure(const mqtt::token& tok) override;
-			void on_success(const mqtt::token& tok) override;
 
-			std::string m_name;
 	};
 
 } /* namespace IoTT */
 
-#endif /* SRC_MQTTACTIONLISTENER_H_ */
+#endif /* SRC_DECODER_H_ */

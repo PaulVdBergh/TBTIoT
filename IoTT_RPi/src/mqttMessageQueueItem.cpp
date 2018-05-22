@@ -21,35 +21,59 @@
  */
 
 /*
- * mqttSettings.h
+ * mqttMessageQueueItem.cpp
  *
  *  Created on: May 21, 2018
  *      Author: paulvdbergh
  */
 
-#ifndef SRC_MQTTSETTINGS_H_
-#define SRC_MQTTSETTINGS_H_
+#include "mqttMessageQueueItem.h"
 
-#include <string>
-#include <mqueue.h>
-#include <sys/stat.h>
-
-using namespace std;
+#include <cstring>
 
 namespace IoTT
 {
-	extern string mqttAddress;
-	extern string mqttClientID;
-	extern string mqttTopic;
 
-	extern int mqttQOS;
-	extern int mqttTimeout;
+	mqttMessageQueueItem::mqttMessageQueueItem(
+			const char*	topic,
+			int			qos,
+			uint8_t		retained,
+			uint8_t		dup,
+			uint16_t	id,
+			uint8_t*	payload,
+			size_t		payloadLen)
+	:	m_QOS(qos)
+	,	m_Retained(retained)
+	,	m_Dup(dup)
+	,	m_Id(id)
+	,	m_PayloadLen(payloadLen)
+	{
+		strncpy(m_Topic, topic, MAX_TOPIC_SIZE);
+		m_Topic[MAX_TOPIC_SIZE] = 0x00;
 
-	extern string mqttSubMQName;
-	extern string mqttPubMQName;
+		memset(m_Payload, 0, MAX_PAYLOAD_SIZE);
+		if(payload && payloadLen)
+		{
+			memcpy(m_Payload, payload, payloadLen > MAX_PAYLOAD_SIZE ? MAX_PAYLOAD_SIZE : payloadLen);
+		}
+	}
 
-	extern mq_attr	mqttMsgQueueAttribs;
+	mqttMessageQueueItem::~mqttMessageQueueItem()
+	{
+		// TODO Auto-generated destructor stub
+	}
+
+	MQTTAsync_message* mqttMessageQueueItem::getMessage()
+	{
+		static MQTTAsync_message msg;
+		msg = MQTTAsync_message_initializer;
+		msg.payload = m_Payload;
+		msg.payloadlen = m_PayloadLen;
+		msg.qos = m_QOS;
+		msg.retained = m_Retained;
+		msg.dup = m_Dup;
+
+		return &msg;
+	}
 
 } /* namespace IoTT */
-
-#endif /* SRC_MQTTSETTINGS_H_ */
