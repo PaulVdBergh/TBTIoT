@@ -47,6 +47,7 @@ namespace TBTIoT
 			int Publish(const string& payload, QoS qos = QOS0, bool retained = false);
 			int Publish(const char* payload, QoS qos = QOS0, bool retained = false);
 			int Publish(const uint8_t& uint8Val, QoS qos = QOS0, bool retained = false);
+			int Publish(const uint16_t& uint8Val, QoS qos = QOS0, bool retained = false);
 			int Publish(const bool& boolVal, QoS qos = QOS0, bool retained = false);
 
 			int Publish(void* payload, size_t payloadlen, QoS qos = QOS0, bool retained = false);

@@ -55,7 +55,6 @@ int main(int argc, char const *argv[])
 		printf("pthread_create(mqtt_thread_func) failed with exit code %i.\n", retVal);
 	}
 
-	IoTT::MqttMsgHandler* pMqttHandler = IoTT::MqttMsgHandler::getInstance();
 	IoTT::Z21Interface* pZ21 = new IoTT::Z21Interface();
 
 	while(true)

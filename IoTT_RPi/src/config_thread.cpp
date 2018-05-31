@@ -44,7 +44,7 @@
 
 void* config_thread_func(void*)
 {
-	int server_fd, response_fd, nbrRead;
+	int server_fd, response_fd;
 	struct sockaddr_in address;
 	int opt = 1;
 	int addrlen = sizeof(address);
@@ -88,7 +88,7 @@ void* config_thread_func(void*)
 			perror("accept");
 			exit(EXIT_FAILURE);
 		}
-		nbrRead = read( response_fd , request, 1024);
+		read( response_fd , request, 1024);
 		printf("Received request : %s\n", request);
 		if(!strcmp(request, "ESP32"))
 		{

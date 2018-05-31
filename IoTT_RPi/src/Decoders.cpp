@@ -54,8 +54,10 @@ namespace IoTT
 	Decoders::~Decoders()
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoders);
-
-		for(auto decoderPair : m_Decoders) delete decoderPair.second;
+		for(auto decoderPair : m_Decoders)
+		{
+			delete decoderPair.second;
+		}
 	}
 
 	Decoder* Decoders::getDecoder(const DCCAddress_t& address)
@@ -97,7 +99,7 @@ namespace IoTT
 
 		if(0 == strncmp(m_TopicBasePath.c_str(), item.getTopic(), m_TopicBasePath.length()))
 		{
-			printf("\tComparison sucseeded !!\n");
+			printf("\tComparison succeeded !!\n");
 
 			const char* szAddress = &(item.getTopic()[m_TopicBasePath.length()]);
 			DCCAddress_t DccAddress = atoi(szAddress);

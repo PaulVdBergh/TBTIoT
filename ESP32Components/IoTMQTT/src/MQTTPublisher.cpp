@@ -98,6 +98,14 @@ namespace TBTIoT
 		return Publish(szBuffer, qos, retained);
 	}
 
+	int MQTTPublisher::Publish(const uint16_t& uint16Val, QoS qos, bool retained)
+	{
+		char szBuffer[7];
+		snprintf(szBuffer, 7, "%d", uint16Val);
+
+		return Publish(szBuffer, qos, retained);
+	}
+
 	int MQTTPublisher::Publish(const bool& boolVal, QoS qos, bool retained)
 	{
 		ESP_LOGI(tag, "Publishing \"%s\" in topic \"%s\"", boolVal ? "true" : "false", m_Topic.c_str());

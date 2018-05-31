@@ -134,7 +134,8 @@ void task_paho(void *ignore) {
 
 	while(1)
 	{
-		MQTTYield(&client, 1000);
+		rc = MQTTYield(&client, 1000);
+		ESP_LOGI(tag, "MQTTYield returned %d", rc);
 	}
 	vTaskDelete(NULL);
 }

@@ -40,6 +40,8 @@
 
 #include "esp_log.h"
 
+#include "DCCGen.h"
+
 #include <string.h>
 
 #include "EventGroup.h"
@@ -160,6 +162,8 @@ esp_err_t event_handler(void *ctx, system_event_t *event)
 	}
     return ESP_OK;
 }
+
+extern "C" void task_paho(void *ignore);
 
 extern "C"
 void app_main(void)
@@ -349,13 +353,21 @@ void app_main(void)
     ledc_set_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0, 0);
     ledc_update_duty(LEDC_HIGH_SPEED_MODE, LEDC_CHANNEL_0);
 
-//    gpio_set_direction(GPIO_NUM_4, GPIO_MODE_OUTPUT);
+    ESP_LOGI(tag, "Starting PAHO...");
+	xTaskCreatePinnedToCore(&task_paho, "task_paho", 8048, NULL, 5, NULL, 0);
+
+	ESP_LOGI(tag, "Starting DccGenerator...");
+	TBTIoT::DCCGen* DccGenerator = new TBTIoT::DCCGen();
+
+	//    gpio_set_direction(GPIO_NUM_4, GPIO_MODE_OUTPUT);
     int level = 0;
     while (true) {
 //        gpio_set_level(GPIO_NUM_4, level);
         level = !level;
         vTaskDelay(300 / portTICK_PERIOD_MS);
     }
+
+    delete DccGenerator;
 }
 
 

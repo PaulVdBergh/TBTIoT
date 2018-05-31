@@ -77,7 +77,7 @@ esp_err_t event_handler(void *ctx, system_event_t *event)
 		{
 			ESP_LOGI(tag, "SYSTEM_EVENT_STA_GOT_IP");
 			xTaskCreatePinnedToCore(&task_paho, "task_paho", 8048, NULL, 5, NULL, 0);
-//			Z21Interface* pZ21 = new Z21Interface();
+			Z21Interface* pZ21 = new Z21Interface();
 			break;
 		}
 

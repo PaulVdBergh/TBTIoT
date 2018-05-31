@@ -37,6 +37,8 @@
 
 #include "MQTTSubscription.h"
 #include "Decoders.h"
+#include "SystemState.h"
+using namespace IoTT;
 
 #include <esp_log.h>
 static char tag[] = "DCCGen";
@@ -87,7 +89,6 @@ namespace TBTIoT
 					rmt_channel_t channel /* = RMT_CHANNEL_0 */
 				  )
 	:	m_bContinue(true)
-	,	m_PowerState(PowerOn)
 	,	m_PowerGPIONum(PowerGPIONum)
 	,	m_RailcomGPIONum(RailcomGPIONum)
 	,	m_DccGPIONum(DccGPIONum)
@@ -126,6 +127,8 @@ namespace TBTIoT
 		static Decoder* currentDecoder = nullptr;
 		static Decoders* pDecoders = Decoders::getInstance();
 
+		static SystemState* pSystemState = new SystemState("IoTT/");
+
 		uint8_t			pCmd[8];
 		rmt_item32_t	pItems[64];
 		uint16_t		itemCount;
@@ -155,7 +158,7 @@ namespace TBTIoT
 			gpio_set_level(m_RailcomGPIONum, 0);
 			usleep(2);
 			//	Power up Power
-			if(m_PowerState == PowerOn)
+			if(!pSystemState->getTrackVoltageOffStatus())
 			{
 				gpio_set_level(m_PowerGPIONum, 1);
 			}

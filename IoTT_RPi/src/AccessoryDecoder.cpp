@@ -60,7 +60,7 @@ namespace IoTT
 	void AccessoryDecoder::setDesiredState(const uint8_t& port, const uint8_t& outputNbr, const uint8_t& state)
 	{
 		stringstream ss;
-		ss << m_BaseTopic << "Desired/" << port << "/" << outputNbr;
+		ss << m_BaseTopic << "Desired/" << (int)port << "/" << (int)outputNbr;
 /*
 		char szTopic[256];
 		snprintf(szTopic, 256, "%sDesired/%i/%i", m_BaseTopic.c_str(), port, outputNbr);

@@ -48,12 +48,12 @@ namespace TBTIoT
 	class DCCGen
 	{
 		public:
-			typedef enum
+/*			typedef enum
 			{
 				PowerOff = 0,
 				PowerOn
 			} PowerState_t;
-
+*/
 			DCCGen(	gpio_num_t RailcomGPIONum = GPIO_NUM_4,
 					gpio_num_t PowerGPIONum = GPIO_NUM_2,
 					gpio_num_t DccGPIONum = GPIO_NUM_0,
@@ -70,8 +70,6 @@ namespace TBTIoT
 			volatile bool 	m_bContinue;
 
 			rmt_config_t 	m_rmtConfig;
-
-			PowerState_t	m_PowerState;
 
 			gpio_num_t		m_PowerGPIONum;
 			gpio_num_t		m_RailcomGPIONum;
