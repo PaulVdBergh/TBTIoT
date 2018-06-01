@@ -32,6 +32,11 @@
 namespace IoTT
 {
 
+	/**
+	 *
+	 * @param pDecoder
+	 * @param port
+	 */
 	Accessory::Accessory(AccessoryDecoder* pDecoder, const uint8_t& port)
 	:	m_pAccessoryDecoder(pDecoder)
 	,	m_Port(port)
@@ -42,11 +47,19 @@ namespace IoTT
 	// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 *
+	 */
 	Accessory::~Accessory()
 	{
 	// TODO Auto-generated destructor stub
 	}
 
+	/**
+	 *
+	 * @param outputNbr
+	 * @param state
+	 */
 	void Accessory::setState(const uint8_t& outputNbr, const uint8_t& state)
 	{
 		m_DesiredState[outputNbr] = state;

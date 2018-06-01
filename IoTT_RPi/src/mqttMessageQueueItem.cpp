@@ -34,6 +34,16 @@
 namespace IoTT
 {
 
+	/**
+	 *
+	 * @param topic
+	 * @param qos
+	 * @param retained
+	 * @param dup
+	 * @param id
+	 * @param payload
+	 * @param payloadLen
+	 */
 	mqttMessageQueueItem::mqttMessageQueueItem(
 			const char*	topic,
 			int			qos,
@@ -58,11 +68,18 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 */
 	mqttMessageQueueItem::~mqttMessageQueueItem()
 	{
 		// TODO Auto-generated destructor stub
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	MQTTAsync_message* mqttMessageQueueItem::getMessage()
 	{
 		static MQTTAsync_message msg;

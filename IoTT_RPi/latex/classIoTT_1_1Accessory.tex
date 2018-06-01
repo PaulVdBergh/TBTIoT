@@ -1,0 +1,129 @@
+\hypertarget{classIoTT_1_1Accessory}{}\section{Io\+TT\+:\+:Accessory Class Reference}
+\label{classIoTT_1_1Accessory}\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+
+
+{\ttfamily \#include $<$Accessory.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1Accessory_aefd81736066539e16ea114b90020ea92}{Accessory} (\hyperlink{classIoTT_1_1AccessoryDecoder}{Accessory\+Decoder} $\ast$p\+Decoder, const uint8\+\_\+t \&port)
+\item 
+virtual \hyperlink{classIoTT_1_1Accessory_a1989c3805fc95d60293ae5d4dc394e64}{$\sim$\+Accessory} ()
+\item 
+const uint8\+\_\+t \& \hyperlink{classIoTT_1_1Accessory_a3ef90b54e0595552ffd0928c7f85cba8}{get\+U\+D\+P\+State} (void)
+\item 
+void \hyperlink{classIoTT_1_1Accessory_a679169c0258c5d520c86628b5141bbf3}{set\+State} (const uint8\+\_\+t \&output\+Nbr, const uint8\+\_\+t \&state)
+\item 
+\hyperlink{classIoTT_1_1AccessoryDecoder}{Accessory\+Decoder} $\ast$ \hyperlink{classIoTT_1_1Accessory_a46d2bbcbea444a0b55aa3bfeb51972c7}{get\+Decoder} (void)
+\item 
+const uint8\+\_\+t \& \hyperlink{classIoTT_1_1Accessory_ac96898811a392db73962bd16e8761ab7}{get\+Port} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1AccessoryDecoder}{Accessory\+Decoder} $\ast$ \hyperlink{classIoTT_1_1Accessory_aecc352ca5802ad5b6bd3c674ebbd56d5}{m\+\_\+p\+Accessory\+Decoder}
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1Accessory_a53d57ddd9ccca253e97bdc7de4dc7d8c}{m\+\_\+\+Port}
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1Accessory_a4a41a6a76373ba2e8bcb082a1986175e}{m\+\_\+\+U\+D\+P\+State}
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1Accessory_a91f05698253837012326f3500ef27ca0}{m\+\_\+\+Current\+State} \mbox{[}2\mbox{]}
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1Accessory_ac6ab600b1fe47f6b9fca11fe8a05025c}{m\+\_\+\+Desired\+State} \mbox{[}2\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Accessory_aefd81736066539e16ea114b90020ea92}\label{classIoTT_1_1Accessory_aefd81736066539e16ea114b90020ea92}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!Accessory@{Accessory}}
+\index{Accessory@{Accessory}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{Accessory()}{Accessory()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Accessory\+::\+Accessory (\begin{DoxyParamCaption}\item[{\hyperlink{classIoTT_1_1AccessoryDecoder}{Accessory\+Decoder} $\ast$}]{p\+Decoder,  }\item[{const uint8\+\_\+t \&}]{port }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Decoder} & \\
+\hline
+{\em port} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1Accessory_a1989c3805fc95d60293ae5d4dc394e64}\label{classIoTT_1_1Accessory_a1989c3805fc95d60293ae5d4dc394e64}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!````~Accessory@{$\sim$\+Accessory}}
+\index{````~Accessory@{$\sim$\+Accessory}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{$\sim$\+Accessory()}{~Accessory()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Accessory\+::$\sim$\+Accessory (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Accessory_a46d2bbcbea444a0b55aa3bfeb51972c7}\label{classIoTT_1_1Accessory_a46d2bbcbea444a0b55aa3bfeb51972c7}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!get\+Decoder@{get\+Decoder}}
+\index{get\+Decoder@{get\+Decoder}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{get\+Decoder()}{getDecoder()}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1AccessoryDecoder}{Accessory\+Decoder}$\ast$ Io\+T\+T\+::\+Accessory\+::get\+Decoder (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Accessory_ac96898811a392db73962bd16e8761ab7}\label{classIoTT_1_1Accessory_ac96898811a392db73962bd16e8761ab7}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!get\+Port@{get\+Port}}
+\index{get\+Port@{get\+Port}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{get\+Port()}{getPort()}}
+{\footnotesize\ttfamily const uint8\+\_\+t\& Io\+T\+T\+::\+Accessory\+::get\+Port (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Accessory_a3ef90b54e0595552ffd0928c7f85cba8}\label{classIoTT_1_1Accessory_a3ef90b54e0595552ffd0928c7f85cba8}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!get\+U\+D\+P\+State@{get\+U\+D\+P\+State}}
+\index{get\+U\+D\+P\+State@{get\+U\+D\+P\+State}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{get\+U\+D\+P\+State()}{getUDPState()}}
+{\footnotesize\ttfamily const uint8\+\_\+t\& Io\+T\+T\+::\+Accessory\+::get\+U\+D\+P\+State (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Accessory_a679169c0258c5d520c86628b5141bbf3}\label{classIoTT_1_1Accessory_a679169c0258c5d520c86628b5141bbf3}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!set\+State@{set\+State}}
+\index{set\+State@{set\+State}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{set\+State()}{setState()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Accessory\+::set\+State (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{output\+Nbr,  }\item[{const uint8\+\_\+t \&}]{state }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em output\+Nbr} & \\
+\hline
+{\em state} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Accessory_a91f05698253837012326f3500ef27ca0}\label{classIoTT_1_1Accessory_a91f05698253837012326f3500ef27ca0}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!m\+\_\+\+Current\+State@{m\+\_\+\+Current\+State}}
+\index{m\+\_\+\+Current\+State@{m\+\_\+\+Current\+State}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Current\+State}{m\_CurrentState}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Accessory\+::m\+\_\+\+Current\+State\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Accessory_ac6ab600b1fe47f6b9fca11fe8a05025c}\label{classIoTT_1_1Accessory_ac6ab600b1fe47f6b9fca11fe8a05025c}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!m\+\_\+\+Desired\+State@{m\+\_\+\+Desired\+State}}
+\index{m\+\_\+\+Desired\+State@{m\+\_\+\+Desired\+State}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Desired\+State}{m\_DesiredState}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Accessory\+::m\+\_\+\+Desired\+State\mbox{[}2\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Accessory_aecc352ca5802ad5b6bd3c674ebbd56d5}\label{classIoTT_1_1Accessory_aecc352ca5802ad5b6bd3c674ebbd56d5}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!m\+\_\+p\+Accessory\+Decoder@{m\+\_\+p\+Accessory\+Decoder}}
+\index{m\+\_\+p\+Accessory\+Decoder@{m\+\_\+p\+Accessory\+Decoder}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{m\+\_\+p\+Accessory\+Decoder}{m\_pAccessoryDecoder}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1AccessoryDecoder}{Accessory\+Decoder}$\ast$ Io\+T\+T\+::\+Accessory\+::m\+\_\+p\+Accessory\+Decoder\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Accessory_a53d57ddd9ccca253e97bdc7de4dc7d8c}\label{classIoTT_1_1Accessory_a53d57ddd9ccca253e97bdc7de4dc7d8c}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!m\+\_\+\+Port@{m\+\_\+\+Port}}
+\index{m\+\_\+\+Port@{m\+\_\+\+Port}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Port}{m\_Port}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Accessory\+::m\+\_\+\+Port\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Accessory_a4a41a6a76373ba2e8bcb082a1986175e}\label{classIoTT_1_1Accessory_a4a41a6a76373ba2e8bcb082a1986175e}} 
+\index{Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}!m\+\_\+\+U\+D\+P\+State@{m\+\_\+\+U\+D\+P\+State}}
+\index{m\+\_\+\+U\+D\+P\+State@{m\+\_\+\+U\+D\+P\+State}!Io\+T\+T\+::\+Accessory@{Io\+T\+T\+::\+Accessory}}
+\subsubsection{\texorpdfstring{m\+\_\+\+U\+D\+P\+State}{m\_UDPState}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Accessory\+::m\+\_\+\+U\+D\+P\+State\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{Accessory_8h}{Accessory.\+h}\item 
+src/\hyperlink{Accessory_8cpp}{Accessory.\+cpp}\end{DoxyCompactItemize}

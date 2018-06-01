@@ -41,21 +41,35 @@ using namespace std;
 
 namespace IoTT
 {
+	/**
+	 *
+	 * @return
+	 */
 	MqttMsgHandler* MqttMsgHandler::getInstance()
 	{
 		return sm_pInstance ? sm_pInstance : sm_pInstance = new MqttMsgHandler();
 	}
 
+	/**
+	 *
+	 */
 	MqttMsgHandler::MqttMsgHandler()
 	{
 		m_Thread = thread([this]{threadFunc();});
 	}
 
+	/**
+	 *
+	 */
 	MqttMsgHandler::~MqttMsgHandler()
 	{
 		// TODO Auto-generated destructor stub
 	}
 
+	/**
+	 *
+	 * @param pSub
+	 */
 	void MqttMsgHandler::RegisterSubscription(MqttSubscription* pSub)
 	{
 		lock_guard<recursive_mutex> lock(m_MSubscriptions);
@@ -66,6 +80,10 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 * @param pSub
+	 */
 	void MqttMsgHandler::UnRegisterSubscription(MqttSubscription* pSub)
 	{
 		lock_guard<recursive_mutex> lock(m_MSubscriptions);
@@ -76,7 +94,9 @@ namespace IoTT
 		}
 	}
 
-
+	/**
+	 *
+	 */
 	void MqttMsgHandler::threadFunc()
 	{
 		mqd_t mqttSubMQHandle;
@@ -109,12 +129,20 @@ namespace IoTT
 		mq_close(mqttSubMQHandle);
 	}
 
+	/**
+	 *
+	 * @param item
+	 */
 	MqttMsgHandler::ExecSub::ExecSub(mqttMessageQueueItem& item)
 	:	m_Item(item)
 	{
 
 	}
 
+	/**
+	 *
+	 * @param pSub
+	 */
 	void MqttMsgHandler::ExecSub::operator()(MqttSubscription* pSub)
 	{
 		if(pSub->isTopicMatched(m_Item))

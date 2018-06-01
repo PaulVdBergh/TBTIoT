@@ -1,0 +1,151 @@
+\hypertarget{classIoTT_1_1mqttMessageQueueItem}{}\section{Io\+TT\+:\+:mqtt\+Message\+Queue\+Item Class Reference}
+\label{classIoTT_1_1mqttMessageQueueItem}\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+
+
+{\ttfamily \#include $<$mqtt\+Message\+Queue\+Item.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1mqttMessageQueueItem_a48f9b083e9734d17b727571f94f32d5d}{mqtt\+Message\+Queue\+Item} (const char $\ast$topic=\char`\"{}\char`\"{}, int qos=0, uint8\+\_\+t retained=0, uint8\+\_\+t dup=0, uint16\+\_\+t id=0, uint8\+\_\+t $\ast$payload=nullptr, size\+\_\+t payload\+Len=0)
+\item 
+virtual \hyperlink{classIoTT_1_1mqttMessageQueueItem_ad4c01d61e21f52e0e85f96792e4abfe5}{$\sim$mqtt\+Message\+Queue\+Item} ()
+\item 
+const char $\ast$ \hyperlink{classIoTT_1_1mqttMessageQueueItem_ad3e4931a0c385be4b976a090532da4f0}{get\+Topic} (void) const
+\item 
+const size\+\_\+t \hyperlink{classIoTT_1_1mqttMessageQueueItem_a331f0d28f6c0724da40592f2634037e9}{get\+Payload\+Len} (void) const
+\item 
+const uint8\+\_\+t $\ast$ \hyperlink{classIoTT_1_1mqttMessageQueueItem_a8a5ec64a1544aea421c93cd9fd1c32d5}{get\+Payload} (void) const
+\item 
+M\+Q\+T\+T\+Async\+\_\+message $\ast$ \hyperlink{classIoTT_1_1mqttMessageQueueItem_a7d48a0772c02fb72fc74b4f2e759cee5}{get\+Message} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+char \hyperlink{classIoTT_1_1mqttMessageQueueItem_ae7a0f10a754905c9ada9503faf15dd08}{m\+\_\+\+Topic} \mbox{[}\hyperlink{mqttMessageQueueItem_8h_a1b819cebb31ed04780e6b51f061d06dd}{M\+A\+X\+\_\+\+T\+O\+P\+I\+C\+\_\+\+S\+I\+ZE}\mbox{]}
+\item 
+int \hyperlink{classIoTT_1_1mqttMessageQueueItem_afb357b1a0e8a4d6a96b7e6a252adacbf}{m\+\_\+\+Q\+OS}
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1mqttMessageQueueItem_a4aa9a491040a3d3399defd35ced86b34}{m\+\_\+\+Retained}
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1mqttMessageQueueItem_a71acf8334dd0f67f4855b735eadf6b33}{m\+\_\+\+Dup}
+\item 
+uint16\+\_\+t \hyperlink{classIoTT_1_1mqttMessageQueueItem_aa454dfde75fb541b9f30aa66f08e34ee}{m\+\_\+\+Id}
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1mqttMessageQueueItem_a183e210ead7338a531a77c4fae946700}{m\+\_\+\+Payload} \mbox{[}\hyperlink{mqttMessageQueueItem_8h_a6303f7392a2d06be5a121c54278d561b}{M\+A\+X\+\_\+\+P\+A\+Y\+L\+O\+A\+D\+\_\+\+S\+I\+ZE}\mbox{]}
+\item 
+size\+\_\+t \hyperlink{classIoTT_1_1mqttMessageQueueItem_a307dbaadc852f447534d3f1916311ddf}{m\+\_\+\+Payload\+Len}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_a48f9b083e9734d17b727571f94f32d5d}\label{classIoTT_1_1mqttMessageQueueItem_a48f9b083e9734d17b727571f94f32d5d}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!mqtt\+Message\+Queue\+Item@{mqtt\+Message\+Queue\+Item}}
+\index{mqtt\+Message\+Queue\+Item@{mqtt\+Message\+Queue\+Item}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{mqtt\+Message\+Queue\+Item()}{mqttMessageQueueItem()}}
+{\footnotesize\ttfamily Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::mqtt\+Message\+Queue\+Item (\begin{DoxyParamCaption}\item[{const char $\ast$}]{topic = {\ttfamily \char`\"{}\char`\"{}},  }\item[{int}]{qos = {\ttfamily 0},  }\item[{uint8\+\_\+t}]{retained = {\ttfamily 0},  }\item[{uint8\+\_\+t}]{dup = {\ttfamily 0},  }\item[{uint16\+\_\+t}]{id = {\ttfamily 0},  }\item[{uint8\+\_\+t $\ast$}]{payload = {\ttfamily nullptr},  }\item[{size\+\_\+t}]{payload\+Len = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em topic} & \\
+\hline
+{\em qos} & \\
+\hline
+{\em retained} & \\
+\hline
+{\em dup} & \\
+\hline
+{\em id} & \\
+\hline
+{\em payload} & \\
+\hline
+{\em payload\+Len} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_ad4c01d61e21f52e0e85f96792e4abfe5}\label{classIoTT_1_1mqttMessageQueueItem_ad4c01d61e21f52e0e85f96792e4abfe5}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!````~mqtt\+Message\+Queue\+Item@{$\sim$mqtt\+Message\+Queue\+Item}}
+\index{````~mqtt\+Message\+Queue\+Item@{$\sim$mqtt\+Message\+Queue\+Item}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{$\sim$mqtt\+Message\+Queue\+Item()}{~mqttMessageQueueItem()}}
+{\footnotesize\ttfamily Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::$\sim$mqtt\+Message\+Queue\+Item (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_a7d48a0772c02fb72fc74b4f2e759cee5}\label{classIoTT_1_1mqttMessageQueueItem_a7d48a0772c02fb72fc74b4f2e759cee5}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!get\+Message@{get\+Message}}
+\index{get\+Message@{get\+Message}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{get\+Message()}{getMessage()}}
+{\footnotesize\ttfamily M\+Q\+T\+T\+Async\+\_\+message $\ast$ Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::get\+Message (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_a8a5ec64a1544aea421c93cd9fd1c32d5}\label{classIoTT_1_1mqttMessageQueueItem_a8a5ec64a1544aea421c93cd9fd1c32d5}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!get\+Payload@{get\+Payload}}
+\index{get\+Payload@{get\+Payload}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{get\+Payload()}{getPayload()}}
+{\footnotesize\ttfamily const uint8\+\_\+t$\ast$ Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::get\+Payload (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_a331f0d28f6c0724da40592f2634037e9}\label{classIoTT_1_1mqttMessageQueueItem_a331f0d28f6c0724da40592f2634037e9}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!get\+Payload\+Len@{get\+Payload\+Len}}
+\index{get\+Payload\+Len@{get\+Payload\+Len}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{get\+Payload\+Len()}{getPayloadLen()}}
+{\footnotesize\ttfamily const size\+\_\+t Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::get\+Payload\+Len (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_ad3e4931a0c385be4b976a090532da4f0}\label{classIoTT_1_1mqttMessageQueueItem_ad3e4931a0c385be4b976a090532da4f0}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!get\+Topic@{get\+Topic}}
+\index{get\+Topic@{get\+Topic}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{get\+Topic()}{getTopic()}}
+{\footnotesize\ttfamily const char$\ast$ Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::get\+Topic (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_a71acf8334dd0f67f4855b735eadf6b33}\label{classIoTT_1_1mqttMessageQueueItem_a71acf8334dd0f67f4855b735eadf6b33}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!m\+\_\+\+Dup@{m\+\_\+\+Dup}}
+\index{m\+\_\+\+Dup@{m\+\_\+\+Dup}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Dup}{m\_Dup}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::m\+\_\+\+Dup\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_aa454dfde75fb541b9f30aa66f08e34ee}\label{classIoTT_1_1mqttMessageQueueItem_aa454dfde75fb541b9f30aa66f08e34ee}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!m\+\_\+\+Id@{m\+\_\+\+Id}}
+\index{m\+\_\+\+Id@{m\+\_\+\+Id}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Id}{m\_Id}}
+{\footnotesize\ttfamily uint16\+\_\+t Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::m\+\_\+\+Id\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_a183e210ead7338a531a77c4fae946700}\label{classIoTT_1_1mqttMessageQueueItem_a183e210ead7338a531a77c4fae946700}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!m\+\_\+\+Payload@{m\+\_\+\+Payload}}
+\index{m\+\_\+\+Payload@{m\+\_\+\+Payload}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Payload}{m\_Payload}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::m\+\_\+\+Payload\mbox{[}\hyperlink{mqttMessageQueueItem_8h_a6303f7392a2d06be5a121c54278d561b}{M\+A\+X\+\_\+\+P\+A\+Y\+L\+O\+A\+D\+\_\+\+S\+I\+ZE}\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_a307dbaadc852f447534d3f1916311ddf}\label{classIoTT_1_1mqttMessageQueueItem_a307dbaadc852f447534d3f1916311ddf}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!m\+\_\+\+Payload\+Len@{m\+\_\+\+Payload\+Len}}
+\index{m\+\_\+\+Payload\+Len@{m\+\_\+\+Payload\+Len}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Payload\+Len}{m\_PayloadLen}}
+{\footnotesize\ttfamily size\+\_\+t Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::m\+\_\+\+Payload\+Len\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_afb357b1a0e8a4d6a96b7e6a252adacbf}\label{classIoTT_1_1mqttMessageQueueItem_afb357b1a0e8a4d6a96b7e6a252adacbf}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!m\+\_\+\+Q\+OS@{m\+\_\+\+Q\+OS}}
+\index{m\+\_\+\+Q\+OS@{m\+\_\+\+Q\+OS}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Q\+OS}{m\_QOS}}
+{\footnotesize\ttfamily int Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::m\+\_\+\+Q\+OS\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_a4aa9a491040a3d3399defd35ced86b34}\label{classIoTT_1_1mqttMessageQueueItem_a4aa9a491040a3d3399defd35ced86b34}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!m\+\_\+\+Retained@{m\+\_\+\+Retained}}
+\index{m\+\_\+\+Retained@{m\+\_\+\+Retained}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Retained}{m\_Retained}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::m\+\_\+\+Retained\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1mqttMessageQueueItem_ae7a0f10a754905c9ada9503faf15dd08}\label{classIoTT_1_1mqttMessageQueueItem_ae7a0f10a754905c9ada9503faf15dd08}} 
+\index{Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}!m\+\_\+\+Topic@{m\+\_\+\+Topic}}
+\index{m\+\_\+\+Topic@{m\+\_\+\+Topic}!Io\+T\+T\+::mqtt\+Message\+Queue\+Item@{Io\+T\+T\+::mqtt\+Message\+Queue\+Item}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Topic}{m\_Topic}}
+{\footnotesize\ttfamily char Io\+T\+T\+::mqtt\+Message\+Queue\+Item\+::m\+\_\+\+Topic\mbox{[}\hyperlink{mqttMessageQueueItem_8h_a1b819cebb31ed04780e6b51f061d06dd}{M\+A\+X\+\_\+\+T\+O\+P\+I\+C\+\_\+\+S\+I\+ZE}\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{mqttMessageQueueItem_8h}{mqtt\+Message\+Queue\+Item.\+h}\item 
+src/\hyperlink{mqttMessageQueueItem_8cpp}{mqtt\+Message\+Queue\+Item.\+cpp}\end{DoxyCompactItemize}

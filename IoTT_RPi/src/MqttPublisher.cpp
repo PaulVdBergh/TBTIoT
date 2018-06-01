@@ -41,6 +41,10 @@ using namespace std;
 namespace IoTT
 {
 
+	/**
+	 *
+	 * @param topic
+	 */
 	MqttPublisher::MqttPublisher(const string& topic)
 	:	m_Topic(topic)
 	,	m_QueueHandle(-1)
@@ -49,21 +53,45 @@ namespace IoTT
 
 	}
 
+	/**
+	 *
+	 */
 	MqttPublisher::~MqttPublisher()
 	{
 		mq_close(m_QueueHandle);
 	}
 
+	/**
+	 *
+	 * @param payload
+	 * @param qos
+	 * @param retained
+	 * @return
+	 */
 	int MqttPublisher::Publish(const string& payload, int qos, bool retained)
 	{
 		return Publish((void*)payload.c_str(), payload.length(), qos, retained);
 	}
 
+	/**
+	 *
+	 * @param payload
+	 * @param qos
+	 * @param retained
+	 * @return
+	 */
 	int MqttPublisher::Publish(const char* payload, int qos, bool retained)
 	{
 		return Publish((void*)payload, strlen(payload), qos, retained);
 	}
 
+	/**
+	 *
+	 * @param uint8Val
+	 * @param qos
+	 * @param retained
+	 * @return
+	 */
 	int MqttPublisher::Publish(const uint8_t& uint8Val, int qos, bool retained)
 	{
 		char	szBuffer[33];
@@ -72,6 +100,13 @@ namespace IoTT
 		return Publish(szBuffer, qos, retained);
 	}
 
+	/**
+	 *
+	 * @param boolVal
+	 * @param qos
+	 * @param retained
+	 * @return
+	 */
 	int MqttPublisher::Publish(const bool& boolVal, int qos, bool retained)
 	{
 		stringstream ss;
@@ -79,6 +114,14 @@ namespace IoTT
 		return Publish(ss.str(), qos, retained);
 	}
 
+	/**
+	 *
+	 * @param payload
+	 * @param payloadLen
+	 * @param qos
+	 * @param retained
+	 * @return
+	 */
 	int MqttPublisher::Publish(void* payload, size_t payloadLen, int qos, bool retained)
 	{
 		mqttMessageQueueItem item(

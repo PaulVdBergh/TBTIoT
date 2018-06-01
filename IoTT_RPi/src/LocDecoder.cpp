@@ -40,6 +40,10 @@ namespace IoTT
 #define LOCMODE_DCC 0
 #define LOCMODE_MM	1
 
+	/**
+	 *
+	 * @param address
+	 */
 	LocDecoder::LocDecoder(const DCCAddress_t& address)
 	:	Decoder(address)
 	,	m_SpeedPublisher(m_BaseTopic + "Speed")
@@ -68,11 +72,20 @@ namespace IoTT
 		setSpeedSteps(4);
 	}
 
+	/**
+	 *
+	 */
 	LocDecoder::~LocDecoder()
 	{
 		// TODO Auto-generated destructor stub
 	}
 
+	/**
+	 *
+	 * @param topic
+	 * @param payloadLen
+	 * @param payload
+	 */
 	void LocDecoder::onNewMqttData(const string& topic, const size_t payloadLen, const uint8_t* payload)
 	{
 		printf("LocDecoder::onNewMqttData : comparing LocAddress [%d] to data [%d]\n", m_DCCAddress, atoi(topic.c_str()));
@@ -176,6 +189,11 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 * @param newMode
+	 * @return
+	 */
 	uint8_t LocDecoder::setLocMode(const uint8_t& newMode)
 	{
 		if(256 > m_DCCAddress)
@@ -189,6 +207,10 @@ namespace IoTT
 		return m_LocMode;
 	}
 
+	/**
+	 *
+	 * @param pMsg
+	 */
 	void LocDecoder::getLANLocInfo(uint8_t* pMsg)
 	{
 		lock_guard<recursive_mutex> guard(m_MDecoder);
@@ -200,489 +222,845 @@ namespace IoTT
 		memcpy(pMsg, &m_LocInfo, *((uint8_t*)&m_LocInfo.DataLen));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setSpeed(const uint8_t& newValue)
 	{
 		m_SpeedPublisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setBusy(const bool& newValue)
 	{
 		m_BusyPublisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setSpeedSteps(const uint8_t& newValue)
 	{
 		m_SpeedStepsPublisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setLocoDrive14(const uint8_t& newValue)
 	{
 		m_LocoDrive14Publisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setLocoDrive27(const uint8_t& newValue)
 	{
 		m_LocoDrive27Publisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setLocoDrive28(const uint8_t& newValue)
 	{
 		m_LocoDrive28Publisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setLocoDrive128(const uint8_t& newValue)
 	{
 		m_LocoDrive128Publisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setDirection(const bool& newValue)
 	{
 		m_DirectionPublisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setDualTraction(const bool& newValue)
 	{
 		m_DualTractionPublisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setSmartSearch(const bool& newValue)
 	{
 		m_SmartSearchPublisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setFunctionGroup1(const uint8_t& newValue)
 	{
 		m_FunctionGroup1Publisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setFunctionGroup2(const uint8_t& newValue)
 	{
 		m_FunctionGroup2Publisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setFunctionGroup3(const uint8_t& newValue)
 	{
 		m_FunctionGroup3Publisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setFunctionGroup4(const uint8_t& newValue)
 	{
 		m_FunctionGroup4Publisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setFunctionGroup5(const uint8_t& newValue)
 	{
 		m_FunctionGroup5Publisher.Publish(newValue);
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setLight(const bool& newValue)
 	{
 		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x10 : getFunctionGroup1() & ~(0x10));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF0(const bool& newValue)
 	{
 		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x10 : getFunctionGroup1() & ~(0x10));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF1(const bool& newValue)
 	{
 		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x01 : getFunctionGroup1() & ~(0x01));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF2(const bool& newValue)
 	{
 		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x02 : getFunctionGroup1() & ~(0x02));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF3(const bool& newValue)
 	{
 		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x04 : getFunctionGroup1() & ~(0x04));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF4(const bool& newValue)
 	{
 		setFunctionGroup1(newValue ? getFunctionGroup1() | 0x08 : getFunctionGroup1() & ~(0x08));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF5(const bool& newValue)
 	{
 		setFunctionGroup2(newValue ? getFunctionGroup2() | 0x01 : getFunctionGroup2() & ~(0x01));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF6(const bool& newValue)
 	{
 		setFunctionGroup2(newValue ? getFunctionGroup2() | 0x02 : getFunctionGroup2() & ~(0x02));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF7(const bool& newValue)
 	{
 		setFunctionGroup2(newValue ? getFunctionGroup2() | 0x04 : getFunctionGroup2() & ~(0x04));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF8(const bool& newValue)
 	{
 		setFunctionGroup2(newValue ? getFunctionGroup2() | 0x08 : getFunctionGroup2() & ~(0x08));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF9(const bool& newValue)
 	{
 		setFunctionGroup3(newValue ? getFunctionGroup3() | 0x10 : getFunctionGroup3() & ~(0x10));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF10(const bool& newValue)
 	{
 		setFunctionGroup3(newValue ? getFunctionGroup3() | 0x20 : getFunctionGroup3() & ~(0x20));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF11(const bool& newValue)
 	{
 		setFunctionGroup3(newValue ? getFunctionGroup3() | 0x40 : getFunctionGroup3() & ~(0x40));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF12(const bool& newValue)
 	{
 		setFunctionGroup3(newValue ? getFunctionGroup3() | 0x80 : getFunctionGroup3() & ~(0x80));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF13(const bool& newValue)
 	{
 		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x01 : getFunctionGroup4() & ~(0x01));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF14(const bool& newValue)
 	{
 		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x02 : getFunctionGroup4() & ~(0x02));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF15(const bool& newValue)
 	{
 		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x04 : getFunctionGroup4() & ~(0x04));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF16(const bool& newValue)
 	{
 		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x08 : getFunctionGroup4() & ~(0x08));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF17(const bool& newValue)
 	{
 		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x10 : getFunctionGroup4() & ~(0x10));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF18(const bool& newValue)
 	{
 		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x20 : getFunctionGroup4() & ~(0x20));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF19(const bool& newValue)
 	{
 		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x40 : getFunctionGroup4() & ~(0x40));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF20(const bool& newValue)
 	{
 		setFunctionGroup4(newValue ? getFunctionGroup4() | 0x80 : getFunctionGroup4() & ~(0x80));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF21(const bool& newValue)
 	{
 		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x01 : getFunctionGroup5() & ~(0x01));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF22(const bool& newValue)
 	{
 		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x02 : getFunctionGroup5() & ~(0x02));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF23(const bool& newValue)
 	{
 		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x04 : getFunctionGroup5() & ~(0x04));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF24(const bool& newValue)
 	{
 		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x08 : getFunctionGroup5() & ~(0x08));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF25(const bool& newValue)
 	{
 		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x10 : getFunctionGroup5() & ~(0x10));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF26(const bool& newValue)
 	{
 		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x20 : getFunctionGroup5() & ~(0x20));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF27(const bool& newValue)
 	{
 		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x40 : getFunctionGroup5() & ~(0x40));
 	}
 
+	/**
+	 *
+	 * @param newValue
+	 */
 	void LocDecoder::setF28(const bool& newValue)
 	{
 		setFunctionGroup5(newValue ? getFunctionGroup5() | 0x80 : getFunctionGroup5() & ~(0x80));
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getSpeed(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB3 & 0x7F;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getBusy(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB2 & 0x08;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getSpeedSteps(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB2 & 0x07;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getLocoDrive14(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB3;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getLocoDrive27(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB3;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getLocoDrive28(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB3;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getLocoDrive128(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB3;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getDirection(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB3 & 0x80;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getDualTraction(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB4 & 0x40;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getFunctionGroup1(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB4 & 0x1F;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getFunctionGroup2(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB5 & 0x0F;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getFunctionGroup3(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return (m_LocInfo.DB5 & 0xF0) >> 4;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getFunctionGroup4(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB6;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	uint8_t	LocDecoder::getFunctionGroup5(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB7;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getLight(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB4 & 0x10;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF0(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB4 & 0x10;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF1(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB4 & 0x01;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF2(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB4 & 0x02;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF3(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB4 & 0x04;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF4(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB4 & 0x08;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF5(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB5 & 0x01;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF6(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB5 & 0x02;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF7(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB5 & 0x04;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF8(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB5 & 0x08;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF9(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB5 & 0x10;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF10(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB5 & 0x20;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF11(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB5 & 0x40;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF12(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB5 & 0x80;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF13(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB6 & 0x01;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF14(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB6 & 0x02;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF15(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB6 & 0x04;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF16(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB6 & 0x08;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF17(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB6 & 0x10;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF18(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB6 & 0x20;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF19(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB6 & 0x40;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF20(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB6 & 0x80;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF21(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB7 & 0x01;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF22(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB7 & 0x02;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF23(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB7 & 0x04;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF24(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB7 & 0x08;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF25(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB7 & 0x10;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF26(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB7 & 0x20;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF27(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);
 		return m_LocInfo.DB7 & 0x40;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	bool LocDecoder::getF28(void)
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoder);

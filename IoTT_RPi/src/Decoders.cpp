@@ -39,11 +39,19 @@ using namespace std;
 
 namespace IoTT
 {
+	/**
+	 *
+	 * @return
+	 */
 	Decoders* Decoders::getInstance()
 	{
 		return sm_pInstance ? sm_pInstance : sm_pInstance = new Decoders();
 	}
 
+	/**
+	 *
+	 * @param MqttTopicBasePath
+	 */
 	Decoders::Decoders(const string& MqttTopicBasePath)
 	:	MqttSubscription((MqttTopicBasePath + "#").c_str())
 	,	m_TopicBasePath(MqttTopicBasePath)
@@ -51,6 +59,9 @@ namespace IoTT
 	// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 *
+	 */
 	Decoders::~Decoders()
 	{
 		lock_guard<recursive_mutex> lock(m_MDecoders);
@@ -60,6 +71,11 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 * @param address
+	 * @return
+	 */
 	Decoder* Decoders::getDecoder(const DCCAddress_t& address)
 	{
 		if(!address)
@@ -93,6 +109,10 @@ namespace IoTT
 		return nullptr;
 	}
 
+	/**
+	 *
+	 * @param item
+	 */
 	void Decoders::OnNewData(const mqttMessageQueueItem& item)
 	{
 		printf("Decoders::OnNewData : comparing interface ['%s']\n\tto item ['%s']\n", m_TopicBasePath.c_str(), item.getTopic());

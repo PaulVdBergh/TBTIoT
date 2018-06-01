@@ -34,6 +34,10 @@
 namespace IoTT
 {
 
+	/**
+	 *
+	 * @param address
+	 */
 	Decoder::Decoder(const DCCAddress_t& address)
 	:	m_DCCAddress(address)
 	{
@@ -43,6 +47,9 @@ namespace IoTT
 		printf("Decode::Decoder(%d) : m_BaseTopic = '%s'\n", address, m_BaseTopic.c_str());
 	}
 
+	/**
+	 *
+	 */
 	Decoder::~Decoder()
 	{
 		// TODO Auto-generated destructor stub

@@ -1,0 +1,1071 @@
+\hypertarget{classIoTT_1_1Z21Interface}{}\section{Io\+TT\+:\+:Z21\+Interface Class Reference}
+\label{classIoTT_1_1Z21Interface}\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+
+
+{\ttfamily \#include $<$Z21\+Interface.\+h$>$}
+
+Inheritance diagram for Io\+TT\+:\+:Z21\+Interface\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIoTT_1_1Z21Interface}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1Z21Interface_a10d5e45be47f7d9a17567d12bb5db2d3}{Z21\+Interface} (in\+\_\+port\+\_\+t port=21105, const string \&topic\+Base\+Path=\char`\"{}Io\+TT/\char`\"{})
+\item 
+virtual \hyperlink{classIoTT_1_1Z21Interface_a49ba7d835312d0f11bc61143410cf373}{$\sim$\+Z21\+Interface} ()
+\item 
+ssize\+\_\+t \hyperlink{classIoTT_1_1Z21Interface_a94dfc1d0b95d6217912c04127dba95f2}{send\+To\+Socket} (const uint8\+\_\+t $\ast$p\+Msg, sockaddr $\ast$address)
+\item 
+void \hyperlink{classIoTT_1_1Z21Interface_aacab731304b340d69606b397a62a83aa}{broadcast\+Power\+State\+Change} (const bool \&new\+State)
+\item 
+void \hyperlink{classIoTT_1_1Z21Interface_a64204cc5a7b4a99e1d6f70c28139cb06}{broadcast\+Accessory\+Info\+Changed} (\hyperlink{classIoTT_1_1Accessory}{Accessory} $\ast$p\+Accessory)
+\item 
+void \hyperlink{classIoTT_1_1Z21Interface_aee490b2f7934a38f04dbc88708e89285}{broadcast\+Emergency\+Stop} (void)
+\item 
+void \hyperlink{classIoTT_1_1Z21Interface_a55b1ca4967ca8e7771f06789e9672cfa}{broadcast\+Overcurrent} (void)
+\item 
+virtual void \hyperlink{classIoTT_1_1Z21Interface_adcb6084a5d89a8fb1f32fdb81009a90e}{On\+New\+Data} (const \hyperlink{classIoTT_1_1mqttMessageQueueItem}{mqtt\+Message\+Queue\+Item} \&item) override
+\item 
+void \hyperlink{classIoTT_1_1Z21Interface_a74bcabc2f7aef6df8a10b12ddf924c20}{broadcast\+Loc\+Info\+Changed} (\hyperlink{classIoTT_1_1LocDecoder}{Loc\+Decoder} $\ast$p\+Loc)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1Z21Client}{Z21\+Client} $\ast$ \hyperlink{classIoTT_1_1Z21Interface_a51664ae9f82efff951003723efbcd55b}{find\+Client} (const sockaddr\+\_\+in \&address)
+\item 
+bool \hyperlink{classIoTT_1_1Z21Interface_a16fbab8afaaa86a2c93624238f933631}{remove\+Client} (\hyperlink{classIoTT_1_1Z21Client}{Z21\+Client} $\ast$p\+Client)
+\item 
+\hyperlink{classIoTT_1_1Decoder}{Decoder} $\ast$ \hyperlink{classIoTT_1_1Z21Interface_a81a8f1e4962c7b47849ec233dd1364af}{find\+Decoder} (const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} \&address)
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\textbf{ }\par
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classIoTT_1_1Z21Interface_a6dd3e3e6c925e4cc09efa1b219936428}{thread\+Func} (void)
+\end{DoxyCompactItemize}
+
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1Decoders}{Decoders} $\ast$ \hyperlink{classIoTT_1_1Z21Interface_ae978137ddd81489343ac8486d74d921a}{m\+\_\+p\+Decoders}
+\item 
+const string \hyperlink{classIoTT_1_1Z21Interface_a88d755ba0c08a8c5dc79357e9093e980}{m\+\_\+\+Topic\+Base\+Path}
+\item 
+in\+\_\+port\+\_\+t \hyperlink{classIoTT_1_1Z21Interface_a303f4581893ff5b9808fda50a428ef4c}{m\+\_\+port}
+\item 
+thread \hyperlink{classIoTT_1_1Z21Interface_ae87188b5116702638ac12db408cb8fa2}{m\+\_\+thread}
+\item 
+int \hyperlink{classIoTT_1_1Z21Interface_ad5136979b4f41f3fabdc2ee5818b0c71}{m\+\_\+fd\+Stop}
+\item 
+sockaddr\+\_\+in \hyperlink{classIoTT_1_1Z21Interface_adefd2315595c417c3ed51e2ccc06edbc}{m\+\_\+sockaddr\+\_\+me}
+\item 
+int \hyperlink{classIoTT_1_1Z21Interface_a644498b25a639cc18b7a0ba1d30e15e3}{m\+\_\+fdsock\+\_\+me}
+\item 
+recursive\+\_\+mutex \hyperlink{classIoTT_1_1Z21Interface_a1212b3351e13f38619bb11dc56f689cd}{m\+\_\+\+Mfdsock\+\_\+me}
+\item 
+vector$<$ \hyperlink{classIoTT_1_1Z21Client}{Z21\+Client} $\ast$ $>$ \hyperlink{classIoTT_1_1Z21Interface_a95d2a91c8058d1cf26c19cd8db9a2ca1}{m\+\_\+\+Clients}
+\item 
+recursive\+\_\+mutex \hyperlink{classIoTT_1_1Z21Interface_ac03305fbb3face4b0db005087d5fc426}{m\+\_\+\+M\+Clients}
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+Class \hyperlink{classIoTT_1_1Z21Interface}{Z21\+Interface} represents the interface for U\+DP clients using the Z21 Lan Protocol.
+
+\subsection*{Basics}
+
+\subsubsection*{Communication\+:}
+
+Communication with the Z21 protocol over U\+DP port 21105 or 21106. Control applications on the client (PC, App, ...) should primarily use port 21105. The communication is always asynchronous, i.\+e. between a request and the corresponding response other broadcast messages can occur.
+
+It is expected that each client communicates with the Z21 once per minute, otherwise it will be removed from the list of active participants. If possible, a client should log off when exiting with the L\+A\+N\+\_\+\+L\+O\+G\+O\+FF command.
+
+\subsubsection*{Z21 Datagram layout}
+
+A Z21 datagram, i.\+e. a request or response is structured as follows\+:
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{3}{|X[-1]}|}
+\caption{Z21 Datagram Layout}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Data\+Len}&\textbf{ Header}&\textbf{ Data }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Data\+Len}&\textbf{ Header}&\textbf{ Data }\\\cline{1-3}
+\endhead
+2 Bytes&2 Bytes&n Bytes \\\cline{1-3}
+\end{longtabu}
+
+\begin{DoxyItemize}
+\item {\bfseries Data\+Len} (little endian)\+:
+
+Total length over the entire data set including Data\+Len, Header and Data, i.\+e. Data\+Len = 2 + 2 + n.
+\item {\bfseries Header} (little endian)\+:
+
+Describes the command or protocol group.
+\item {\bfseries Data}\+:
+
+Structure and length depend on command. Exact description see respective command.
+\end{DoxyItemize}
+
+Unless otherwise stated, the byte order is little-\/endian, i.\+e. first the low byte, then the high byte. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a10d5e45be47f7d9a17567d12bb5db2d3}\label{classIoTT_1_1Z21Interface_a10d5e45be47f7d9a17567d12bb5db2d3}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!Z21\+Interface@{Z21\+Interface}}
+\index{Z21\+Interface@{Z21\+Interface}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{Z21\+Interface()}{Z21Interface()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Z21\+Interface\+::\+Z21\+Interface (\begin{DoxyParamCaption}\item[{in\+\_\+port\+\_\+t}]{port = {\ttfamily 21105},  }\item[{const string \&}]{topic\+Base\+Path = {\ttfamily \char`\"{}IoTT/\char`\"{}} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & \\
+\hline
+{\em topic\+Base\+Path} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a49ba7d835312d0f11bc61143410cf373}\label{classIoTT_1_1Z21Interface_a49ba7d835312d0f11bc61143410cf373}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!````~Z21\+Interface@{$\sim$\+Z21\+Interface}}
+\index{````~Z21\+Interface@{$\sim$\+Z21\+Interface}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{$\sim$\+Z21\+Interface()}{~Z21Interface()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Z21\+Interface\+::$\sim$\+Z21\+Interface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a64204cc5a7b4a99e1d6f70c28139cb06}\label{classIoTT_1_1Z21Interface_a64204cc5a7b4a99e1d6f70c28139cb06}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!broadcast\+Accessory\+Info\+Changed@{broadcast\+Accessory\+Info\+Changed}}
+\index{broadcast\+Accessory\+Info\+Changed@{broadcast\+Accessory\+Info\+Changed}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{broadcast\+Accessory\+Info\+Changed()}{broadcastAccessoryInfoChanged()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Z21\+Interface\+::broadcast\+Accessory\+Info\+Changed (\begin{DoxyParamCaption}\item[{\hyperlink{classIoTT_1_1Accessory}{Accessory} $\ast$}]{p\+Accessory }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Accessory} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_aee490b2f7934a38f04dbc88708e89285}\label{classIoTT_1_1Z21Interface_aee490b2f7934a38f04dbc88708e89285}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!broadcast\+Emergency\+Stop@{broadcast\+Emergency\+Stop}}
+\index{broadcast\+Emergency\+Stop@{broadcast\+Emergency\+Stop}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{broadcast\+Emergency\+Stop()}{broadcastEmergencyStop()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Z21\+Interface\+::broadcast\+Emergency\+Stop (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a74bcabc2f7aef6df8a10b12ddf924c20}\label{classIoTT_1_1Z21Interface_a74bcabc2f7aef6df8a10b12ddf924c20}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!broadcast\+Loc\+Info\+Changed@{broadcast\+Loc\+Info\+Changed}}
+\index{broadcast\+Loc\+Info\+Changed@{broadcast\+Loc\+Info\+Changed}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{broadcast\+Loc\+Info\+Changed()}{broadcastLocInfoChanged()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Z21\+Interface\+::broadcast\+Loc\+Info\+Changed (\begin{DoxyParamCaption}\item[{\hyperlink{classIoTT_1_1LocDecoder}{Loc\+Decoder} $\ast$}]{p\+Loc }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Loc} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a55b1ca4967ca8e7771f06789e9672cfa}\label{classIoTT_1_1Z21Interface_a55b1ca4967ca8e7771f06789e9672cfa}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!broadcast\+Overcurrent@{broadcast\+Overcurrent}}
+\index{broadcast\+Overcurrent@{broadcast\+Overcurrent}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{broadcast\+Overcurrent()}{broadcastOvercurrent()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Z21\+Interface\+::broadcast\+Overcurrent (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_aacab731304b340d69606b397a62a83aa}\label{classIoTT_1_1Z21Interface_aacab731304b340d69606b397a62a83aa}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!broadcast\+Power\+State\+Change@{broadcast\+Power\+State\+Change}}
+\index{broadcast\+Power\+State\+Change@{broadcast\+Power\+State\+Change}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{broadcast\+Power\+State\+Change()}{broadcastPowerStateChange()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Z21\+Interface\+::broadcast\+Power\+State\+Change (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+State }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+State} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a51664ae9f82efff951003723efbcd55b}\label{classIoTT_1_1Z21Interface_a51664ae9f82efff951003723efbcd55b}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!find\+Client@{find\+Client}}
+\index{find\+Client@{find\+Client}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{find\+Client()}{findClient()}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1Z21Client}{Z21\+Client} $\ast$ Io\+T\+T\+::\+Z21\+Interface\+::find\+Client (\begin{DoxyParamCaption}\item[{const sockaddr\+\_\+in \&}]{address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a81a8f1e4962c7b47849ec233dd1364af}\label{classIoTT_1_1Z21Interface_a81a8f1e4962c7b47849ec233dd1364af}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!find\+Decoder@{find\+Decoder}}
+\index{find\+Decoder@{find\+Decoder}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{find\+Decoder()}{findDecoder()}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1Decoder}{Decoder} $\ast$ Io\+T\+T\+::\+Z21\+Interface\+::find\+Decoder (\begin{DoxyParamCaption}\item[{const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} \&}]{address }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_adcb6084a5d89a8fb1f32fdb81009a90e}\label{classIoTT_1_1Z21Interface_adcb6084a5d89a8fb1f32fdb81009a90e}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!On\+New\+Data@{On\+New\+Data}}
+\index{On\+New\+Data@{On\+New\+Data}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{On\+New\+Data()}{OnNewData()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Z21\+Interface\+::\+On\+New\+Data (\begin{DoxyParamCaption}\item[{const \hyperlink{classIoTT_1_1mqttMessageQueueItem}{mqtt\+Message\+Queue\+Item} \&}]{item }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classIoTT_1_1MqttSubscription_a9ddc697ad6a842bd88ec0e768d8a1d37}{Io\+T\+T\+::\+Mqtt\+Subscription}.
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a16fbab8afaaa86a2c93624238f933631}\label{classIoTT_1_1Z21Interface_a16fbab8afaaa86a2c93624238f933631}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!remove\+Client@{remove\+Client}}
+\index{remove\+Client@{remove\+Client}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{remove\+Client()}{removeClient()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Z21\+Interface\+::remove\+Client (\begin{DoxyParamCaption}\item[{\hyperlink{classIoTT_1_1Z21Client}{Z21\+Client} $\ast$}]{p\+Client }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Client} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a94dfc1d0b95d6217912c04127dba95f2}\label{classIoTT_1_1Z21Interface_a94dfc1d0b95d6217912c04127dba95f2}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!send\+To\+Socket@{send\+To\+Socket}}
+\index{send\+To\+Socket@{send\+To\+Socket}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{send\+To\+Socket()}{sendToSocket()}}
+{\footnotesize\ttfamily ssize\+\_\+t Io\+T\+T\+::\+Z21\+Interface\+::send\+To\+Socket (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t $\ast$}]{p\+Msg,  }\item[{sockaddr $\ast$}]{address }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Msg} & \\
+\hline
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a6dd3e3e6c925e4cc09efa1b219936428}\label{classIoTT_1_1Z21Interface_a6dd3e3e6c925e4cc09efa1b219936428}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!thread\+Func@{thread\+Func}}
+\index{thread\+Func@{thread\+Func}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{thread\+Func()}{threadFunc()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Z21\+Interface\+::thread\+Func (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+G\+E\+T\+\_\+\+S\+E\+R\+I\+A\+L\+\_\+\+N\+U\+M\+B\+ER}
+
+read the serial number from the Z21
+
+\hypertarget{Z21Interface.cpp_multi_row}{}
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{request\+:}\label{Z21Interface.cpp_multi_row}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x04&0x00&0x10&0x00&-- \\\cline{1-5}
+\end{longtabu}
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{response\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x08&0x00&0x10&0x00&Serialnumber (32 bit, little endian) \\\cline{1-5}
+\end{longtabu}
+
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+G\+E\+T\+\_\+\+C\+O\+DE}
+
+With this command, the SW feature scope of the Z21 can be checked and read out. This command is of particular interest for the hardware version \char`\"{}z21 start\char`\"{} in order to check whether driving and switching via L\+AN is blocked or allowed.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x04&0x00&0x18&0x00&-\/ \\\cline{1-5}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Response\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x05&0x00&0x18&0x00&Code (8 Bit) \\\cline{1-5}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{3}{|X[-1]}|}
+\caption{Code layout}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ define}&\textbf{ Value}&\textbf{ Meaning }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ define}&\textbf{ Value}&\textbf{ Meaning }\\\cline{1-3}
+\endhead
+Z21\+\_\+\+N\+O\+\_\+\+L\+O\+CK&0x00&No features locked \\\cline{1-3}
+Z21\+\_\+\+S\+T\+A\+R\+T\+\_\+\+L\+O\+C\+K\+ED&0x01&\char`\"{}z21 start\char`\"{} \+: Driving and switching disabled via L\+AN. \\\cline{1-3}
+Z21\+\_\+\+S\+T\+A\+R\+T\+\_\+\+U\+N\+L\+O\+C\+K\+ED&0x02&\char`\"{}z21 start\char`\"{} \+: all feature locks are removed \\\cline{1-3}
+\end{longtabu}
+
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+G\+E\+T\+\_\+\+H\+W\+I\+N\+FO}
+
+With this command the hardware type and the firmware version of the Z21 can be read out.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x04&0x00&0x1A&0x00&-\/ \\\cline{1-5}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{6}{|X[-1]}|}
+\caption{Response\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endhead
+0x0C&0x00&0x1A&0x00&Hw\+Type 32 Bit(little endian)&FW Version 32 Bit (little endian) \\\cline{1-6}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{3}{|X[-1]}|}
+\caption{Hw\+Type 32 Bit}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ define}&\textbf{ Value}&\textbf{ Meaning }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ define}&\textbf{ Value}&\textbf{ Meaning }\\\cline{1-3}
+\endhead
+D\+\_\+\+H\+W\+T\+\_\+\+Z21\+\_\+\+O\+LD&0x00000200&\char`\"{}\+Black Z21\char`\"{} (Hardware-\/version from 2012) \\\cline{1-3}
+D\+\_\+\+H\+W\+T\+\_\+\+Z21\+\_\+\+N\+EW&0x00000201&\char`\"{}\+Black Z21\char`\"{} (Hardware-\/version from 2013) \\\cline{1-3}
+D\+\_\+\+H\+W\+T\+\_\+\+S\+M\+A\+R\+T\+R\+A\+IL&0x00000202&\char`\"{}\+Smart\+Rail\char`\"{} (from 2012) \\\cline{1-3}
+D\+\_\+\+H\+W\+T\+\_\+z21\+\_\+\+S\+M\+A\+LL&0x00000203&\char`\"{}\+White z21\char`\"{} Starterset-\/version (from 2013) \\\cline{1-3}
+D\+\_\+\+H\+W\+T\+\_\+z21\+\_\+\+S\+T\+A\+RT&0x00000204&\char`\"{}z21 start\char`\"{} Starterset-\/version (from 2016) \\\cline{1-3}
+\end{longtabu}
+
+
+The FW version is specified in B\+CD format.
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+L\+O\+G\+O\+FF}
+
+Log off this client from the system
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x04&0x00&0x30&0x00&-- \\\cline{1-5}
+\end{longtabu}
+
+
+response\+: none
+
+When logging out, use the same port number as when logging in.
+
+{\bfseries Note}\+: logging in occurs implicitly with the client\textquotesingle{}s first command (e.\+g. L\+A\+N\+\_\+\+S\+Y\+S\+T\+E\+M\+\_\+\+S\+T\+A\+T\+E\+\_\+\+G\+E\+T\+D\+A\+TA, ...).
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+G\+E\+T\+\_\+\+B\+R\+O\+A\+D\+C\+A\+S\+T\+F\+L\+A\+GS}
+
+Reading out the broadcast flags in the Z21.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x04&0x00&0x51&0x00&-- \\\cline{1-5}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Response\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x08&0x00&0x51&0x00&Broadcast-\/\+Flags (32 Bit little endian) \\\cline{1-5}
+\end{longtabu}
+
+
+Broadcast-\/\+Flags \+: see U\+D\+P\+Client\+::get\+Broadcast\+Flags
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+S\+Y\+S\+T\+E\+M\+S\+T\+A\+T\+E\+\_\+\+G\+E\+T\+D\+A\+TA}
+
+Request the current system state.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x04&0x00&0x85&0x00&-\/ \\\cline{1-5}
+\end{longtabu}
+
+
+response \+: see T\+B\+T\+::\+System\+State
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+L\+O\+C\+O\+N\+E\+T\+\_\+\+F\+R\+O\+M\+\_\+\+L\+AN}
+
+{\bfseries From Z21 FW version 1.\+20.}
+
+With this message, a L\+AN client can write a message to the Loco\+Net bus.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+\multirow{2}{\linewidth}{0x04 + n}&\multirow{2}{\linewidth}{0x00}&\multirow{2}{\linewidth}{0x\+A2}&\multirow{2}{\linewidth}{0x00}&\textbf{ Loco\+Net message incl. C\+K\+S\+UM }\\\cline{5-5}
+&&&&n Bytes \\\cline{1-5}
+\end{longtabu}
+
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+R\+M\+B\+U\+S\+\_\+\+G\+E\+T\+D\+A\+TA}
+
+Request the current status of the feedback.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x05&0x00&0x81&0x00&Group index (1 Byte) \\\cline{1-5}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{6}{|X[-1]}|}
+\caption{Response\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endhead
+0x0F&0x00&0x80&0x00&Group index (1 Byte)&Feedback status (10 bytes) \\\cline{1-6}
+\end{longtabu}
+
+
+{\bfseries Group index \+:}
+\begin{DoxyItemize}
+\item 0 --$>$ Feedback status for address from 1 to 10
+\item 1 --$>$ Feedback status for address from 11 to 20
+\item 
+\item 
+\end{DoxyItemize}
+
+{\bfseries Feedback status \+:}
+\begin{DoxyItemize}
+\item 1 byte per feedback,
+\item 1 bit per input.
+\end{DoxyItemize}
+
+The assignment of feedback address and byte position is statically ascending.
+
+{\bfseries Example\+:} Group\+Index = 1 and feedback status = 0x01 0x00 0x\+C5 0x00 0x00 0x00 0x00 0x00 0x00 0x00 means \char`\"{}feedback 11, contact input 1; Feedback 13, contact input 8,7,3 and 1 \char`\"{}
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+R\+M\+B\+U\+S\+\_\+\+P\+R\+O\+G\+R\+A\+M\+M\+O\+D\+U\+LE}
+
+Change the feedback address.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x05&0x00&0x82&0x00&Address (1 Byte) \\\cline{1-5}
+\end{longtabu}
+
+
+{\bfseries Address\+:} new address for the feedback module to be programmed. Supported value range\+: 0 and 1 ... 20.
+
+Response\+: none
+
+\begin{DoxyWarning}{Warning}
+The programming command is output on the R-\/\+B\+US until this command is sent again to Z21 with address = 0. During the programming process, no other feedback module may be connected on the R-\/\+B\+US.
+\end{DoxyWarning}
+
+
+ \paragraph*{L\+A\+N\+\_\+\+G\+E\+T\+\_\+\+L\+O\+C\+O\+M\+O\+DE}
+
+Read the output format for a given locomotive address.
+
+The output format (D\+CC, MM) can be stored persistently per locomotive address in the Z21. A maximum of 256 different locomotive addresses can be stored. Each address$>$ = 256 is automatically D\+CC.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x06&0x00&0x60&0x00&Loc-\/\+Address (16 Bit {\bfseries big endian}) \\\cline{1-5}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{6}{|X[-1]}|}
+\caption{Response\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endhead
+0x07&0x00&0x60&0x00&Loc-\/\+Address (16 Bit {\bfseries big endian})&Modus (8 bit) \\\cline{1-6}
+\end{longtabu}
+
+
+Modus \+: see \hyperlink{classIoTT_1_1LocDecoder_afe55555aa98e8bf36748676b81e3c01f}{Loc\+Decoder\+::get\+Loc\+Mode}
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+X\+\_\+\+S\+E\+T\+\_\+\+S\+T\+OP}
+
+With the following command the emergency stop is raised. All Locs goes into speedstep 01, but the power is still feed to the rails.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{6}{|X[-1]}|}
+\caption{request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endhead
+\multirow{2}{\linewidth}{0x06}&\multirow{2}{\linewidth}{0x00}&\multirow{2}{\linewidth}{0x40}&\multirow{2}{\linewidth}{0x00}&\textbf{ X-\/\+Header}&\textbf{ X\+O\+R-\/\+Byte }\\\cline{5-6}
+&&&&0x80&0x80 \\\cline{1-6}
+\end{longtabu}
+
+
+response \+: see U\+D\+P\+Client\+::broadcast\+Emergency\+Stop
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+G\+E\+T\+\_\+\+T\+U\+R\+N\+O\+U\+T\+M\+O\+DE}
+
+Reading the settings for a given function decoder address (\char`\"{}\+Function Decoder\char`\"{} in the sense of \char`\"{}\+Accessory Decoder\char`\"{} R\+P-\/9.\+2.\+1). The output format (D\+CC, MM) can be stored persistently per function decoder address in the Z21. A maximum of 256 different function decoder addresses can be stored. Each Address$>$ = 256 is automatically D\+CC.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{5}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*5-\arrayrulewidth*3)*2/5}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\textbf{ Data }\\\cline{1-5}
+\endhead
+0x06&0x00&0x70&0x00&Function \hyperlink{classIoTT_1_1Decoder}{Decoder} Address (16 Bit {\bfseries big endian}) \\\cline{1-5}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{6}{|X[-1]}|}
+\caption{Response\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endhead
+0x07&0x00&0x70&0x00&Function \hyperlink{classIoTT_1_1Decoder}{Decoder} Address (16 Bit {\bfseries big endian})&Modus (8 Bit) \\\cline{1-6}
+\end{longtabu}
+
+
+Modus \+: see Function\+Decoder\+::get\+Mode
+
+At the L\+AN interface and in the Z21, the function decoder addresses are addressed from 0, in the visualization on the apps or on the multi\+Maus, however, from 1. This is merely a decision of the visualization. Example\+: multi\+Maus switch address \# 3, corresponds on the L\+AN and Z21 to address \# 2.
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+X\+\_\+\+G\+E\+T\+\_\+\+V\+E\+R\+S\+I\+ON}
+
+With the following command the X-\/\+Bus version of the Z21 can be read out.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{7}{|X[-1]}|}
+\caption{request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{3}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*3/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-7}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{3}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*3/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-7}
+\endhead
+\multirow{2}{\linewidth}{0x07}&\multirow{2}{\linewidth}{0x00}&\multirow{2}{\linewidth}{0x40}&\multirow{2}{\linewidth}{0x00}&\textbf{ X-\/\+Header}&\textbf{ D\+B0}&\textbf{ X\+O\+R-\/\+Byte }\\\cline{5-7}
+&&&&0x21&0x21&0x00 \\\cline{1-7}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{9}{|X[-1]}|}
+\caption{response\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*2/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*2/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{5}{p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*5/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-9}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*2/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*2/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{5}{p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*5/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-9}
+\endhead
+\multirow{2}{\linewidth}{0x09}&\multirow{2}{\linewidth}{0x00}&\multirow{2}{\linewidth}{0x40}&\multirow{2}{\linewidth}{0x00}&\textbf{ X-\/\+Header}&\textbf{ D\+B0}&\textbf{ D\+B1}&\textbf{ D\+B2}&\textbf{ X\+O\+R-\/\+Byte }\\\cline{5-9}
+&&&&0x63&0x21&0x30&0x12&0x60 \\\cline{1-9}
+\end{longtabu}
+
+
+
+\begin{DoxyItemize}
+\item D\+B1 --$>$ X-\/\+Bus Version (3.\+0)
+\item D\+B2 --$>$ ID (Z21 = 0x12)
+\end{DoxyItemize}
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+X\+\_\+\+G\+E\+T\+\_\+\+S\+T\+A\+T\+US}
+
+with the following command the system\textquotesingle{}s status can be read out.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{7}{|X[-1]}|}
+\caption{request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{3}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*3/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-7}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{3}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*3/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-7}
+\endhead
+\multirow{2}{\linewidth}{0x07}&\multirow{2}{\linewidth}{0x00}&\multirow{2}{\linewidth}{0x40}&\multirow{2}{\linewidth}{0x00}&\textbf{ X-\/\+Header}&\textbf{ D\+B0}&\textbf{ X\+O\+R-\/\+Byte }\\\cline{5-7}
+&&&&0x21&0x24&0x05 \\\cline{1-7}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{8}{|X[-1]}|}
+\caption{response\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*8-\arrayrulewidth*3)*2/8}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*8-\arrayrulewidth*3)*2/8}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{4}{p{(\linewidth-\tabcolsep*8-\arrayrulewidth*3)*4/8}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-8}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*8-\arrayrulewidth*3)*2/8}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*8-\arrayrulewidth*3)*2/8}|}{\cellcolor{\tableheadbgcolor}\textbf{ Headers}}&\multicolumn{4}{p{(\linewidth-\tabcolsep*8-\arrayrulewidth*3)*4/8}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-8}
+\endhead
+\multirow{2}{\linewidth}{0x08}&\multirow{2}{\linewidth}{0x00}&\multirow{2}{\linewidth}{0x40}&\multirow{2}{\linewidth}{0x00}&\textbf{ X-\/\+Header}&\textbf{ D\+B0}&\textbf{ D\+B1}&\textbf{ X\+O\+R-\/\+Byte }\\\cline{5-8}
+&&&&0x62&0x22&Central\+State&X\+O\+R-\/\+Byte \\\cline{1-8}
+\end{longtabu}
+
+
+The system status is identical to the central\+State, which is supplied in System\+Status.
+
+\begin{DoxySeeAlso}{See also}
+Manager\+::get\+Central\+State
+\end{DoxySeeAlso}
+
+
+ \paragraph*{L\+A\+N\+\_\+\+X\+\_\+\+S\+E\+T\+\_\+\+T\+R\+A\+C\+K\+\_\+\+P\+O\+W\+E\+R\+\_\+\+O\+FF}
+
+With the following command the trackpower is switched off.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{7}{|X[-1]}|}
+\caption{request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{3}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*3/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-7}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{3}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*3/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-7}
+\endhead
+\multirow{2}{\linewidth}{0x07}&\multirow{2}{\linewidth}{0x00}&\multirow{2}{\linewidth}{0x40}&\multirow{2}{\linewidth}{0x00}&\textbf{ X-\/\+Header}&\textbf{ D\+B0}&\textbf{ X\+O\+R-\/\+Byte }\\\cline{5-7}
+&&&&0x21&0x80&0x\+A1 \\\cline{1-7}
+\end{longtabu}
+
+
+response\+: see U\+D\+P\+Client\+::broadcast\+Power\+State\+Change
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+X\+\_\+\+S\+E\+T\+\_\+\+T\+R\+A\+C\+K\+\_\+\+P\+O\+W\+E\+R\+\_\+\+ON}
+
+With the following command the trackpower is switched on. This cancels a pending emergencystop or programmingmode.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{7}{|X[-1]}|}
+\caption{request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{3}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*3/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-7}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{3}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*3/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-7}
+\endhead
+\multirow{2}{\linewidth}{0x07}&\multirow{2}{\linewidth}{0x00}&\multirow{2}{\linewidth}{0x40}&\multirow{2}{\linewidth}{0x00}&\textbf{ X-\/\+Header}&\textbf{ D\+B0}&\textbf{ X\+O\+R-\/\+Byte }\\\cline{5-7}
+&&&&0x21&0x81&0x\+A0 \\\cline{1-7}
+\end{longtabu}
+
+
+response\+: see U\+D\+P\+Client\+::broadcast\+Power\+State\+Change
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+X\+\_\+\+G\+E\+T\+\_\+\+F\+I\+R\+M\+W\+A\+R\+E\+\_\+\+V\+E\+R\+S\+I\+ON}
+
+With this command the firmware version of the Z21 can be read out.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{7}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{3}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*3/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-7}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*2/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{3}{p{(\linewidth-\tabcolsep*7-\arrayrulewidth*3)*3/7}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-7}
+\endhead
+\multirow{2}{\linewidth}{0x07}&\multirow{2}{\linewidth}{0x00}&\multirow{2}{\linewidth}{0x40}&\multirow{2}{\linewidth}{0x00}&\textbf{ X-\/\+Header}&\textbf{ D\+B0}&\textbf{ X\+O\+R-\/\+Byte }\\\cline{5-7}
+&&&&0x\+F1&0x0A&0x\+FB \\\cline{1-7}
+\end{longtabu}
+
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{9}{|X[-1]}|}
+\caption{Response\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*2/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*2/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{5}{p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*5/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-9}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*2/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*2/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{5}{p{(\linewidth-\tabcolsep*9-\arrayrulewidth*3)*5/9}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-9}
+\endhead
+\multirow{2}{\linewidth}{0x09}&\multirow{2}{\linewidth}{0x00}&\multirow{2}{\linewidth}{0x40}&\multirow{2}{\linewidth}{0x00}&\textbf{ X-\/\+Header}&\textbf{ D\+B0}&\textbf{ D\+B1}&\textbf{ D\+B2}&\textbf{ X\+O\+R-\/\+Byte }\\\cline{5-9}
+&&&&0x\+F3&0x0A&{\bfseries V\+\_\+\+M\+SB}&{\bfseries V\+\_\+\+L\+SB}&X\+O\+R\+\_\+\+Byte \\\cline{1-9}
+\end{longtabu}
+
+
+{\bfseries D\+B1} \+: Most significant byte firmware version.
+
+{\bfseries D\+B2} \+: Least significant byte firmware version.
+
+The Firmware version is in B\+CD format.
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+S\+E\+T\+\_\+\+L\+O\+C\+O\+M\+O\+DE}
+
+Set the output format for a given locomotive address. The format is stored persistently in the Z21.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{6}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endhead
+0x07&0x00&0x61&Loc-\/\+Address (16 Bit big endian)&Modus (8 Bit) \\\cline{1-6}
+\end{longtabu}
+
+
+{\bfseries Response} \+: none
+
+{\bfseries Modus} \+:
+\begin{DoxyItemize}
+\item 0 = D\+CC Format
+\item 1 = MM Format
+\end{DoxyItemize}
+
+{\bfseries Note}\+: Each loco address $>$= 256 is and will automatically be \char`\"{}\+D\+C\+C format\char`\"{}.
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+S\+E\+T\+\_\+\+T\+U\+R\+N\+O\+U\+T\+M\+O\+DE}
+
+Set the output format for a given function decoder address. The format is stored persistently in the Z21.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{6}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data\+Len}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endhead
+0x07&0x00&0x71&Function\+Decoder-\/\+Address (16 Bit big endian)&Modus (8 Bit) \\\cline{1-6}
+\end{longtabu}
+
+
+{\bfseries Response} \+: none
+
+{\bfseries Modus} \+:
+\begin{DoxyItemize}
+\item 0 = D\+CC Format
+\item 1 = MM Format
+\end{DoxyItemize}
+
+{\bfseries Note}\+: Each function decoder address $>$= 256 is and will automatically be \char`\"{}\+D\+C\+C format\char`\"{}.
+
+
+
+ \paragraph*{L\+A\+N\+\_\+\+R\+A\+I\+L\+C\+O\+M\+\_\+\+G\+E\+T\+D\+A\+TA}
+
+Request Rail\+Com data from Z21.
+
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{6}{|X[-1]}|}
+\caption{Request\+:}\label{_}\\
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Datalen}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\multicolumn{2}{|p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Datalen}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Header}}&\multicolumn{2}{p{(\linewidth-\tabcolsep*6-\arrayrulewidth*3)*2/6}|}{\cellcolor{\tableheadbgcolor}\textbf{ Data }}\\\cline{1-6}
+\endhead
+0x07&0x00&0x89&0x00&{\bfseries Type}&Loc address (16 Bit litle endian) \\\cline{1-6}
+\end{longtabu}
+
+
+{\bfseries Type} \+: 0x01 = Request Rail\+Com data for given locomotive address
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a95d2a91c8058d1cf26c19cd8db9a2ca1}\label{classIoTT_1_1Z21Interface_a95d2a91c8058d1cf26c19cd8db9a2ca1}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!m\+\_\+\+Clients@{m\+\_\+\+Clients}}
+\index{m\+\_\+\+Clients@{m\+\_\+\+Clients}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Clients}{m\_Clients}}
+{\footnotesize\ttfamily vector$<$\hyperlink{classIoTT_1_1Z21Client}{Z21\+Client}$\ast$$>$ Io\+T\+T\+::\+Z21\+Interface\+::m\+\_\+\+Clients\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a644498b25a639cc18b7a0ba1d30e15e3}\label{classIoTT_1_1Z21Interface_a644498b25a639cc18b7a0ba1d30e15e3}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!m\+\_\+fdsock\+\_\+me@{m\+\_\+fdsock\+\_\+me}}
+\index{m\+\_\+fdsock\+\_\+me@{m\+\_\+fdsock\+\_\+me}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{m\+\_\+fdsock\+\_\+me}{m\_fdsock\_me}}
+{\footnotesize\ttfamily int Io\+T\+T\+::\+Z21\+Interface\+::m\+\_\+fdsock\+\_\+me\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_ad5136979b4f41f3fabdc2ee5818b0c71}\label{classIoTT_1_1Z21Interface_ad5136979b4f41f3fabdc2ee5818b0c71}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!m\+\_\+fd\+Stop@{m\+\_\+fd\+Stop}}
+\index{m\+\_\+fd\+Stop@{m\+\_\+fd\+Stop}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{m\+\_\+fd\+Stop}{m\_fdStop}}
+{\footnotesize\ttfamily int Io\+T\+T\+::\+Z21\+Interface\+::m\+\_\+fd\+Stop\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_ac03305fbb3face4b0db005087d5fc426}\label{classIoTT_1_1Z21Interface_ac03305fbb3face4b0db005087d5fc426}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!m\+\_\+\+M\+Clients@{m\+\_\+\+M\+Clients}}
+\index{m\+\_\+\+M\+Clients@{m\+\_\+\+M\+Clients}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{m\+\_\+\+M\+Clients}{m\_MClients}}
+{\footnotesize\ttfamily recursive\+\_\+mutex Io\+T\+T\+::\+Z21\+Interface\+::m\+\_\+\+M\+Clients\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a1212b3351e13f38619bb11dc56f689cd}\label{classIoTT_1_1Z21Interface_a1212b3351e13f38619bb11dc56f689cd}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!m\+\_\+\+Mfdsock\+\_\+me@{m\+\_\+\+Mfdsock\+\_\+me}}
+\index{m\+\_\+\+Mfdsock\+\_\+me@{m\+\_\+\+Mfdsock\+\_\+me}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Mfdsock\+\_\+me}{m\_Mfdsock\_me}}
+{\footnotesize\ttfamily recursive\+\_\+mutex Io\+T\+T\+::\+Z21\+Interface\+::m\+\_\+\+Mfdsock\+\_\+me\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_ae978137ddd81489343ac8486d74d921a}\label{classIoTT_1_1Z21Interface_ae978137ddd81489343ac8486d74d921a}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!m\+\_\+p\+Decoders@{m\+\_\+p\+Decoders}}
+\index{m\+\_\+p\+Decoders@{m\+\_\+p\+Decoders}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{m\+\_\+p\+Decoders}{m\_pDecoders}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1Decoders}{Decoders}$\ast$ Io\+T\+T\+::\+Z21\+Interface\+::m\+\_\+p\+Decoders\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a303f4581893ff5b9808fda50a428ef4c}\label{classIoTT_1_1Z21Interface_a303f4581893ff5b9808fda50a428ef4c}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!m\+\_\+port@{m\+\_\+port}}
+\index{m\+\_\+port@{m\+\_\+port}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{m\+\_\+port}{m\_port}}
+{\footnotesize\ttfamily in\+\_\+port\+\_\+t Io\+T\+T\+::\+Z21\+Interface\+::m\+\_\+port\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_adefd2315595c417c3ed51e2ccc06edbc}\label{classIoTT_1_1Z21Interface_adefd2315595c417c3ed51e2ccc06edbc}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!m\+\_\+sockaddr\+\_\+me@{m\+\_\+sockaddr\+\_\+me}}
+\index{m\+\_\+sockaddr\+\_\+me@{m\+\_\+sockaddr\+\_\+me}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{m\+\_\+sockaddr\+\_\+me}{m\_sockaddr\_me}}
+{\footnotesize\ttfamily sockaddr\+\_\+in Io\+T\+T\+::\+Z21\+Interface\+::m\+\_\+sockaddr\+\_\+me\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_ae87188b5116702638ac12db408cb8fa2}\label{classIoTT_1_1Z21Interface_ae87188b5116702638ac12db408cb8fa2}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!m\+\_\+thread@{m\+\_\+thread}}
+\index{m\+\_\+thread@{m\+\_\+thread}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{m\+\_\+thread}{m\_thread}}
+{\footnotesize\ttfamily thread Io\+T\+T\+::\+Z21\+Interface\+::m\+\_\+thread\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Z21Interface_a88d755ba0c08a8c5dc79357e9093e980}\label{classIoTT_1_1Z21Interface_a88d755ba0c08a8c5dc79357e9093e980}} 
+\index{Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}!m\+\_\+\+Topic\+Base\+Path@{m\+\_\+\+Topic\+Base\+Path}}
+\index{m\+\_\+\+Topic\+Base\+Path@{m\+\_\+\+Topic\+Base\+Path}!Io\+T\+T\+::\+Z21\+Interface@{Io\+T\+T\+::\+Z21\+Interface}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Topic\+Base\+Path}{m\_TopicBasePath}}
+{\footnotesize\ttfamily const string Io\+T\+T\+::\+Z21\+Interface\+::m\+\_\+\+Topic\+Base\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{Z21Interface_8h}{Z21\+Interface.\+h}\item 
+src/\hyperlink{Z21Interface_8cpp}{Z21\+Interface.\+cpp}\end{DoxyCompactItemize}

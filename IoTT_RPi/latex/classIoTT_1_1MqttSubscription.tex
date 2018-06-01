@@ -1,0 +1,90 @@
+\hypertarget{classIoTT_1_1MqttSubscription}{}\section{Io\+TT\+:\+:Mqtt\+Subscription Class Reference}
+\label{classIoTT_1_1MqttSubscription}\index{Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}}
+
+
+{\ttfamily \#include $<$Mqtt\+Subscription.\+h$>$}
+
+Inheritance diagram for Io\+TT\+:\+:Mqtt\+Subscription\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIoTT_1_1MqttSubscription}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1MqttSubscription_a97c600c8bd24e69b5f9cc9a6bea767a7}{Mqtt\+Subscription} (const char $\ast$topic)
+\item 
+virtual \hyperlink{classIoTT_1_1MqttSubscription_a59507385afe48df7f1c5d3d509c3509e}{$\sim$\+Mqtt\+Subscription} ()
+\item 
+bool \hyperlink{classIoTT_1_1MqttSubscription_ad7e587fbdf5cf104f38c2c7e15a5b912}{is\+Topic\+Matched} (const \hyperlink{classIoTT_1_1mqttMessageQueueItem}{mqtt\+Message\+Queue\+Item} \&item)
+\item 
+virtual void \hyperlink{classIoTT_1_1MqttSubscription_a9ddc697ad6a842bd88ec0e768d8a1d37}{On\+New\+Data} (const \hyperlink{classIoTT_1_1mqttMessageQueueItem}{mqtt\+Message\+Queue\+Item} \&item)=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const string \hyperlink{classIoTT_1_1MqttSubscription_a244de1721c3ba52f3920bee00fa7f73b}{m\+\_\+\+Topic}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIoTT_1_1MqttSubscription_a97c600c8bd24e69b5f9cc9a6bea767a7}\label{classIoTT_1_1MqttSubscription_a97c600c8bd24e69b5f9cc9a6bea767a7}} 
+\index{Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}!Mqtt\+Subscription@{Mqtt\+Subscription}}
+\index{Mqtt\+Subscription@{Mqtt\+Subscription}!Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}}
+\subsubsection{\texorpdfstring{Mqtt\+Subscription()}{MqttSubscription()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Mqtt\+Subscription\+::\+Mqtt\+Subscription (\begin{DoxyParamCaption}\item[{const char $\ast$}]{topic }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em topic} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1MqttSubscription_a59507385afe48df7f1c5d3d509c3509e}\label{classIoTT_1_1MqttSubscription_a59507385afe48df7f1c5d3d509c3509e}} 
+\index{Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}!````~Mqtt\+Subscription@{$\sim$\+Mqtt\+Subscription}}
+\index{````~Mqtt\+Subscription@{$\sim$\+Mqtt\+Subscription}!Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}}
+\subsubsection{\texorpdfstring{$\sim$\+Mqtt\+Subscription()}{~MqttSubscription()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Mqtt\+Subscription\+::$\sim$\+Mqtt\+Subscription (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIoTT_1_1MqttSubscription_ad7e587fbdf5cf104f38c2c7e15a5b912}\label{classIoTT_1_1MqttSubscription_ad7e587fbdf5cf104f38c2c7e15a5b912}} 
+\index{Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}!is\+Topic\+Matched@{is\+Topic\+Matched}}
+\index{is\+Topic\+Matched@{is\+Topic\+Matched}!Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}}
+\subsubsection{\texorpdfstring{is\+Topic\+Matched()}{isTopicMatched()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Mqtt\+Subscription\+::is\+Topic\+Matched (\begin{DoxyParamCaption}\item[{const \hyperlink{classIoTT_1_1mqttMessageQueueItem}{mqtt\+Message\+Queue\+Item} \&}]{item }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1MqttSubscription_a9ddc697ad6a842bd88ec0e768d8a1d37}\label{classIoTT_1_1MqttSubscription_a9ddc697ad6a842bd88ec0e768d8a1d37}} 
+\index{Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}!On\+New\+Data@{On\+New\+Data}}
+\index{On\+New\+Data@{On\+New\+Data}!Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}}
+\subsubsection{\texorpdfstring{On\+New\+Data()}{OnNewData()}}
+{\footnotesize\ttfamily virtual void Io\+T\+T\+::\+Mqtt\+Subscription\+::\+On\+New\+Data (\begin{DoxyParamCaption}\item[{const \hyperlink{classIoTT_1_1mqttMessageQueueItem}{mqtt\+Message\+Queue\+Item} \&}]{item }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{classIoTT_1_1Z21Interface_adcb6084a5d89a8fb1f32fdb81009a90e}{Io\+T\+T\+::\+Z21\+Interface}, and \hyperlink{classIoTT_1_1Decoders_aa413a310e8ba87b11d3a7c2b02a90dc4}{Io\+T\+T\+::\+Decoders}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classIoTT_1_1MqttSubscription_a244de1721c3ba52f3920bee00fa7f73b}\label{classIoTT_1_1MqttSubscription_a244de1721c3ba52f3920bee00fa7f73b}} 
+\index{Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}!m\+\_\+\+Topic@{m\+\_\+\+Topic}}
+\index{m\+\_\+\+Topic@{m\+\_\+\+Topic}!Io\+T\+T\+::\+Mqtt\+Subscription@{Io\+T\+T\+::\+Mqtt\+Subscription}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Topic}{m\_Topic}}
+{\footnotesize\ttfamily const string Io\+T\+T\+::\+Mqtt\+Subscription\+::m\+\_\+\+Topic\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{MqttSubscription_8h}{Mqtt\+Subscription.\+h}\item 
+src/\hyperlink{MqttSubscription_8cpp}{Mqtt\+Subscription.\+cpp}\end{DoxyCompactItemize}

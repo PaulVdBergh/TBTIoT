@@ -38,6 +38,10 @@ using namespace std;
 namespace IoTT
 {
 
+	/**
+	 *
+	 * @param address
+	 */
 	AccessoryDecoder::AccessoryDecoder(const DCCAddress_t& address)
 	:	Decoder(address)
 	{
@@ -47,16 +51,30 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 */
 	AccessoryDecoder::~AccessoryDecoder()
 	{
 		for(auto item : m_pAccessories) delete item;
 	}
 
+	/**
+	 *
+	 * @param port
+	 * @return
+	 */
 	const uint8_t& AccessoryDecoder::getState(const uint8_t& port)
 	{
 		return m_pAccessories[port]->getUDPState();
 	}
 
+	/**
+	 *
+	 * @param port
+	 * @param outputNbr
+	 * @param state
+	 */
 	void AccessoryDecoder::setDesiredState(const uint8_t& port, const uint8_t& outputNbr, const uint8_t& state)
 	{
 		stringstream ss;
@@ -69,6 +87,12 @@ namespace IoTT
 		MqttPublisher(ss.str()).Publish(state);
 	}
 
+	/**
+	 *
+	 * @param topic
+	 * @param payloadLen
+	 * @param payload
+	 */
 	void AccessoryDecoder::onNewMqttData(const string& topic, const size_t payloadLen, const uint8_t* payload)
 	{
 		if(m_DCCAddress == atoi(topic.c_str()))

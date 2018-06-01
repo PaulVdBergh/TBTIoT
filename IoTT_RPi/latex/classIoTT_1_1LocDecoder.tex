@@ -1,0 +1,1381 @@
+\hypertarget{classIoTT_1_1LocDecoder}{}\section{Io\+TT\+:\+:Loc\+Decoder Class Reference}
+\label{classIoTT_1_1LocDecoder}\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+
+
+{\ttfamily \#include $<$Loc\+Decoder.\+h$>$}
+
+Inheritance diagram for Io\+TT\+:\+:Loc\+Decoder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIoTT_1_1LocDecoder}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structIoTT_1_1LocDecoder_1_1locInfo__t}{loc\+Info\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1LocDecoder_a9643de201baffeecfe14f26fdd1105e5}{Loc\+Decoder} (const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} \&address)
+\item 
+virtual \hyperlink{classIoTT_1_1LocDecoder_aafbfe84b5303dd6155d55aa277e1751f}{$\sim$\+Loc\+Decoder} ()
+\item 
+virtual void \hyperlink{classIoTT_1_1LocDecoder_a7d2faa51ae31ee25ed63ebaefbda5d78}{on\+New\+Mqtt\+Data} (const string \&topic, const size\+\_\+t payload\+Len, const uint8\+\_\+t $\ast$payload) override
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a395369fe38be49fe123a915562a5e1b5}{get\+L\+A\+N\+Loc\+Info} (uint8\+\_\+t $\ast$p\+Msg)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_afe55555aa98e8bf36748676b81e3c01f}{get\+Loc\+Mode} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_a7ed0dd387ddae6c5634cde59e3fc7966}{set\+Loc\+Mode} (const uint8\+\_\+t \&new\+Mode)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_aaa19e16c24db209d24f30e4698da7f31}{get\+Speed} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a16cc784024ab8ba39313f43b3bf9d376}{get\+Busy} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_aa1472d19a65a0e329d2e64ad0acd6764}{get\+Speed\+Steps} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_a5353bd57bf5c0482b636a6b081b66f27}{get\+Loco\+Drive14} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_a9e68771693d3a8b615ac04afe92f442e}{get\+Loco\+Drive27} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_a1c671f2f852d67a43e7d39cb4ce992f9}{get\+Loco\+Drive28} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_abf4a45e2a47e4d719c6ed6ea7f86916c}{get\+Loco\+Drive128} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a4b24c7a74f00c744312fa93e50179e04}{get\+Direction} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_aff48ce460f2fdf72d5195c66011eeb70}{get\+Dual\+Traction} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_a464c4494c9303bb2ff677244420e83cd}{get\+Function\+Group1} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_a0c36bdf38cbf54119734daa01fdb2798}{get\+Function\+Group2} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_ae4bf79e7de9800aaadc27358a894f73e}{get\+Function\+Group3} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_a89ee10010db132f54576c644a62cb680}{get\+Function\+Group4} (void)
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_a1bd40f11b3af2beac3804cd3eb731aae}{get\+Function\+Group5} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_ad52b8f416735e9a3e77e29b99272e008}{get\+Light} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a4d8f4d42c97779e31d2554231b49bb1c}{get\+F0} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a6b69fb74cf9c70e1d33dca842bfdcb30}{get\+F1} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a69e3524048a03a38a05b1ad6a91ca96a}{get\+F2} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a427d64ad3dd1d0a447ba3cb14fa72179}{get\+F3} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a8b547231e4897eb9301e1a9a0fe38b51}{get\+F4} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a4cf08edc95df77d463422a440b46abba}{get\+F5} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a324cc6b43bd971a49b49ff5b0ec2e2fd}{get\+F6} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_ac312036e9b99e3de3109bbb37a466e57}{get\+F7} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a5b6b29371cfa8510e3edbdda9a3340ab}{get\+F8} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a0f95eee8ea7fe95d97361f38e1f729cc}{get\+F9} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_aaccaec37d4f620ceee54868379800eb5}{get\+F10} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_aad7f11ef18ea635b9e5d58dc64832017}{get\+F11} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a2fc9445e7b4facdd7fa8852a9e6ca6fe}{get\+F12} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_ab9041afd0ee9bc6d0a6e03477a47ae90}{get\+F13} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_ad3fdffa129425f810ec72b369fac7e36}{get\+F14} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a639d50b97eb7754675c26fe0066d49bf}{get\+F15} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a565ed71a5e034006022610cd8836fa85}{get\+F16} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a25e06f93ea583ba5d57da49648ac0461}{get\+F17} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a23dbff1707e2ba4244499a6ddc1279ea}{get\+F18} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_abc67def845365957b27455f856697875}{get\+F19} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a02ad881bb20ee39b88070c0fd51be6b1}{get\+F20} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a18417f2b0554fc3f30da7fb6ef2578e3}{get\+F21} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_af08144a3a55b211f75473617b3288667}{get\+F22} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_aa998009e69fead22229bc588035cfb1f}{get\+F23} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a4bf9cf941641d03b6027033607fbec14}{get\+F24} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_aa3b368525eb98890029ed0453047ef77}{get\+F25} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a9ca02c2708c4456ad0f0ebbba4deca4a}{get\+F26} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a12907d330923a254f019242ac63c1670}{get\+F27} (void)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_aba1303236c9df1cc15406a0abcdfd424}{get\+F28} (void)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a9ac45335c62250e8f64086e0a06f399a}{set\+Speed} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_aa1cd277d6a76d8dd565df804527d46f9}{set\+Busy} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ae05b9d11871c659a286f58e810db5983}{set\+Speed\+Steps} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a32fc785fece905c89118bca8f3120cfc}{set\+Loco\+Drive14} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ab85bb0abdc9f3f2f4e8fb8fdad6949ba}{set\+Loco\+Drive27} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_aebe429e758b5cbe2fd4ad3e04d854711}{set\+Loco\+Drive28} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_af308320a9ae794af3cd1f20b46a7d639}{set\+Loco\+Drive128} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a028107eb566eee57a5590ccd90432e4e}{set\+Direction} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a94ff7a99963e07ea39c7a4ea09f9b9a1}{set\+Dual\+Traction} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_acdda1c9b2f6f792bc1a3d246e12d3aeb}{set\+Smart\+Search} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a85f76a68886d3470c2aaab641855b6b6}{set\+Function\+Group1} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a602470c858cfd13382f9180d6c768051}{set\+Function\+Group2} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a2698876fc3124c833e15a7ff3fa884d6}{set\+Function\+Group3} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_af4965ab85d13a4f165643c11562a295e}{set\+Function\+Group4} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a0649a1986d8954e4a13d8c3fe9b28e6a}{set\+Function\+Group5} (const uint8\+\_\+t \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a5eb292204c101454c4300e3c6f9e818e}{set\+Light} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ae947a49c6655d2912839d9032fcf0a46}{set\+F0} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ae1aab97da28929fe5da043eb58295ada}{set\+F1} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ad7df25a09f6a25b9869eba5671f55973}{set\+F2} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_aa76fd0ad9d6ab28805d3f2a1a97fab4c}{set\+F3} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a5eb0fc4661df614b298d8e54934559f0}{set\+F4} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_afb9028105d0e9f3440ad4f72ac1385bf}{set\+F5} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ae83b4bde9fed996fd18818875ea72017}{set\+F6} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a161e0001a8ed2fbd6260269cec830218}{set\+F7} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a31555a406af698ad87be5aa0e54f6532}{set\+F8} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a32e6f6844d89a116fcb750dea86fb0a8}{set\+F9} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a35283471e9b8cc893d04bdf71487ce0b}{set\+F10} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ac81445f413f23a6e13ecbdf3a1910686}{set\+F11} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ae8eb191639ba1ee137cb4c1ee07de2c9}{set\+F12} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a5528d28f81227fc6d88de6228c045480}{set\+F13} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a914e4e860e6440b3fcff32c6de2a0e28}{set\+F14} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ae0c9aeac7d21161d898f515ddaffa851}{set\+F15} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a3a38b63ec4f7f9f5f6731e8d328b053c}{set\+F16} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a8e10e113460d9c377234cd1be678931a}{set\+F17} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_aeb2fef072ba2340f98b72b6a4d65af6a}{set\+F18} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a5b39b25fbce7cb68a89862e34d0829ee}{set\+F19} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a4014c83224b461c36f190c40a86e8444}{set\+F20} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a35458b4c739bfeceb9823a82e06cbf7d}{set\+F21} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a0d378a7a02012c3c3e139ff554b78c6f}{set\+F22} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a49c5c584123beba94068591eb8744d7d}{set\+F23} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a89b14ddd70af0d3c72a3a077cd32df4c}{set\+F24} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ac767e22e04d636a034e71faa72854afa}{set\+F25} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ab46b1404908d6362cdd1660a871b92a1}{set\+F26} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_ac3293265ed2d36d721e637e0a4f8f1ae}{set\+F27} (const bool \&new\+Value)
+\item 
+void \hyperlink{classIoTT_1_1LocDecoder_a082ff7e341958add6a0367c989c58d0a}{set\+F28} (const bool \&new\+Value)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_ad9cccdca1d4f151af29ac51176db61ea}{get\+D\+C\+C\+Speed\+Message} (uint8\+\_\+t $\ast$p\+Buffer)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a9090a004fdc6d5a69d8bea29e7fd633d}{get\+D\+C\+C\+F\+G1\+Message} (uint8\+\_\+t $\ast$p\+Buffer)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a11915d7ebd6e9f4e7b0e097f6a6b1265}{get\+D\+C\+C\+F\+G2\+Message} (uint8\+\_\+t $\ast$p\+Buffer)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a009f4f953a84825f9d2e045f92dd046e}{get\+D\+C\+C\+F\+G3\+Message} (uint8\+\_\+t $\ast$p\+Buffer)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_a7a03b5a6889d7adbe4e6d2840b640ddc}{get\+D\+C\+C\+F\+G4\+Message} (uint8\+\_\+t $\ast$p\+Buffer)
+\item 
+bool \hyperlink{classIoTT_1_1LocDecoder_ae31271c6076a31717ed2b6d8717f3399}{get\+D\+C\+C\+F\+G5\+Message} (uint8\+\_\+t $\ast$p\+Buffer)
+\item 
+struct \hyperlink{structIoTT_1_1LocDecoder_1_1locInfo__t}{Io\+T\+T\+::\+Loc\+Decoder\+::loc\+Info\+\_\+t} \hyperlink{classIoTT_1_1LocDecoder_ac54f260ecde192daef8f083576e09881}{\+\_\+\+\_\+attribute\+\_\+\+\_\+} ((packed))
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_a2e1e77d6b6afbfc596bacf9e610676f7}{m\+\_\+\+Speed\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_a57f18c1655e45585bb6607bb629f5bfb}{m\+\_\+\+Busy\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_ae2dd932a3ab756c89a4aebd98a01fc13}{m\+\_\+\+Speed\+Steps\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_a1e985100d61d364be2ee6993028bc2c5}{m\+\_\+\+Loco\+Drive14\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_a26e0b69d61545ff21162636a15aa8c07}{m\+\_\+\+Loco\+Drive27\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_a0ef958619a0e3917b815253581a9645c}{m\+\_\+\+Loco\+Drive28\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_a19c3d3f0edadf124539500659441a604}{m\+\_\+\+Loco\+Drive128\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_a450cfd7a96ec279708c3dddc66db437c}{m\+\_\+\+Direction\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_ae538104fb9df1988e119728cbbc18460}{m\+\_\+\+Dual\+Traction\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_ada7028c3eb96dcba778025c1e4886030}{m\+\_\+\+Smart\+Search\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_ac8af77095ccacdf2b770500699fe3e77}{m\+\_\+\+Function\+Group1\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_a0d1397da3871f5fc207aaf5c542381aa}{m\+\_\+\+Function\+Group2\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_abdfb7b2744d684440f4c6d8aba2b1e98}{m\+\_\+\+Function\+Group3\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_a6a7e7bef4d5397197cefb6d9a0a52b4d}{m\+\_\+\+Function\+Group4\+Publisher}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} \hyperlink{classIoTT_1_1LocDecoder_ae126acd27bc87568558f599c94c8c17f}{m\+\_\+\+Function\+Group5\+Publisher}
+\item 
+uint8\+\_\+t \hyperlink{classIoTT_1_1LocDecoder_a71b48ceda04b004ea181d9c9425ce9de}{m\+\_\+\+Loc\+Mode}
+\item 
+\hyperlink{structIoTT_1_1LocDecoder_1_1locInfo__t}{loc\+Info\+\_\+t} \hyperlink{classIoTT_1_1LocDecoder_a6f6ddbd212e97fb46a23741a0da19c90}{m\+\_\+\+Loc\+Info}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a9643de201baffeecfe14f26fdd1105e5}\label{classIoTT_1_1LocDecoder_a9643de201baffeecfe14f26fdd1105e5}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!Loc\+Decoder@{Loc\+Decoder}}
+\index{Loc\+Decoder@{Loc\+Decoder}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{Loc\+Decoder()}{LocDecoder()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Loc\+Decoder\+::\+Loc\+Decoder (\begin{DoxyParamCaption}\item[{const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} \&}]{address }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aafbfe84b5303dd6155d55aa277e1751f}\label{classIoTT_1_1LocDecoder_aafbfe84b5303dd6155d55aa277e1751f}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!````~Loc\+Decoder@{$\sim$\+Loc\+Decoder}}
+\index{````~Loc\+Decoder@{$\sim$\+Loc\+Decoder}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{$\sim$\+Loc\+Decoder()}{~LocDecoder()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Loc\+Decoder\+::$\sim$\+Loc\+Decoder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ac54f260ecde192daef8f083576e09881}\label{classIoTT_1_1LocDecoder_ac54f260ecde192daef8f083576e09881}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+attribute\+\_\+\+\_\+()}{\_\_attribute\_\_()}}
+{\footnotesize\ttfamily struct \hyperlink{structIoTT_1_1LocDecoder_1_1locInfo__t}{Io\+T\+T\+::\+Loc\+Decoder\+::loc\+Info\+\_\+t} Io\+T\+T\+::\+Loc\+Decoder\+::\+\_\+\+\_\+attribute\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{(packed)}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a16cc784024ab8ba39313f43b3bf9d376}\label{classIoTT_1_1LocDecoder_a16cc784024ab8ba39313f43b3bf9d376}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Busy@{get\+Busy}}
+\index{get\+Busy@{get\+Busy}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Busy()}{getBusy()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+Busy (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a9090a004fdc6d5a69d8bea29e7fd633d}\label{classIoTT_1_1LocDecoder_a9090a004fdc6d5a69d8bea29e7fd633d}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+D\+C\+C\+F\+G1\+Message@{get\+D\+C\+C\+F\+G1\+Message}}
+\index{get\+D\+C\+C\+F\+G1\+Message@{get\+D\+C\+C\+F\+G1\+Message}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+D\+C\+C\+F\+G1\+Message()}{getDCCFG1Message()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+D\+C\+C\+F\+G1\+Message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{p\+Buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a11915d7ebd6e9f4e7b0e097f6a6b1265}\label{classIoTT_1_1LocDecoder_a11915d7ebd6e9f4e7b0e097f6a6b1265}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+D\+C\+C\+F\+G2\+Message@{get\+D\+C\+C\+F\+G2\+Message}}
+\index{get\+D\+C\+C\+F\+G2\+Message@{get\+D\+C\+C\+F\+G2\+Message}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+D\+C\+C\+F\+G2\+Message()}{getDCCFG2Message()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+D\+C\+C\+F\+G2\+Message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{p\+Buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a009f4f953a84825f9d2e045f92dd046e}\label{classIoTT_1_1LocDecoder_a009f4f953a84825f9d2e045f92dd046e}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+D\+C\+C\+F\+G3\+Message@{get\+D\+C\+C\+F\+G3\+Message}}
+\index{get\+D\+C\+C\+F\+G3\+Message@{get\+D\+C\+C\+F\+G3\+Message}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+D\+C\+C\+F\+G3\+Message()}{getDCCFG3Message()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+D\+C\+C\+F\+G3\+Message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{p\+Buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a7a03b5a6889d7adbe4e6d2840b640ddc}\label{classIoTT_1_1LocDecoder_a7a03b5a6889d7adbe4e6d2840b640ddc}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+D\+C\+C\+F\+G4\+Message@{get\+D\+C\+C\+F\+G4\+Message}}
+\index{get\+D\+C\+C\+F\+G4\+Message@{get\+D\+C\+C\+F\+G4\+Message}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+D\+C\+C\+F\+G4\+Message()}{getDCCFG4Message()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+D\+C\+C\+F\+G4\+Message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{p\+Buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae31271c6076a31717ed2b6d8717f3399}\label{classIoTT_1_1LocDecoder_ae31271c6076a31717ed2b6d8717f3399}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+D\+C\+C\+F\+G5\+Message@{get\+D\+C\+C\+F\+G5\+Message}}
+\index{get\+D\+C\+C\+F\+G5\+Message@{get\+D\+C\+C\+F\+G5\+Message}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+D\+C\+C\+F\+G5\+Message()}{getDCCFG5Message()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+D\+C\+C\+F\+G5\+Message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{p\+Buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ad9cccdca1d4f151af29ac51176db61ea}\label{classIoTT_1_1LocDecoder_ad9cccdca1d4f151af29ac51176db61ea}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+D\+C\+C\+Speed\+Message@{get\+D\+C\+C\+Speed\+Message}}
+\index{get\+D\+C\+C\+Speed\+Message@{get\+D\+C\+C\+Speed\+Message}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+D\+C\+C\+Speed\+Message()}{getDCCSpeedMessage()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+D\+C\+C\+Speed\+Message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{p\+Buffer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a4b24c7a74f00c744312fa93e50179e04}\label{classIoTT_1_1LocDecoder_a4b24c7a74f00c744312fa93e50179e04}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Direction@{get\+Direction}}
+\index{get\+Direction@{get\+Direction}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Direction()}{getDirection()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+Direction (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aff48ce460f2fdf72d5195c66011eeb70}\label{classIoTT_1_1LocDecoder_aff48ce460f2fdf72d5195c66011eeb70}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Dual\+Traction@{get\+Dual\+Traction}}
+\index{get\+Dual\+Traction@{get\+Dual\+Traction}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Dual\+Traction()}{getDualTraction()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+Dual\+Traction (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a4d8f4d42c97779e31d2554231b49bb1c}\label{classIoTT_1_1LocDecoder_a4d8f4d42c97779e31d2554231b49bb1c}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F0@{get\+F0}}
+\index{get\+F0@{get\+F0}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F0()}{getF0()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F0 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a6b69fb74cf9c70e1d33dca842bfdcb30}\label{classIoTT_1_1LocDecoder_a6b69fb74cf9c70e1d33dca842bfdcb30}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F1@{get\+F1}}
+\index{get\+F1@{get\+F1}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F1()}{getF1()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F1 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aaccaec37d4f620ceee54868379800eb5}\label{classIoTT_1_1LocDecoder_aaccaec37d4f620ceee54868379800eb5}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F10@{get\+F10}}
+\index{get\+F10@{get\+F10}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F10()}{getF10()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F10 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aad7f11ef18ea635b9e5d58dc64832017}\label{classIoTT_1_1LocDecoder_aad7f11ef18ea635b9e5d58dc64832017}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F11@{get\+F11}}
+\index{get\+F11@{get\+F11}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F11()}{getF11()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F11 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a2fc9445e7b4facdd7fa8852a9e6ca6fe}\label{classIoTT_1_1LocDecoder_a2fc9445e7b4facdd7fa8852a9e6ca6fe}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F12@{get\+F12}}
+\index{get\+F12@{get\+F12}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F12()}{getF12()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F12 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ab9041afd0ee9bc6d0a6e03477a47ae90}\label{classIoTT_1_1LocDecoder_ab9041afd0ee9bc6d0a6e03477a47ae90}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F13@{get\+F13}}
+\index{get\+F13@{get\+F13}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F13()}{getF13()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F13 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ad3fdffa129425f810ec72b369fac7e36}\label{classIoTT_1_1LocDecoder_ad3fdffa129425f810ec72b369fac7e36}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F14@{get\+F14}}
+\index{get\+F14@{get\+F14}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F14()}{getF14()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F14 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a639d50b97eb7754675c26fe0066d49bf}\label{classIoTT_1_1LocDecoder_a639d50b97eb7754675c26fe0066d49bf}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F15@{get\+F15}}
+\index{get\+F15@{get\+F15}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F15()}{getF15()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F15 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a565ed71a5e034006022610cd8836fa85}\label{classIoTT_1_1LocDecoder_a565ed71a5e034006022610cd8836fa85}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F16@{get\+F16}}
+\index{get\+F16@{get\+F16}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F16()}{getF16()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F16 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a25e06f93ea583ba5d57da49648ac0461}\label{classIoTT_1_1LocDecoder_a25e06f93ea583ba5d57da49648ac0461}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F17@{get\+F17}}
+\index{get\+F17@{get\+F17}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F17()}{getF17()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F17 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a23dbff1707e2ba4244499a6ddc1279ea}\label{classIoTT_1_1LocDecoder_a23dbff1707e2ba4244499a6ddc1279ea}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F18@{get\+F18}}
+\index{get\+F18@{get\+F18}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F18()}{getF18()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F18 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_abc67def845365957b27455f856697875}\label{classIoTT_1_1LocDecoder_abc67def845365957b27455f856697875}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F19@{get\+F19}}
+\index{get\+F19@{get\+F19}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F19()}{getF19()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F19 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a69e3524048a03a38a05b1ad6a91ca96a}\label{classIoTT_1_1LocDecoder_a69e3524048a03a38a05b1ad6a91ca96a}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F2@{get\+F2}}
+\index{get\+F2@{get\+F2}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F2()}{getF2()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F2 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a02ad881bb20ee39b88070c0fd51be6b1}\label{classIoTT_1_1LocDecoder_a02ad881bb20ee39b88070c0fd51be6b1}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F20@{get\+F20}}
+\index{get\+F20@{get\+F20}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F20()}{getF20()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F20 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a18417f2b0554fc3f30da7fb6ef2578e3}\label{classIoTT_1_1LocDecoder_a18417f2b0554fc3f30da7fb6ef2578e3}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F21@{get\+F21}}
+\index{get\+F21@{get\+F21}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F21()}{getF21()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F21 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_af08144a3a55b211f75473617b3288667}\label{classIoTT_1_1LocDecoder_af08144a3a55b211f75473617b3288667}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F22@{get\+F22}}
+\index{get\+F22@{get\+F22}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F22()}{getF22()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F22 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aa998009e69fead22229bc588035cfb1f}\label{classIoTT_1_1LocDecoder_aa998009e69fead22229bc588035cfb1f}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F23@{get\+F23}}
+\index{get\+F23@{get\+F23}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F23()}{getF23()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F23 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a4bf9cf941641d03b6027033607fbec14}\label{classIoTT_1_1LocDecoder_a4bf9cf941641d03b6027033607fbec14}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F24@{get\+F24}}
+\index{get\+F24@{get\+F24}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F24()}{getF24()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F24 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aa3b368525eb98890029ed0453047ef77}\label{classIoTT_1_1LocDecoder_aa3b368525eb98890029ed0453047ef77}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F25@{get\+F25}}
+\index{get\+F25@{get\+F25}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F25()}{getF25()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F25 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a9ca02c2708c4456ad0f0ebbba4deca4a}\label{classIoTT_1_1LocDecoder_a9ca02c2708c4456ad0f0ebbba4deca4a}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F26@{get\+F26}}
+\index{get\+F26@{get\+F26}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F26()}{getF26()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F26 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a12907d330923a254f019242ac63c1670}\label{classIoTT_1_1LocDecoder_a12907d330923a254f019242ac63c1670}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F27@{get\+F27}}
+\index{get\+F27@{get\+F27}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F27()}{getF27()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F27 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aba1303236c9df1cc15406a0abcdfd424}\label{classIoTT_1_1LocDecoder_aba1303236c9df1cc15406a0abcdfd424}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F28@{get\+F28}}
+\index{get\+F28@{get\+F28}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F28()}{getF28()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F28 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a427d64ad3dd1d0a447ba3cb14fa72179}\label{classIoTT_1_1LocDecoder_a427d64ad3dd1d0a447ba3cb14fa72179}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F3@{get\+F3}}
+\index{get\+F3@{get\+F3}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F3()}{getF3()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F3 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a8b547231e4897eb9301e1a9a0fe38b51}\label{classIoTT_1_1LocDecoder_a8b547231e4897eb9301e1a9a0fe38b51}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F4@{get\+F4}}
+\index{get\+F4@{get\+F4}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F4()}{getF4()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F4 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a4cf08edc95df77d463422a440b46abba}\label{classIoTT_1_1LocDecoder_a4cf08edc95df77d463422a440b46abba}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F5@{get\+F5}}
+\index{get\+F5@{get\+F5}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F5()}{getF5()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F5 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a324cc6b43bd971a49b49ff5b0ec2e2fd}\label{classIoTT_1_1LocDecoder_a324cc6b43bd971a49b49ff5b0ec2e2fd}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F6@{get\+F6}}
+\index{get\+F6@{get\+F6}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F6()}{getF6()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F6 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ac312036e9b99e3de3109bbb37a466e57}\label{classIoTT_1_1LocDecoder_ac312036e9b99e3de3109bbb37a466e57}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F7@{get\+F7}}
+\index{get\+F7@{get\+F7}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F7()}{getF7()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F7 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a5b6b29371cfa8510e3edbdda9a3340ab}\label{classIoTT_1_1LocDecoder_a5b6b29371cfa8510e3edbdda9a3340ab}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F8@{get\+F8}}
+\index{get\+F8@{get\+F8}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F8()}{getF8()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F8 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a0f95eee8ea7fe95d97361f38e1f729cc}\label{classIoTT_1_1LocDecoder_a0f95eee8ea7fe95d97361f38e1f729cc}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+F9@{get\+F9}}
+\index{get\+F9@{get\+F9}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+F9()}{getF9()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+F9 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a464c4494c9303bb2ff677244420e83cd}\label{classIoTT_1_1LocDecoder_a464c4494c9303bb2ff677244420e83cd}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Function\+Group1@{get\+Function\+Group1}}
+\index{get\+Function\+Group1@{get\+Function\+Group1}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Function\+Group1()}{getFunctionGroup1()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Function\+Group1 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a0c36bdf38cbf54119734daa01fdb2798}\label{classIoTT_1_1LocDecoder_a0c36bdf38cbf54119734daa01fdb2798}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Function\+Group2@{get\+Function\+Group2}}
+\index{get\+Function\+Group2@{get\+Function\+Group2}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Function\+Group2()}{getFunctionGroup2()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Function\+Group2 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae4bf79e7de9800aaadc27358a894f73e}\label{classIoTT_1_1LocDecoder_ae4bf79e7de9800aaadc27358a894f73e}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Function\+Group3@{get\+Function\+Group3}}
+\index{get\+Function\+Group3@{get\+Function\+Group3}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Function\+Group3()}{getFunctionGroup3()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Function\+Group3 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a89ee10010db132f54576c644a62cb680}\label{classIoTT_1_1LocDecoder_a89ee10010db132f54576c644a62cb680}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Function\+Group4@{get\+Function\+Group4}}
+\index{get\+Function\+Group4@{get\+Function\+Group4}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Function\+Group4()}{getFunctionGroup4()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Function\+Group4 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a1bd40f11b3af2beac3804cd3eb731aae}\label{classIoTT_1_1LocDecoder_a1bd40f11b3af2beac3804cd3eb731aae}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Function\+Group5@{get\+Function\+Group5}}
+\index{get\+Function\+Group5@{get\+Function\+Group5}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Function\+Group5()}{getFunctionGroup5()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Function\+Group5 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a395369fe38be49fe123a915562a5e1b5}\label{classIoTT_1_1LocDecoder_a395369fe38be49fe123a915562a5e1b5}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+L\+A\+N\+Loc\+Info@{get\+L\+A\+N\+Loc\+Info}}
+\index{get\+L\+A\+N\+Loc\+Info@{get\+L\+A\+N\+Loc\+Info}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+L\+A\+N\+Loc\+Info()}{getLANLocInfo()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::get\+L\+A\+N\+Loc\+Info (\begin{DoxyParamCaption}\item[{uint8\+\_\+t $\ast$}]{p\+Msg }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Msg} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ad52b8f416735e9a3e77e29b99272e008}\label{classIoTT_1_1LocDecoder_ad52b8f416735e9a3e77e29b99272e008}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Light@{get\+Light}}
+\index{get\+Light@{get\+Light}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Light()}{getLight()}}
+{\footnotesize\ttfamily bool Io\+T\+T\+::\+Loc\+Decoder\+::get\+Light (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_afe55555aa98e8bf36748676b81e3c01f}\label{classIoTT_1_1LocDecoder_afe55555aa98e8bf36748676b81e3c01f}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Loc\+Mode@{get\+Loc\+Mode}}
+\index{get\+Loc\+Mode@{get\+Loc\+Mode}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Loc\+Mode()}{getLocMode()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Loc\+Mode (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_abf4a45e2a47e4d719c6ed6ea7f86916c}\label{classIoTT_1_1LocDecoder_abf4a45e2a47e4d719c6ed6ea7f86916c}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Loco\+Drive128@{get\+Loco\+Drive128}}
+\index{get\+Loco\+Drive128@{get\+Loco\+Drive128}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Loco\+Drive128()}{getLocoDrive128()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Loco\+Drive128 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a5353bd57bf5c0482b636a6b081b66f27}\label{classIoTT_1_1LocDecoder_a5353bd57bf5c0482b636a6b081b66f27}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Loco\+Drive14@{get\+Loco\+Drive14}}
+\index{get\+Loco\+Drive14@{get\+Loco\+Drive14}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Loco\+Drive14()}{getLocoDrive14()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Loco\+Drive14 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a9e68771693d3a8b615ac04afe92f442e}\label{classIoTT_1_1LocDecoder_a9e68771693d3a8b615ac04afe92f442e}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Loco\+Drive27@{get\+Loco\+Drive27}}
+\index{get\+Loco\+Drive27@{get\+Loco\+Drive27}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Loco\+Drive27()}{getLocoDrive27()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Loco\+Drive27 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a1c671f2f852d67a43e7d39cb4ce992f9}\label{classIoTT_1_1LocDecoder_a1c671f2f852d67a43e7d39cb4ce992f9}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Loco\+Drive28@{get\+Loco\+Drive28}}
+\index{get\+Loco\+Drive28@{get\+Loco\+Drive28}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Loco\+Drive28()}{getLocoDrive28()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Loco\+Drive28 (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aaa19e16c24db209d24f30e4698da7f31}\label{classIoTT_1_1LocDecoder_aaa19e16c24db209d24f30e4698da7f31}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Speed@{get\+Speed}}
+\index{get\+Speed@{get\+Speed}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Speed()}{getSpeed()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Speed (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aa1472d19a65a0e329d2e64ad0acd6764}\label{classIoTT_1_1LocDecoder_aa1472d19a65a0e329d2e64ad0acd6764}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!get\+Speed\+Steps@{get\+Speed\+Steps}}
+\index{get\+Speed\+Steps@{get\+Speed\+Steps}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{get\+Speed\+Steps()}{getSpeedSteps()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::get\+Speed\+Steps (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a7d2faa51ae31ee25ed63ebaefbda5d78}\label{classIoTT_1_1LocDecoder_a7d2faa51ae31ee25ed63ebaefbda5d78}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!on\+New\+Mqtt\+Data@{on\+New\+Mqtt\+Data}}
+\index{on\+New\+Mqtt\+Data@{on\+New\+Mqtt\+Data}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{on\+New\+Mqtt\+Data()}{onNewMqttData()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::on\+New\+Mqtt\+Data (\begin{DoxyParamCaption}\item[{const string \&}]{topic,  }\item[{const size\+\_\+t}]{payload\+Len,  }\item[{const uint8\+\_\+t $\ast$}]{payload }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em topic} & \\
+\hline
+{\em payload\+Len} & \\
+\hline
+{\em payload} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classIoTT_1_1Decoder_aba63fd0a28594e3b23fb6e436417e325}{Io\+T\+T\+::\+Decoder}.
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aa1cd277d6a76d8dd565df804527d46f9}\label{classIoTT_1_1LocDecoder_aa1cd277d6a76d8dd565df804527d46f9}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Busy@{set\+Busy}}
+\index{set\+Busy@{set\+Busy}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Busy()}{setBusy()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Busy (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a028107eb566eee57a5590ccd90432e4e}\label{classIoTT_1_1LocDecoder_a028107eb566eee57a5590ccd90432e4e}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Direction@{set\+Direction}}
+\index{set\+Direction@{set\+Direction}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Direction()}{setDirection()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Direction (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a94ff7a99963e07ea39c7a4ea09f9b9a1}\label{classIoTT_1_1LocDecoder_a94ff7a99963e07ea39c7a4ea09f9b9a1}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Dual\+Traction@{set\+Dual\+Traction}}
+\index{set\+Dual\+Traction@{set\+Dual\+Traction}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Dual\+Traction()}{setDualTraction()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Dual\+Traction (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae947a49c6655d2912839d9032fcf0a46}\label{classIoTT_1_1LocDecoder_ae947a49c6655d2912839d9032fcf0a46}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F0@{set\+F0}}
+\index{set\+F0@{set\+F0}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F0()}{setF0()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F0 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae1aab97da28929fe5da043eb58295ada}\label{classIoTT_1_1LocDecoder_ae1aab97da28929fe5da043eb58295ada}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F1@{set\+F1}}
+\index{set\+F1@{set\+F1}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F1()}{setF1()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F1 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a35283471e9b8cc893d04bdf71487ce0b}\label{classIoTT_1_1LocDecoder_a35283471e9b8cc893d04bdf71487ce0b}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F10@{set\+F10}}
+\index{set\+F10@{set\+F10}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F10()}{setF10()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F10 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ac81445f413f23a6e13ecbdf3a1910686}\label{classIoTT_1_1LocDecoder_ac81445f413f23a6e13ecbdf3a1910686}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F11@{set\+F11}}
+\index{set\+F11@{set\+F11}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F11()}{setF11()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F11 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae8eb191639ba1ee137cb4c1ee07de2c9}\label{classIoTT_1_1LocDecoder_ae8eb191639ba1ee137cb4c1ee07de2c9}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F12@{set\+F12}}
+\index{set\+F12@{set\+F12}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F12()}{setF12()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F12 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a5528d28f81227fc6d88de6228c045480}\label{classIoTT_1_1LocDecoder_a5528d28f81227fc6d88de6228c045480}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F13@{set\+F13}}
+\index{set\+F13@{set\+F13}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F13()}{setF13()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F13 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a914e4e860e6440b3fcff32c6de2a0e28}\label{classIoTT_1_1LocDecoder_a914e4e860e6440b3fcff32c6de2a0e28}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F14@{set\+F14}}
+\index{set\+F14@{set\+F14}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F14()}{setF14()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F14 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae0c9aeac7d21161d898f515ddaffa851}\label{classIoTT_1_1LocDecoder_ae0c9aeac7d21161d898f515ddaffa851}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F15@{set\+F15}}
+\index{set\+F15@{set\+F15}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F15()}{setF15()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F15 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a3a38b63ec4f7f9f5f6731e8d328b053c}\label{classIoTT_1_1LocDecoder_a3a38b63ec4f7f9f5f6731e8d328b053c}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F16@{set\+F16}}
+\index{set\+F16@{set\+F16}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F16()}{setF16()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F16 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a8e10e113460d9c377234cd1be678931a}\label{classIoTT_1_1LocDecoder_a8e10e113460d9c377234cd1be678931a}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F17@{set\+F17}}
+\index{set\+F17@{set\+F17}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F17()}{setF17()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F17 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aeb2fef072ba2340f98b72b6a4d65af6a}\label{classIoTT_1_1LocDecoder_aeb2fef072ba2340f98b72b6a4d65af6a}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F18@{set\+F18}}
+\index{set\+F18@{set\+F18}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F18()}{setF18()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F18 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a5b39b25fbce7cb68a89862e34d0829ee}\label{classIoTT_1_1LocDecoder_a5b39b25fbce7cb68a89862e34d0829ee}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F19@{set\+F19}}
+\index{set\+F19@{set\+F19}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F19()}{setF19()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F19 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ad7df25a09f6a25b9869eba5671f55973}\label{classIoTT_1_1LocDecoder_ad7df25a09f6a25b9869eba5671f55973}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F2@{set\+F2}}
+\index{set\+F2@{set\+F2}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F2()}{setF2()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F2 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a4014c83224b461c36f190c40a86e8444}\label{classIoTT_1_1LocDecoder_a4014c83224b461c36f190c40a86e8444}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F20@{set\+F20}}
+\index{set\+F20@{set\+F20}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F20()}{setF20()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F20 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a35458b4c739bfeceb9823a82e06cbf7d}\label{classIoTT_1_1LocDecoder_a35458b4c739bfeceb9823a82e06cbf7d}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F21@{set\+F21}}
+\index{set\+F21@{set\+F21}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F21()}{setF21()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F21 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a0d378a7a02012c3c3e139ff554b78c6f}\label{classIoTT_1_1LocDecoder_a0d378a7a02012c3c3e139ff554b78c6f}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F22@{set\+F22}}
+\index{set\+F22@{set\+F22}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F22()}{setF22()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F22 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a49c5c584123beba94068591eb8744d7d}\label{classIoTT_1_1LocDecoder_a49c5c584123beba94068591eb8744d7d}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F23@{set\+F23}}
+\index{set\+F23@{set\+F23}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F23()}{setF23()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F23 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a89b14ddd70af0d3c72a3a077cd32df4c}\label{classIoTT_1_1LocDecoder_a89b14ddd70af0d3c72a3a077cd32df4c}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F24@{set\+F24}}
+\index{set\+F24@{set\+F24}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F24()}{setF24()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F24 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ac767e22e04d636a034e71faa72854afa}\label{classIoTT_1_1LocDecoder_ac767e22e04d636a034e71faa72854afa}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F25@{set\+F25}}
+\index{set\+F25@{set\+F25}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F25()}{setF25()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F25 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ab46b1404908d6362cdd1660a871b92a1}\label{classIoTT_1_1LocDecoder_ab46b1404908d6362cdd1660a871b92a1}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F26@{set\+F26}}
+\index{set\+F26@{set\+F26}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F26()}{setF26()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F26 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ac3293265ed2d36d721e637e0a4f8f1ae}\label{classIoTT_1_1LocDecoder_ac3293265ed2d36d721e637e0a4f8f1ae}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F27@{set\+F27}}
+\index{set\+F27@{set\+F27}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F27()}{setF27()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F27 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a082ff7e341958add6a0367c989c58d0a}\label{classIoTT_1_1LocDecoder_a082ff7e341958add6a0367c989c58d0a}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F28@{set\+F28}}
+\index{set\+F28@{set\+F28}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F28()}{setF28()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F28 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aa76fd0ad9d6ab28805d3f2a1a97fab4c}\label{classIoTT_1_1LocDecoder_aa76fd0ad9d6ab28805d3f2a1a97fab4c}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F3@{set\+F3}}
+\index{set\+F3@{set\+F3}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F3()}{setF3()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F3 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a5eb0fc4661df614b298d8e54934559f0}\label{classIoTT_1_1LocDecoder_a5eb0fc4661df614b298d8e54934559f0}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F4@{set\+F4}}
+\index{set\+F4@{set\+F4}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F4()}{setF4()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F4 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_afb9028105d0e9f3440ad4f72ac1385bf}\label{classIoTT_1_1LocDecoder_afb9028105d0e9f3440ad4f72ac1385bf}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F5@{set\+F5}}
+\index{set\+F5@{set\+F5}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F5()}{setF5()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F5 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae83b4bde9fed996fd18818875ea72017}\label{classIoTT_1_1LocDecoder_ae83b4bde9fed996fd18818875ea72017}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F6@{set\+F6}}
+\index{set\+F6@{set\+F6}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F6()}{setF6()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F6 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a161e0001a8ed2fbd6260269cec830218}\label{classIoTT_1_1LocDecoder_a161e0001a8ed2fbd6260269cec830218}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F7@{set\+F7}}
+\index{set\+F7@{set\+F7}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F7()}{setF7()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F7 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a31555a406af698ad87be5aa0e54f6532}\label{classIoTT_1_1LocDecoder_a31555a406af698ad87be5aa0e54f6532}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F8@{set\+F8}}
+\index{set\+F8@{set\+F8}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F8()}{setF8()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F8 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a32e6f6844d89a116fcb750dea86fb0a8}\label{classIoTT_1_1LocDecoder_a32e6f6844d89a116fcb750dea86fb0a8}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+F9@{set\+F9}}
+\index{set\+F9@{set\+F9}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+F9()}{setF9()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+F9 (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a85f76a68886d3470c2aaab641855b6b6}\label{classIoTT_1_1LocDecoder_a85f76a68886d3470c2aaab641855b6b6}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Function\+Group1@{set\+Function\+Group1}}
+\index{set\+Function\+Group1@{set\+Function\+Group1}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Function\+Group1()}{setFunctionGroup1()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Function\+Group1 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a602470c858cfd13382f9180d6c768051}\label{classIoTT_1_1LocDecoder_a602470c858cfd13382f9180d6c768051}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Function\+Group2@{set\+Function\+Group2}}
+\index{set\+Function\+Group2@{set\+Function\+Group2}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Function\+Group2()}{setFunctionGroup2()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Function\+Group2 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a2698876fc3124c833e15a7ff3fa884d6}\label{classIoTT_1_1LocDecoder_a2698876fc3124c833e15a7ff3fa884d6}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Function\+Group3@{set\+Function\+Group3}}
+\index{set\+Function\+Group3@{set\+Function\+Group3}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Function\+Group3()}{setFunctionGroup3()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Function\+Group3 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_af4965ab85d13a4f165643c11562a295e}\label{classIoTT_1_1LocDecoder_af4965ab85d13a4f165643c11562a295e}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Function\+Group4@{set\+Function\+Group4}}
+\index{set\+Function\+Group4@{set\+Function\+Group4}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Function\+Group4()}{setFunctionGroup4()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Function\+Group4 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a0649a1986d8954e4a13d8c3fe9b28e6a}\label{classIoTT_1_1LocDecoder_a0649a1986d8954e4a13d8c3fe9b28e6a}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Function\+Group5@{set\+Function\+Group5}}
+\index{set\+Function\+Group5@{set\+Function\+Group5}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Function\+Group5()}{setFunctionGroup5()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Function\+Group5 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a5eb292204c101454c4300e3c6f9e818e}\label{classIoTT_1_1LocDecoder_a5eb292204c101454c4300e3c6f9e818e}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Light@{set\+Light}}
+\index{set\+Light@{set\+Light}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Light()}{setLight()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Light (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a7ed0dd387ddae6c5634cde59e3fc7966}\label{classIoTT_1_1LocDecoder_a7ed0dd387ddae6c5634cde59e3fc7966}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Loc\+Mode@{set\+Loc\+Mode}}
+\index{set\+Loc\+Mode@{set\+Loc\+Mode}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Loc\+Mode()}{setLocMode()}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::set\+Loc\+Mode (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Mode }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Mode} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_af308320a9ae794af3cd1f20b46a7d639}\label{classIoTT_1_1LocDecoder_af308320a9ae794af3cd1f20b46a7d639}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Loco\+Drive128@{set\+Loco\+Drive128}}
+\index{set\+Loco\+Drive128@{set\+Loco\+Drive128}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Loco\+Drive128()}{setLocoDrive128()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Loco\+Drive128 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a32fc785fece905c89118bca8f3120cfc}\label{classIoTT_1_1LocDecoder_a32fc785fece905c89118bca8f3120cfc}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Loco\+Drive14@{set\+Loco\+Drive14}}
+\index{set\+Loco\+Drive14@{set\+Loco\+Drive14}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Loco\+Drive14()}{setLocoDrive14()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Loco\+Drive14 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ab85bb0abdc9f3f2f4e8fb8fdad6949ba}\label{classIoTT_1_1LocDecoder_ab85bb0abdc9f3f2f4e8fb8fdad6949ba}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Loco\+Drive27@{set\+Loco\+Drive27}}
+\index{set\+Loco\+Drive27@{set\+Loco\+Drive27}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Loco\+Drive27()}{setLocoDrive27()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Loco\+Drive27 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_aebe429e758b5cbe2fd4ad3e04d854711}\label{classIoTT_1_1LocDecoder_aebe429e758b5cbe2fd4ad3e04d854711}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Loco\+Drive28@{set\+Loco\+Drive28}}
+\index{set\+Loco\+Drive28@{set\+Loco\+Drive28}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Loco\+Drive28()}{setLocoDrive28()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Loco\+Drive28 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_acdda1c9b2f6f792bc1a3d246e12d3aeb}\label{classIoTT_1_1LocDecoder_acdda1c9b2f6f792bc1a3d246e12d3aeb}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Smart\+Search@{set\+Smart\+Search}}
+\index{set\+Smart\+Search@{set\+Smart\+Search}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Smart\+Search()}{setSmartSearch()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Smart\+Search (\begin{DoxyParamCaption}\item[{const bool \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a9ac45335c62250e8f64086e0a06f399a}\label{classIoTT_1_1LocDecoder_a9ac45335c62250e8f64086e0a06f399a}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Speed@{set\+Speed}}
+\index{set\+Speed@{set\+Speed}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Speed()}{setSpeed()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Speed (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae05b9d11871c659a286f58e810db5983}\label{classIoTT_1_1LocDecoder_ae05b9d11871c659a286f58e810db5983}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!set\+Speed\+Steps@{set\+Speed\+Steps}}
+\index{set\+Speed\+Steps@{set\+Speed\+Steps}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{set\+Speed\+Steps()}{setSpeedSteps()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Loc\+Decoder\+::set\+Speed\+Steps (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{new\+Value }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Value} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a57f18c1655e45585bb6607bb629f5bfb}\label{classIoTT_1_1LocDecoder_a57f18c1655e45585bb6607bb629f5bfb}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Busy\+Publisher@{m\+\_\+\+Busy\+Publisher}}
+\index{m\+\_\+\+Busy\+Publisher@{m\+\_\+\+Busy\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Busy\+Publisher}{m\_BusyPublisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Busy\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a450cfd7a96ec279708c3dddc66db437c}\label{classIoTT_1_1LocDecoder_a450cfd7a96ec279708c3dddc66db437c}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Direction\+Publisher@{m\+\_\+\+Direction\+Publisher}}
+\index{m\+\_\+\+Direction\+Publisher@{m\+\_\+\+Direction\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Direction\+Publisher}{m\_DirectionPublisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Direction\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae538104fb9df1988e119728cbbc18460}\label{classIoTT_1_1LocDecoder_ae538104fb9df1988e119728cbbc18460}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Dual\+Traction\+Publisher@{m\+\_\+\+Dual\+Traction\+Publisher}}
+\index{m\+\_\+\+Dual\+Traction\+Publisher@{m\+\_\+\+Dual\+Traction\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Dual\+Traction\+Publisher}{m\_DualTractionPublisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Dual\+Traction\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ac8af77095ccacdf2b770500699fe3e77}\label{classIoTT_1_1LocDecoder_ac8af77095ccacdf2b770500699fe3e77}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Function\+Group1\+Publisher@{m\+\_\+\+Function\+Group1\+Publisher}}
+\index{m\+\_\+\+Function\+Group1\+Publisher@{m\+\_\+\+Function\+Group1\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Function\+Group1\+Publisher}{m\_FunctionGroup1Publisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Function\+Group1\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a0d1397da3871f5fc207aaf5c542381aa}\label{classIoTT_1_1LocDecoder_a0d1397da3871f5fc207aaf5c542381aa}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Function\+Group2\+Publisher@{m\+\_\+\+Function\+Group2\+Publisher}}
+\index{m\+\_\+\+Function\+Group2\+Publisher@{m\+\_\+\+Function\+Group2\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Function\+Group2\+Publisher}{m\_FunctionGroup2Publisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Function\+Group2\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_abdfb7b2744d684440f4c6d8aba2b1e98}\label{classIoTT_1_1LocDecoder_abdfb7b2744d684440f4c6d8aba2b1e98}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Function\+Group3\+Publisher@{m\+\_\+\+Function\+Group3\+Publisher}}
+\index{m\+\_\+\+Function\+Group3\+Publisher@{m\+\_\+\+Function\+Group3\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Function\+Group3\+Publisher}{m\_FunctionGroup3Publisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Function\+Group3\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a6a7e7bef4d5397197cefb6d9a0a52b4d}\label{classIoTT_1_1LocDecoder_a6a7e7bef4d5397197cefb6d9a0a52b4d}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Function\+Group4\+Publisher@{m\+\_\+\+Function\+Group4\+Publisher}}
+\index{m\+\_\+\+Function\+Group4\+Publisher@{m\+\_\+\+Function\+Group4\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Function\+Group4\+Publisher}{m\_FunctionGroup4Publisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Function\+Group4\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae126acd27bc87568558f599c94c8c17f}\label{classIoTT_1_1LocDecoder_ae126acd27bc87568558f599c94c8c17f}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Function\+Group5\+Publisher@{m\+\_\+\+Function\+Group5\+Publisher}}
+\index{m\+\_\+\+Function\+Group5\+Publisher@{m\+\_\+\+Function\+Group5\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Function\+Group5\+Publisher}{m\_FunctionGroup5Publisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Function\+Group5\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a6f6ddbd212e97fb46a23741a0da19c90}\label{classIoTT_1_1LocDecoder_a6f6ddbd212e97fb46a23741a0da19c90}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Loc\+Info@{m\+\_\+\+Loc\+Info}}
+\index{m\+\_\+\+Loc\+Info@{m\+\_\+\+Loc\+Info}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Loc\+Info}{m\_LocInfo}}
+{\footnotesize\ttfamily \hyperlink{structIoTT_1_1LocDecoder_1_1locInfo__t}{loc\+Info\+\_\+t} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Loc\+Info\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a71b48ceda04b004ea181d9c9425ce9de}\label{classIoTT_1_1LocDecoder_a71b48ceda04b004ea181d9c9425ce9de}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Loc\+Mode@{m\+\_\+\+Loc\+Mode}}
+\index{m\+\_\+\+Loc\+Mode@{m\+\_\+\+Loc\+Mode}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Loc\+Mode}{m\_LocMode}}
+{\footnotesize\ttfamily uint8\+\_\+t Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Loc\+Mode\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a19c3d3f0edadf124539500659441a604}\label{classIoTT_1_1LocDecoder_a19c3d3f0edadf124539500659441a604}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Loco\+Drive128\+Publisher@{m\+\_\+\+Loco\+Drive128\+Publisher}}
+\index{m\+\_\+\+Loco\+Drive128\+Publisher@{m\+\_\+\+Loco\+Drive128\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Loco\+Drive128\+Publisher}{m\_LocoDrive128Publisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Loco\+Drive128\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a1e985100d61d364be2ee6993028bc2c5}\label{classIoTT_1_1LocDecoder_a1e985100d61d364be2ee6993028bc2c5}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Loco\+Drive14\+Publisher@{m\+\_\+\+Loco\+Drive14\+Publisher}}
+\index{m\+\_\+\+Loco\+Drive14\+Publisher@{m\+\_\+\+Loco\+Drive14\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Loco\+Drive14\+Publisher}{m\_LocoDrive14Publisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Loco\+Drive14\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a26e0b69d61545ff21162636a15aa8c07}\label{classIoTT_1_1LocDecoder_a26e0b69d61545ff21162636a15aa8c07}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Loco\+Drive27\+Publisher@{m\+\_\+\+Loco\+Drive27\+Publisher}}
+\index{m\+\_\+\+Loco\+Drive27\+Publisher@{m\+\_\+\+Loco\+Drive27\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Loco\+Drive27\+Publisher}{m\_LocoDrive27Publisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Loco\+Drive27\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a0ef958619a0e3917b815253581a9645c}\label{classIoTT_1_1LocDecoder_a0ef958619a0e3917b815253581a9645c}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Loco\+Drive28\+Publisher@{m\+\_\+\+Loco\+Drive28\+Publisher}}
+\index{m\+\_\+\+Loco\+Drive28\+Publisher@{m\+\_\+\+Loco\+Drive28\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Loco\+Drive28\+Publisher}{m\_LocoDrive28Publisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Loco\+Drive28\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ada7028c3eb96dcba778025c1e4886030}\label{classIoTT_1_1LocDecoder_ada7028c3eb96dcba778025c1e4886030}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Smart\+Search\+Publisher@{m\+\_\+\+Smart\+Search\+Publisher}}
+\index{m\+\_\+\+Smart\+Search\+Publisher@{m\+\_\+\+Smart\+Search\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Smart\+Search\+Publisher}{m\_SmartSearchPublisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Smart\+Search\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_a2e1e77d6b6afbfc596bacf9e610676f7}\label{classIoTT_1_1LocDecoder_a2e1e77d6b6afbfc596bacf9e610676f7}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Speed\+Publisher@{m\+\_\+\+Speed\+Publisher}}
+\index{m\+\_\+\+Speed\+Publisher@{m\+\_\+\+Speed\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Speed\+Publisher}{m\_SpeedPublisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Speed\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1LocDecoder_ae2dd932a3ab756c89a4aebd98a01fc13}\label{classIoTT_1_1LocDecoder_ae2dd932a3ab756c89a4aebd98a01fc13}} 
+\index{Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}!m\+\_\+\+Speed\+Steps\+Publisher@{m\+\_\+\+Speed\+Steps\+Publisher}}
+\index{m\+\_\+\+Speed\+Steps\+Publisher@{m\+\_\+\+Speed\+Steps\+Publisher}!Io\+T\+T\+::\+Loc\+Decoder@{Io\+T\+T\+::\+Loc\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Speed\+Steps\+Publisher}{m\_SpeedStepsPublisher}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher} Io\+T\+T\+::\+Loc\+Decoder\+::m\+\_\+\+Speed\+Steps\+Publisher\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{LocDecoder_8h}{Loc\+Decoder.\+h}\item 
+src/\hyperlink{LocDecoder_8cpp}{Loc\+Decoder.\+cpp}\end{DoxyCompactItemize}

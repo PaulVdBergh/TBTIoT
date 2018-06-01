@@ -1,0 +1,98 @@
+\hypertarget{classIoTT_1_1Decoder}{}\section{Io\+TT\+:\+:Decoder Class Reference}
+\label{classIoTT_1_1Decoder}\index{Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}}
+
+
+{\ttfamily \#include $<$Decoder.\+h$>$}
+
+Inheritance diagram for Io\+TT\+:\+:Decoder\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIoTT_1_1Decoder}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1Decoder_aa4c9e61bda47768c3ba226feef9de4fa}{Decoder} (const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} \&address)
+\item 
+virtual \hyperlink{classIoTT_1_1Decoder_a4fd222d1e7c4961e22d0dbba0add46ab}{$\sim$\+Decoder} ()
+\item 
+const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} \& \hyperlink{classIoTT_1_1Decoder_a7f1dff064ec8d207955f600fba70062f}{get\+D\+C\+C\+Address} (void)
+\item 
+virtual void \hyperlink{classIoTT_1_1Decoder_aba63fd0a28594e3b23fb6e436417e325}{on\+New\+Mqtt\+Data} (const string \&topic, const size\+\_\+t payload\+Len, const uint8\+\_\+t $\ast$payload)=0
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} \hyperlink{classIoTT_1_1Decoder_a6003d2a748d7b408285198d0bef0ed8d}{m\+\_\+\+D\+C\+C\+Address}
+\item 
+string \hyperlink{classIoTT_1_1Decoder_a441119df006f3149f44321369cbc5882}{m\+\_\+\+Base\+Topic}
+\item 
+recursive\+\_\+mutex \hyperlink{classIoTT_1_1Decoder_a2848111b5585ea86a9b7313f681759c7}{m\+\_\+\+M\+Decoder}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Decoder_aa4c9e61bda47768c3ba226feef9de4fa}\label{classIoTT_1_1Decoder_aa4c9e61bda47768c3ba226feef9de4fa}} 
+\index{Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}!Decoder@{Decoder}}
+\index{Decoder@{Decoder}!Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}}
+\subsubsection{\texorpdfstring{Decoder()}{Decoder()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Decoder\+::\+Decoder (\begin{DoxyParamCaption}\item[{const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} \&}]{address }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1Decoder_a4fd222d1e7c4961e22d0dbba0add46ab}\label{classIoTT_1_1Decoder_a4fd222d1e7c4961e22d0dbba0add46ab}} 
+\index{Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}!````~Decoder@{$\sim$\+Decoder}}
+\index{````~Decoder@{$\sim$\+Decoder}!Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}}
+\subsubsection{\texorpdfstring{$\sim$\+Decoder()}{~Decoder()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Decoder\+::$\sim$\+Decoder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Decoder_a7f1dff064ec8d207955f600fba70062f}\label{classIoTT_1_1Decoder_a7f1dff064ec8d207955f600fba70062f}} 
+\index{Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}!get\+D\+C\+C\+Address@{get\+D\+C\+C\+Address}}
+\index{get\+D\+C\+C\+Address@{get\+D\+C\+C\+Address}!Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}}
+\subsubsection{\texorpdfstring{get\+D\+C\+C\+Address()}{getDCCAddress()}}
+{\footnotesize\ttfamily const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t}\& Io\+T\+T\+::\+Decoder\+::get\+D\+C\+C\+Address (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Decoder_aba63fd0a28594e3b23fb6e436417e325}\label{classIoTT_1_1Decoder_aba63fd0a28594e3b23fb6e436417e325}} 
+\index{Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}!on\+New\+Mqtt\+Data@{on\+New\+Mqtt\+Data}}
+\index{on\+New\+Mqtt\+Data@{on\+New\+Mqtt\+Data}!Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}}
+\subsubsection{\texorpdfstring{on\+New\+Mqtt\+Data()}{onNewMqttData()}}
+{\footnotesize\ttfamily virtual void Io\+T\+T\+::\+Decoder\+::on\+New\+Mqtt\+Data (\begin{DoxyParamCaption}\item[{const string \&}]{topic,  }\item[{const size\+\_\+t}]{payload\+Len,  }\item[{const uint8\+\_\+t $\ast$}]{payload }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \hyperlink{classIoTT_1_1AccessoryDecoder_a2aefba75fd586b25e37f8ea03deda7e7}{Io\+T\+T\+::\+Accessory\+Decoder}, and \hyperlink{classIoTT_1_1LocDecoder_a7d2faa51ae31ee25ed63ebaefbda5d78}{Io\+T\+T\+::\+Loc\+Decoder}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Decoder_a441119df006f3149f44321369cbc5882}\label{classIoTT_1_1Decoder_a441119df006f3149f44321369cbc5882}} 
+\index{Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}!m\+\_\+\+Base\+Topic@{m\+\_\+\+Base\+Topic}}
+\index{m\+\_\+\+Base\+Topic@{m\+\_\+\+Base\+Topic}!Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Base\+Topic}{m\_BaseTopic}}
+{\footnotesize\ttfamily string Io\+T\+T\+::\+Decoder\+::m\+\_\+\+Base\+Topic\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Decoder_a6003d2a748d7b408285198d0bef0ed8d}\label{classIoTT_1_1Decoder_a6003d2a748d7b408285198d0bef0ed8d}} 
+\index{Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}!m\+\_\+\+D\+C\+C\+Address@{m\+\_\+\+D\+C\+C\+Address}}
+\index{m\+\_\+\+D\+C\+C\+Address@{m\+\_\+\+D\+C\+C\+Address}!Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+D\+C\+C\+Address}{m\_DCCAddress}}
+{\footnotesize\ttfamily const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} Io\+T\+T\+::\+Decoder\+::m\+\_\+\+D\+C\+C\+Address\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Decoder_a2848111b5585ea86a9b7313f681759c7}\label{classIoTT_1_1Decoder_a2848111b5585ea86a9b7313f681759c7}} 
+\index{Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}!m\+\_\+\+M\+Decoder@{m\+\_\+\+M\+Decoder}}
+\index{m\+\_\+\+M\+Decoder@{m\+\_\+\+M\+Decoder}!Io\+T\+T\+::\+Decoder@{Io\+T\+T\+::\+Decoder}}
+\subsubsection{\texorpdfstring{m\+\_\+\+M\+Decoder}{m\_MDecoder}}
+{\footnotesize\ttfamily recursive\+\_\+mutex Io\+T\+T\+::\+Decoder\+::m\+\_\+\+M\+Decoder\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{Decoder_8h}{Decoder.\+h}\item 
+src/\hyperlink{Decoder_8cpp}{Decoder.\+cpp}\end{DoxyCompactItemize}

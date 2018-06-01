@@ -32,6 +32,11 @@
 namespace IoTT
 {
 
+	/**
+	 *
+	 * @param pinterface
+	 * @param address
+	 */
 	Z21Client::Z21Client(Z21Interface* pinterface, const sockaddr_in& address)
 	:	m_pInterface(pinterface)
 	,	m_Address(address)
@@ -40,6 +45,9 @@ namespace IoTT
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 *
+	 */
 	Z21Client::~Z21Client()
 	{
 		// TODO Auto-generated destructor stub
@@ -75,6 +83,10 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 * @param pLoc
+	 */
 	void Z21Client::broadcastLocInfoChanged(LocDecoder* pLoc)
 	{
 		uint8_t msg[0x0E];
@@ -83,6 +95,10 @@ namespace IoTT
 		m_pInterface->sendToSocket(msg, (sockaddr*)&m_Address);
 	}
 
+	/**
+	 *
+	 * @param pAccessory
+	 */
 	void Z21Client::broadcastAccessoryInfoChanged(Accessory* pAccessory)
 	{
 		uint8_t msg[] = { 0x09, 0x00, 0x40, 0x00, 0x43, 0x00, 0x00, 0x00, 0x00 };
@@ -114,6 +130,9 @@ namespace IoTT
 		m_pInterface->sendToSocket(msg, (sockaddr*)&m_Address);
 	}
 
+	/**
+	 *
+	 */
 	void Z21Client::broadcastOvercurrent()
 	{
 		const uint8_t msg[] = { 0x07, 0x00, 0x40, 0x00, 0x61, 0x08, 0x69 };

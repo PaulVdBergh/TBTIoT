@@ -37,6 +37,12 @@
 #include "Z21Interface.h"
 #include "MqttMsgHandler.h"
 
+/**
+ *
+ * @param argc
+ * @param argv
+ * @return
+ */
 int main(int argc, char const *argv[])
 {
 	pthread_t conf_thread;

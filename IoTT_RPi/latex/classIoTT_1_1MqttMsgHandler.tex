@@ -1,0 +1,137 @@
+\hypertarget{classIoTT_1_1MqttMsgHandler}{}\section{Io\+TT\+:\+:Mqtt\+Msg\+Handler Class Reference}
+\label{classIoTT_1_1MqttMsgHandler}\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+
+
+{\ttfamily \#include $<$Mqtt\+Msg\+Handler.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classIoTT_1_1MqttMsgHandler_1_1ExecSub}{Exec\+Sub}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classIoTT_1_1MqttMsgHandler_ae5c149f6342c56965941bb18239e8057}{$\sim$\+Mqtt\+Msg\+Handler} ()
+\item 
+void \hyperlink{classIoTT_1_1MqttMsgHandler_ae15fbcd8dedccaf532f115fe1c728e40}{Register\+Subscription} (\hyperlink{classIoTT_1_1MqttSubscription}{Mqtt\+Subscription} $\ast$p\+Sub)
+\item 
+void \hyperlink{classIoTT_1_1MqttMsgHandler_a20d87733262efb223015c856a8cfcfaf}{Un\+Register\+Subscription} (\hyperlink{classIoTT_1_1MqttSubscription}{Mqtt\+Subscription} $\ast$p\+Sub)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classIoTT_1_1MqttMsgHandler}{Mqtt\+Msg\+Handler} $\ast$ \hyperlink{classIoTT_1_1MqttMsgHandler_aed5b042e8cfa1de172012bdfa0dc081a}{get\+Instance} (void)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1MqttMsgHandler_a0a1213f50a75d07c3690d99a94fe118b}{Mqtt\+Msg\+Handler} ()
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{classIoTT_1_1MqttMsgHandler_a600695bb4d3736efd739ed4a35c3c7d3}{thread\+Func} (void)
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+thread \hyperlink{classIoTT_1_1MqttMsgHandler_a35d336e903050e3b2cdd61f5043c403a}{m\+\_\+\+Thread}
+\item 
+vector$<$ \hyperlink{classIoTT_1_1MqttSubscription}{Mqtt\+Subscription} $\ast$ $>$ \hyperlink{classIoTT_1_1MqttMsgHandler_adf7d1fafda4cee41a9e00a9481157fc0}{m\+\_\+\+Subscriptions}
+\item 
+recursive\+\_\+mutex \hyperlink{classIoTT_1_1MqttMsgHandler_a82e4c0dc5fd6025a7ce96dbf3e5edbf3}{m\+\_\+\+M\+Subscriptions}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classIoTT_1_1MqttMsgHandler}{Mqtt\+Msg\+Handler} $\ast$ \hyperlink{classIoTT_1_1MqttMsgHandler_a16f295286a833a7c905a126db6a60118}{sm\+\_\+p\+Instance} = nullptr
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIoTT_1_1MqttMsgHandler_ae5c149f6342c56965941bb18239e8057}\label{classIoTT_1_1MqttMsgHandler_ae5c149f6342c56965941bb18239e8057}} 
+\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}!````~Mqtt\+Msg\+Handler@{$\sim$\+Mqtt\+Msg\+Handler}}
+\index{````~Mqtt\+Msg\+Handler@{$\sim$\+Mqtt\+Msg\+Handler}!Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+\subsubsection{\texorpdfstring{$\sim$\+Mqtt\+Msg\+Handler()}{~MqttMsgHandler()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Mqtt\+Msg\+Handler\+::$\sim$\+Mqtt\+Msg\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classIoTT_1_1MqttMsgHandler_a0a1213f50a75d07c3690d99a94fe118b}\label{classIoTT_1_1MqttMsgHandler_a0a1213f50a75d07c3690d99a94fe118b}} 
+\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}!Mqtt\+Msg\+Handler@{Mqtt\+Msg\+Handler}}
+\index{Mqtt\+Msg\+Handler@{Mqtt\+Msg\+Handler}!Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+\subsubsection{\texorpdfstring{Mqtt\+Msg\+Handler()}{MqttMsgHandler()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Mqtt\+Msg\+Handler\+::\+Mqtt\+Msg\+Handler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIoTT_1_1MqttMsgHandler_aed5b042e8cfa1de172012bdfa0dc081a}\label{classIoTT_1_1MqttMsgHandler_aed5b042e8cfa1de172012bdfa0dc081a}} 
+\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttMsgHandler}{Mqtt\+Msg\+Handler} $\ast$ Io\+T\+T\+::\+Mqtt\+Msg\+Handler\+::get\+Instance (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1MqttMsgHandler_ae15fbcd8dedccaf532f115fe1c728e40}\label{classIoTT_1_1MqttMsgHandler_ae15fbcd8dedccaf532f115fe1c728e40}} 
+\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}!Register\+Subscription@{Register\+Subscription}}
+\index{Register\+Subscription@{Register\+Subscription}!Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+\subsubsection{\texorpdfstring{Register\+Subscription()}{RegisterSubscription()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Mqtt\+Msg\+Handler\+::\+Register\+Subscription (\begin{DoxyParamCaption}\item[{\hyperlink{classIoTT_1_1MqttSubscription}{Mqtt\+Subscription} $\ast$}]{p\+Sub }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Sub} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1MqttMsgHandler_a600695bb4d3736efd739ed4a35c3c7d3}\label{classIoTT_1_1MqttMsgHandler_a600695bb4d3736efd739ed4a35c3c7d3}} 
+\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}!thread\+Func@{thread\+Func}}
+\index{thread\+Func@{thread\+Func}!Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+\subsubsection{\texorpdfstring{thread\+Func()}{threadFunc()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Mqtt\+Msg\+Handler\+::thread\+Func (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1MqttMsgHandler_a20d87733262efb223015c856a8cfcfaf}\label{classIoTT_1_1MqttMsgHandler_a20d87733262efb223015c856a8cfcfaf}} 
+\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}!Un\+Register\+Subscription@{Un\+Register\+Subscription}}
+\index{Un\+Register\+Subscription@{Un\+Register\+Subscription}!Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+\subsubsection{\texorpdfstring{Un\+Register\+Subscription()}{UnRegisterSubscription()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Mqtt\+Msg\+Handler\+::\+Un\+Register\+Subscription (\begin{DoxyParamCaption}\item[{\hyperlink{classIoTT_1_1MqttSubscription}{Mqtt\+Subscription} $\ast$}]{p\+Sub }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em p\+Sub} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classIoTT_1_1MqttMsgHandler_a82e4c0dc5fd6025a7ce96dbf3e5edbf3}\label{classIoTT_1_1MqttMsgHandler_a82e4c0dc5fd6025a7ce96dbf3e5edbf3}} 
+\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}!m\+\_\+\+M\+Subscriptions@{m\+\_\+\+M\+Subscriptions}}
+\index{m\+\_\+\+M\+Subscriptions@{m\+\_\+\+M\+Subscriptions}!Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+\subsubsection{\texorpdfstring{m\+\_\+\+M\+Subscriptions}{m\_MSubscriptions}}
+{\footnotesize\ttfamily recursive\+\_\+mutex Io\+T\+T\+::\+Mqtt\+Msg\+Handler\+::m\+\_\+\+M\+Subscriptions\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1MqttMsgHandler_adf7d1fafda4cee41a9e00a9481157fc0}\label{classIoTT_1_1MqttMsgHandler_adf7d1fafda4cee41a9e00a9481157fc0}} 
+\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}!m\+\_\+\+Subscriptions@{m\+\_\+\+Subscriptions}}
+\index{m\+\_\+\+Subscriptions@{m\+\_\+\+Subscriptions}!Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Subscriptions}{m\_Subscriptions}}
+{\footnotesize\ttfamily vector$<$\hyperlink{classIoTT_1_1MqttSubscription}{Mqtt\+Subscription}$\ast$$>$ Io\+T\+T\+::\+Mqtt\+Msg\+Handler\+::m\+\_\+\+Subscriptions\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1MqttMsgHandler_a35d336e903050e3b2cdd61f5043c403a}\label{classIoTT_1_1MqttMsgHandler_a35d336e903050e3b2cdd61f5043c403a}} 
+\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}!m\+\_\+\+Thread@{m\+\_\+\+Thread}}
+\index{m\+\_\+\+Thread@{m\+\_\+\+Thread}!Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Thread}{m\_Thread}}
+{\footnotesize\ttfamily thread Io\+T\+T\+::\+Mqtt\+Msg\+Handler\+::m\+\_\+\+Thread\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1MqttMsgHandler_a16f295286a833a7c905a126db6a60118}\label{classIoTT_1_1MqttMsgHandler_a16f295286a833a7c905a126db6a60118}} 
+\index{Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}!sm\+\_\+p\+Instance@{sm\+\_\+p\+Instance}}
+\index{sm\+\_\+p\+Instance@{sm\+\_\+p\+Instance}!Io\+T\+T\+::\+Mqtt\+Msg\+Handler@{Io\+T\+T\+::\+Mqtt\+Msg\+Handler}}
+\subsubsection{\texorpdfstring{sm\+\_\+p\+Instance}{sm\_pInstance}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1MqttMsgHandler}{Mqtt\+Msg\+Handler} $\ast$ Io\+T\+T\+::\+Mqtt\+Msg\+Handler\+::sm\+\_\+p\+Instance = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{MqttMsgHandler_8h}{Mqtt\+Msg\+Handler.\+h}\item 
+src/\hyperlink{MqttMsgHandler_8cpp}{Mqtt\+Msg\+Handler.\+cpp}\end{DoxyCompactItemize}

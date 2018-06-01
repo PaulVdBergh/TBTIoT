@@ -41,7 +41,10 @@
 
 #define PORT 3003
 
-
+/**
+ *
+ * @param
+ */
 void* config_thread_func(void*)
 {
 	int server_fd, response_fd;

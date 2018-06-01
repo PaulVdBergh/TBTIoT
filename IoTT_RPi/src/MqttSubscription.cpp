@@ -35,17 +35,29 @@
 namespace IoTT
 {
 
+	/**
+	 *
+	 * @param topic
+	 */
 	MqttSubscription::MqttSubscription(const char* topic)
 	:	m_Topic(topic)
 	{
 		MqttMsgHandler::getInstance()->RegisterSubscription(this);
 	}
 
+	/**
+	 *
+	 */
 	MqttSubscription::~MqttSubscription()
 	{
 		MqttMsgHandler::getInstance()->UnRegisterSubscription(this);
 	}
 
+	/**
+	 *
+	 * @param item
+	 * @return
+	 */
 	bool MqttSubscription::isTopicMatched(const mqttMessageQueueItem& item)
 	{
 	    char* curf = const_cast<char*>(m_Topic.c_str());

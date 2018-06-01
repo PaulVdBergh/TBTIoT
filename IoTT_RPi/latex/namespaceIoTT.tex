@@ -1,0 +1,156 @@
+\hypertarget{namespaceIoTT}{}\section{Io\+TT Namespace Reference}
+\label{namespaceIoTT}\index{Io\+TT@{Io\+TT}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classIoTT_1_1Accessory}{Accessory}
+\item 
+class \hyperlink{classIoTT_1_1AccessoryDecoder}{Accessory\+Decoder}
+\item 
+class \hyperlink{classIoTT_1_1Decoder}{Decoder}
+\item 
+class \hyperlink{classIoTT_1_1Decoders}{Decoders}
+\item 
+class \hyperlink{classIoTT_1_1LocDecoder}{Loc\+Decoder}
+\item 
+class \hyperlink{classIoTT_1_1mqttMessageQueueItem}{mqtt\+Message\+Queue\+Item}
+\item 
+class \hyperlink{classIoTT_1_1MqttMsgHandler}{Mqtt\+Msg\+Handler}
+\item 
+class \hyperlink{classIoTT_1_1MqttPublisher}{Mqtt\+Publisher}
+\item 
+class \hyperlink{classIoTT_1_1MqttSubscription}{Mqtt\+Subscription}
+\item 
+class \hyperlink{classIoTT_1_1Z21Client}{Z21\+Client}
+\item 
+class \hyperlink{classIoTT_1_1Z21Interface}{Z21\+Interface}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef uint16\+\_\+t \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t}
+\item 
+typedef map$<$ \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t}, \hyperlink{classIoTT_1_1Decoder}{Decoder} $\ast$ $>$ \hyperlink{namespaceIoTT_a677ecaa41dfd1a0a7987bda3d12720f4}{Decoders\+Map\+\_\+t}
+\item 
+typedef Decoders\+Map\+\_\+t\+::iterator \hyperlink{namespaceIoTT_aa58ce75b7106007510f71144195e192c}{Decoders\+Map\+Iterator\+\_\+t}
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classIoTT_1_1mqttMessageQueueItem}{Io\+T\+T\+::mqtt\+Message\+Queue\+Item} \hyperlink{namespaceIoTT_a1c62efc2d4aa61fbde90116f24417451}{\+\_\+\+\_\+attribute\+\_\+\+\_\+}
+\item 
+string \hyperlink{namespaceIoTT_a6f663a1e0ebfb3cb6131a75a4c23b869}{mqtt\+Address} = \char`\"{}tcp\+://localhost\+:1883\char`\"{}
+\item 
+string \hyperlink{namespaceIoTT_a3ee57a41355a80e59b439e583629ad0e}{mqtt\+Client\+ID} = \char`\"{}Io\+T\+T\+\_\+\+R\+Pi\char`\"{}
+\item 
+string \hyperlink{namespaceIoTT_a9ef3190024e4c4c0836a889cc0040088}{mqtt\+Topic} = \char`\"{}\#\char`\"{}
+\item 
+int \hyperlink{namespaceIoTT_a6eef3057f162570da321fb6326812cc3}{mqtt\+Q\+OS} = 0
+\item 
+int \hyperlink{namespaceIoTT_ade85c73a3aca0a96a796510460591ed0}{mqtt\+Timeout} = 10000L
+\item 
+string \hyperlink{namespaceIoTT_a0ea5d152ba0545be67f096987c512b34}{mqtt\+Sub\+M\+Q\+Name} = \char`\"{}/Io\+T\+T\+\_\+\+R\+Pi\+\_\+\+Sub\char`\"{}
+\item 
+string \hyperlink{namespaceIoTT_a7f27a09048ef99545a72594635a3503b}{mqtt\+Pub\+M\+Q\+Name} = \char`\"{}/Io\+T\+T\+\_\+\+R\+Pi\+\_\+\+Pub\char`\"{}
+\item 
+mq\+\_\+attr \hyperlink{namespaceIoTT_a2a32f17de0792ea51b0fa9d6602ecf3f}{mqtt\+Msg\+Queue\+Attribs}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Copyright (C) 2018 Paul Van den Bergh \href{mailto:admin@paulvandenbergh.be}{\tt admin@paulvandenbergh.\+be}
+
+This program is free software\+: you can redistribute it and/or modify it under the terms of the G\+NU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but W\+I\+T\+H\+O\+UT A\+NY W\+A\+R\+R\+A\+N\+TY; without even the implied warranty of M\+E\+R\+C\+H\+A\+N\+T\+A\+B\+I\+L\+I\+TY or F\+I\+T\+N\+E\+SS F\+OR A P\+A\+R\+T\+I\+C\+U\+L\+AR P\+U\+R\+P\+O\+SE. See the G\+NU General Public License for more details.
+
+You should have received a copy of the G\+NU General Public License along with this program. If not, see \href{http://www.gnu.org/licenses/}{\tt http\+://www.\+gnu.\+org/licenses/}. 
+
+ This file is part of the IoT\&Trains project. \subsection*{For more info see \href{http://paulvandenbergh.be}{\tt http\+://paulvandenbergh.\+be} }
+
+\subsection{Typedef Documentation}
+\mbox{\Hypertarget{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}\label{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}} 
+\index{Io\+TT@{Io\+TT}!D\+C\+C\+Address\+\_\+t@{D\+C\+C\+Address\+\_\+t}}
+\index{D\+C\+C\+Address\+\_\+t@{D\+C\+C\+Address\+\_\+t}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{D\+C\+C\+Address\+\_\+t}{DCCAddress\_t}}
+{\footnotesize\ttfamily typedef uint16\+\_\+t \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{Io\+T\+T\+::\+D\+C\+C\+Address\+\_\+t}}
+
+\mbox{\Hypertarget{namespaceIoTT_a677ecaa41dfd1a0a7987bda3d12720f4}\label{namespaceIoTT_a677ecaa41dfd1a0a7987bda3d12720f4}} 
+\index{Io\+TT@{Io\+TT}!Decoders\+Map\+\_\+t@{Decoders\+Map\+\_\+t}}
+\index{Decoders\+Map\+\_\+t@{Decoders\+Map\+\_\+t}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{Decoders\+Map\+\_\+t}{DecodersMap\_t}}
+{\footnotesize\ttfamily typedef map$<$\hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t}, \hyperlink{classIoTT_1_1Decoder}{Decoder}$\ast$$>$ \hyperlink{namespaceIoTT_a677ecaa41dfd1a0a7987bda3d12720f4}{Io\+T\+T\+::\+Decoders\+Map\+\_\+t}}
+
+\mbox{\Hypertarget{namespaceIoTT_aa58ce75b7106007510f71144195e192c}\label{namespaceIoTT_aa58ce75b7106007510f71144195e192c}} 
+\index{Io\+TT@{Io\+TT}!Decoders\+Map\+Iterator\+\_\+t@{Decoders\+Map\+Iterator\+\_\+t}}
+\index{Decoders\+Map\+Iterator\+\_\+t@{Decoders\+Map\+Iterator\+\_\+t}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{Decoders\+Map\+Iterator\+\_\+t}{DecodersMapIterator\_t}}
+{\footnotesize\ttfamily typedef Decoders\+Map\+\_\+t\+::iterator \hyperlink{namespaceIoTT_aa58ce75b7106007510f71144195e192c}{Io\+T\+T\+::\+Decoders\+Map\+Iterator\+\_\+t}}
+
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{namespaceIoTT_a1c62efc2d4aa61fbde90116f24417451}\label{namespaceIoTT_a1c62efc2d4aa61fbde90116f24417451}} 
+\index{Io\+TT@{Io\+TT}!\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}}
+\index{\+\_\+\+\_\+attribute\+\_\+\+\_\+@{\+\_\+\+\_\+attribute\+\_\+\+\_\+}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{\+\_\+\+\_\+attribute\+\_\+\+\_\+}{\_\_attribute\_\_}}
+{\footnotesize\ttfamily class \hyperlink{classIoTT_1_1mqttMessageQueueItem}{Io\+T\+T\+::mqtt\+Message\+Queue\+Item} Io\+T\+T\+::\+\_\+\+\_\+attribute\+\_\+\+\_\+}
+
+\mbox{\Hypertarget{namespaceIoTT_a6f663a1e0ebfb3cb6131a75a4c23b869}\label{namespaceIoTT_a6f663a1e0ebfb3cb6131a75a4c23b869}} 
+\index{Io\+TT@{Io\+TT}!mqtt\+Address@{mqtt\+Address}}
+\index{mqtt\+Address@{mqtt\+Address}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{mqtt\+Address}{mqttAddress}}
+{\footnotesize\ttfamily string Io\+T\+T\+::mqtt\+Address = \char`\"{}tcp\+://localhost\+:1883\char`\"{}}
+
+\mbox{\Hypertarget{namespaceIoTT_a3ee57a41355a80e59b439e583629ad0e}\label{namespaceIoTT_a3ee57a41355a80e59b439e583629ad0e}} 
+\index{Io\+TT@{Io\+TT}!mqtt\+Client\+ID@{mqtt\+Client\+ID}}
+\index{mqtt\+Client\+ID@{mqtt\+Client\+ID}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{mqtt\+Client\+ID}{mqttClientID}}
+{\footnotesize\ttfamily string Io\+T\+T\+::mqtt\+Client\+ID = \char`\"{}Io\+T\+T\+\_\+\+R\+Pi\char`\"{}}
+
+\mbox{\Hypertarget{namespaceIoTT_a2a32f17de0792ea51b0fa9d6602ecf3f}\label{namespaceIoTT_a2a32f17de0792ea51b0fa9d6602ecf3f}} 
+\index{Io\+TT@{Io\+TT}!mqtt\+Msg\+Queue\+Attribs@{mqtt\+Msg\+Queue\+Attribs}}
+\index{mqtt\+Msg\+Queue\+Attribs@{mqtt\+Msg\+Queue\+Attribs}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{mqtt\+Msg\+Queue\+Attribs}{mqttMsgQueueAttribs}}
+{\footnotesize\ttfamily mq\+\_\+attr Io\+T\+T\+::mqtt\+Msg\+Queue\+Attribs}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=
+    \{
+        0,      
+        16,     
+        \textcolor{keyword}{sizeof}(\hyperlink{classIoTT_1_1mqttMessageQueueItem}{IoTT::mqttMessageQueueItem}),   
+        0       
+    \}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespaceIoTT_a7f27a09048ef99545a72594635a3503b}\label{namespaceIoTT_a7f27a09048ef99545a72594635a3503b}} 
+\index{Io\+TT@{Io\+TT}!mqtt\+Pub\+M\+Q\+Name@{mqtt\+Pub\+M\+Q\+Name}}
+\index{mqtt\+Pub\+M\+Q\+Name@{mqtt\+Pub\+M\+Q\+Name}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{mqtt\+Pub\+M\+Q\+Name}{mqttPubMQName}}
+{\footnotesize\ttfamily string Io\+T\+T\+::mqtt\+Pub\+M\+Q\+Name = \char`\"{}/Io\+T\+T\+\_\+\+R\+Pi\+\_\+\+Pub\char`\"{}}
+
+\mbox{\Hypertarget{namespaceIoTT_a6eef3057f162570da321fb6326812cc3}\label{namespaceIoTT_a6eef3057f162570da321fb6326812cc3}} 
+\index{Io\+TT@{Io\+TT}!mqtt\+Q\+OS@{mqtt\+Q\+OS}}
+\index{mqtt\+Q\+OS@{mqtt\+Q\+OS}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{mqtt\+Q\+OS}{mqttQOS}}
+{\footnotesize\ttfamily int Io\+T\+T\+::mqtt\+Q\+OS = 0}
+
+\mbox{\Hypertarget{namespaceIoTT_a0ea5d152ba0545be67f096987c512b34}\label{namespaceIoTT_a0ea5d152ba0545be67f096987c512b34}} 
+\index{Io\+TT@{Io\+TT}!mqtt\+Sub\+M\+Q\+Name@{mqtt\+Sub\+M\+Q\+Name}}
+\index{mqtt\+Sub\+M\+Q\+Name@{mqtt\+Sub\+M\+Q\+Name}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{mqtt\+Sub\+M\+Q\+Name}{mqttSubMQName}}
+{\footnotesize\ttfamily string Io\+T\+T\+::mqtt\+Sub\+M\+Q\+Name = \char`\"{}/Io\+T\+T\+\_\+\+R\+Pi\+\_\+\+Sub\char`\"{}}
+
+\mbox{\Hypertarget{namespaceIoTT_ade85c73a3aca0a96a796510460591ed0}\label{namespaceIoTT_ade85c73a3aca0a96a796510460591ed0}} 
+\index{Io\+TT@{Io\+TT}!mqtt\+Timeout@{mqtt\+Timeout}}
+\index{mqtt\+Timeout@{mqtt\+Timeout}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{mqtt\+Timeout}{mqttTimeout}}
+{\footnotesize\ttfamily int Io\+T\+T\+::mqtt\+Timeout = 10000L}
+
+\mbox{\Hypertarget{namespaceIoTT_a9ef3190024e4c4c0836a889cc0040088}\label{namespaceIoTT_a9ef3190024e4c4c0836a889cc0040088}} 
+\index{Io\+TT@{Io\+TT}!mqtt\+Topic@{mqtt\+Topic}}
+\index{mqtt\+Topic@{mqtt\+Topic}!Io\+TT@{Io\+TT}}
+\subsubsection{\texorpdfstring{mqtt\+Topic}{mqttTopic}}
+{\footnotesize\ttfamily string Io\+T\+T\+::mqtt\+Topic = \char`\"{}\#\char`\"{}}
+

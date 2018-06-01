@@ -1,0 +1,140 @@
+\hypertarget{classIoTT_1_1Decoders}{}\section{Io\+TT\+:\+:Decoders Class Reference}
+\label{classIoTT_1_1Decoders}\index{Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}}
+
+
+{\ttfamily \#include $<$Decoders.\+h$>$}
+
+Inheritance diagram for Io\+TT\+:\+:Decoders\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classIoTT_1_1Decoders}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \hyperlink{classIoTT_1_1Decoders_a101b619ed4cfa0fb6ff19984e534161f}{$\sim$\+Decoders} ()
+\item 
+\hyperlink{classIoTT_1_1Decoder}{Decoder} $\ast$ \hyperlink{classIoTT_1_1Decoders_af079a0dd22459e170cd35a8740a21261}{get\+Decoder} (const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} \&address)
+\item 
+virtual void \hyperlink{classIoTT_1_1Decoders_aa413a310e8ba87b11d3a7c2b02a90dc4}{On\+New\+Data} (const \hyperlink{classIoTT_1_1mqttMessageQueueItem}{mqtt\+Message\+Queue\+Item} \&item) override
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classIoTT_1_1Decoders}{Decoders} $\ast$ \hyperlink{classIoTT_1_1Decoders_a23583534ca36cafd911eebbbf9a0a299}{get\+Instance} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1Decoders_a2fe2db78da99d037611b348fe5e2d682}{Decoders} (const string \&Mqtt\+Topic\+Base\+Path=\char`\"{}Io\+TT/\hyperlink{classIoTT_1_1Decoders}{Decoders}/\char`\"{})
+\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+string \hyperlink{classIoTT_1_1Decoders_a5fa7217ac2674eec1be09eb9c9ca36af}{m\+\_\+\+Topic\+Base\+Path}
+\item 
+\hyperlink{namespaceIoTT_a677ecaa41dfd1a0a7987bda3d12720f4}{Decoders\+Map\+\_\+t} \hyperlink{classIoTT_1_1Decoders_afa68af31e406b2de6877715f16d6833f}{m\+\_\+\+Decoders}
+\item 
+recursive\+\_\+mutex \hyperlink{classIoTT_1_1Decoders_a825e74476dd0c449bdf7c396d67e19ba}{m\+\_\+\+M\+Decoders}
+\end{DoxyCompactItemize}
+\subsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{classIoTT_1_1Decoders}{Decoders} $\ast$ \hyperlink{classIoTT_1_1Decoders_a760a108a879e32459261f7ab355b7251}{sm\+\_\+p\+Instance} = nullptr
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Decoders_a101b619ed4cfa0fb6ff19984e534161f}\label{classIoTT_1_1Decoders_a101b619ed4cfa0fb6ff19984e534161f}} 
+\index{Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}!````~Decoders@{$\sim$\+Decoders}}
+\index{````~Decoders@{$\sim$\+Decoders}!Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}}
+\subsubsection{\texorpdfstring{$\sim$\+Decoders()}{~Decoders()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Decoders\+::$\sim$\+Decoders (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Decoders_a2fe2db78da99d037611b348fe5e2d682}\label{classIoTT_1_1Decoders_a2fe2db78da99d037611b348fe5e2d682}} 
+\index{Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}!Decoders@{Decoders}}
+\index{Decoders@{Decoders}!Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}}
+\subsubsection{\texorpdfstring{Decoders()}{Decoders()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Decoders\+::\+Decoders (\begin{DoxyParamCaption}\item[{const string \&}]{Mqtt\+Topic\+Base\+Path = {\ttfamily \char`\"{}IoTT/\hyperlink{classIoTT_1_1Decoders}{Decoders}/\char`\"{}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em Mqtt\+Topic\+Base\+Path} & \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Decoders_af079a0dd22459e170cd35a8740a21261}\label{classIoTT_1_1Decoders_af079a0dd22459e170cd35a8740a21261}} 
+\index{Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}!get\+Decoder@{get\+Decoder}}
+\index{get\+Decoder@{get\+Decoder}!Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}}
+\subsubsection{\texorpdfstring{get\+Decoder()}{getDecoder()}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1Decoder}{Decoder} $\ast$ Io\+T\+T\+::\+Decoders\+::get\+Decoder (\begin{DoxyParamCaption}\item[{const \hyperlink{namespaceIoTT_a31b8cd9473fc447b3fb341b78afa54fe}{D\+C\+C\+Address\+\_\+t} \&}]{address }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1Decoders_a23583534ca36cafd911eebbbf9a0a299}\label{classIoTT_1_1Decoders_a23583534ca36cafd911eebbbf9a0a299}} 
+\index{Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}!get\+Instance@{get\+Instance}}
+\index{get\+Instance@{get\+Instance}!Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}}
+\subsubsection{\texorpdfstring{get\+Instance()}{getInstance()}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1Decoders}{Decoders} $\ast$ Io\+T\+T\+::\+Decoders\+::get\+Instance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1Decoders_aa413a310e8ba87b11d3a7c2b02a90dc4}\label{classIoTT_1_1Decoders_aa413a310e8ba87b11d3a7c2b02a90dc4}} 
+\index{Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}!On\+New\+Data@{On\+New\+Data}}
+\index{On\+New\+Data@{On\+New\+Data}!Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}}
+\subsubsection{\texorpdfstring{On\+New\+Data()}{OnNewData()}}
+{\footnotesize\ttfamily void Io\+T\+T\+::\+Decoders\+::\+On\+New\+Data (\begin{DoxyParamCaption}\item[{const \hyperlink{classIoTT_1_1mqttMessageQueueItem}{mqtt\+Message\+Queue\+Item} \&}]{item }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & \\
+\hline
+\end{DoxyParams}
+
+
+Implements \hyperlink{classIoTT_1_1MqttSubscription_a9ddc697ad6a842bd88ec0e768d8a1d37}{Io\+T\+T\+::\+Mqtt\+Subscription}.
+
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classIoTT_1_1Decoders_afa68af31e406b2de6877715f16d6833f}\label{classIoTT_1_1Decoders_afa68af31e406b2de6877715f16d6833f}} 
+\index{Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}!m\+\_\+\+Decoders@{m\+\_\+\+Decoders}}
+\index{m\+\_\+\+Decoders@{m\+\_\+\+Decoders}!Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Decoders}{m\_Decoders}}
+{\footnotesize\ttfamily \hyperlink{namespaceIoTT_a677ecaa41dfd1a0a7987bda3d12720f4}{Decoders\+Map\+\_\+t} Io\+T\+T\+::\+Decoders\+::m\+\_\+\+Decoders\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Decoders_a825e74476dd0c449bdf7c396d67e19ba}\label{classIoTT_1_1Decoders_a825e74476dd0c449bdf7c396d67e19ba}} 
+\index{Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}!m\+\_\+\+M\+Decoders@{m\+\_\+\+M\+Decoders}}
+\index{m\+\_\+\+M\+Decoders@{m\+\_\+\+M\+Decoders}!Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}}
+\subsubsection{\texorpdfstring{m\+\_\+\+M\+Decoders}{m\_MDecoders}}
+{\footnotesize\ttfamily recursive\+\_\+mutex Io\+T\+T\+::\+Decoders\+::m\+\_\+\+M\+Decoders\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Decoders_a5fa7217ac2674eec1be09eb9c9ca36af}\label{classIoTT_1_1Decoders_a5fa7217ac2674eec1be09eb9c9ca36af}} 
+\index{Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}!m\+\_\+\+Topic\+Base\+Path@{m\+\_\+\+Topic\+Base\+Path}}
+\index{m\+\_\+\+Topic\+Base\+Path@{m\+\_\+\+Topic\+Base\+Path}!Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Topic\+Base\+Path}{m\_TopicBasePath}}
+{\footnotesize\ttfamily string Io\+T\+T\+::\+Decoders\+::m\+\_\+\+Topic\+Base\+Path\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{classIoTT_1_1Decoders_a760a108a879e32459261f7ab355b7251}\label{classIoTT_1_1Decoders_a760a108a879e32459261f7ab355b7251}} 
+\index{Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}!sm\+\_\+p\+Instance@{sm\+\_\+p\+Instance}}
+\index{sm\+\_\+p\+Instance@{sm\+\_\+p\+Instance}!Io\+T\+T\+::\+Decoders@{Io\+T\+T\+::\+Decoders}}
+\subsubsection{\texorpdfstring{sm\+\_\+p\+Instance}{sm\_pInstance}}
+{\footnotesize\ttfamily \hyperlink{classIoTT_1_1Decoders}{Decoders} $\ast$ Io\+T\+T\+::\+Decoders\+::sm\+\_\+p\+Instance = nullptr\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{Decoders_8h}{Decoders.\+h}\item 
+src/\hyperlink{Decoders_8cpp}{Decoders.\+cpp}\end{DoxyCompactItemize}

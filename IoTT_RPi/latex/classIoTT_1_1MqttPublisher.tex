@@ -1,0 +1,166 @@
+\hypertarget{classIoTT_1_1MqttPublisher}{}\section{Io\+TT\+:\+:Mqtt\+Publisher Class Reference}
+\label{classIoTT_1_1MqttPublisher}\index{Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}}
+
+
+{\ttfamily \#include $<$Mqtt\+Publisher.\+h$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classIoTT_1_1MqttPublisher_a5b41e02b5f6d9c1ba2dad863b5f80ce6}{Mqtt\+Publisher} (const string \&topic)
+\item 
+virtual \hyperlink{classIoTT_1_1MqttPublisher_ab533cffa75ed108d360dbcdad93b65d7}{$\sim$\+Mqtt\+Publisher} ()
+\item 
+int \hyperlink{classIoTT_1_1MqttPublisher_a038d355fb4e0b9478562e0faa54c3288}{Publish} (const string \&payload, int qos=0, bool retained=false)
+\item 
+int \hyperlink{classIoTT_1_1MqttPublisher_a6f208fee8b6d2942e28dfaffd4d80ca0}{Publish} (const char $\ast$payload, int qos=0, bool retained=false)
+\item 
+int \hyperlink{classIoTT_1_1MqttPublisher_ab85025b01adf841ab6734e3099ed6f49}{Publish} (const uint8\+\_\+t \&uint8\+Val, int qos=0, bool retained=false)
+\item 
+int \hyperlink{classIoTT_1_1MqttPublisher_a18f8add5856c995a270848a1bfecce24}{Publish} (const bool \&bool\+Val, int qos=0, bool retained=false)
+\item 
+int \hyperlink{classIoTT_1_1MqttPublisher_a1d86c942d392bb28b2715380cf88bf71}{Publish} (void $\ast$payload, size\+\_\+t payloadlen, int qos=0, bool retained=false)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const string \hyperlink{classIoTT_1_1MqttPublisher_a921c6d3cff38da77e674f04a2b9cd0f3}{m\+\_\+\+Topic}
+\item 
+mqd\+\_\+t \hyperlink{classIoTT_1_1MqttPublisher_a82e5135a1270e1c2d8a923e042edd05a}{m\+\_\+\+Queue\+Handle}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classIoTT_1_1MqttPublisher_a5b41e02b5f6d9c1ba2dad863b5f80ce6}\label{classIoTT_1_1MqttPublisher_a5b41e02b5f6d9c1ba2dad863b5f80ce6}} 
+\index{Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}!Mqtt\+Publisher@{Mqtt\+Publisher}}
+\index{Mqtt\+Publisher@{Mqtt\+Publisher}!Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}}
+\subsubsection{\texorpdfstring{Mqtt\+Publisher()}{MqttPublisher()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Mqtt\+Publisher\+::\+Mqtt\+Publisher (\begin{DoxyParamCaption}\item[{const string \&}]{topic }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em topic} & \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classIoTT_1_1MqttPublisher_ab533cffa75ed108d360dbcdad93b65d7}\label{classIoTT_1_1MqttPublisher_ab533cffa75ed108d360dbcdad93b65d7}} 
+\index{Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}!````~Mqtt\+Publisher@{$\sim$\+Mqtt\+Publisher}}
+\index{````~Mqtt\+Publisher@{$\sim$\+Mqtt\+Publisher}!Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}}
+\subsubsection{\texorpdfstring{$\sim$\+Mqtt\+Publisher()}{~MqttPublisher()}}
+{\footnotesize\ttfamily Io\+T\+T\+::\+Mqtt\+Publisher\+::$\sim$\+Mqtt\+Publisher (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classIoTT_1_1MqttPublisher_a038d355fb4e0b9478562e0faa54c3288}\label{classIoTT_1_1MqttPublisher_a038d355fb4e0b9478562e0faa54c3288}} 
+\index{Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}!Publish@{Publish}}
+\index{Publish@{Publish}!Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}}
+\subsubsection{\texorpdfstring{Publish()}{Publish()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily int Io\+T\+T\+::\+Mqtt\+Publisher\+::\+Publish (\begin{DoxyParamCaption}\item[{const string \&}]{payload,  }\item[{int}]{qos = {\ttfamily 0},  }\item[{bool}]{retained = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & \\
+\hline
+{\em qos} & \\
+\hline
+{\em retained} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1MqttPublisher_a6f208fee8b6d2942e28dfaffd4d80ca0}\label{classIoTT_1_1MqttPublisher_a6f208fee8b6d2942e28dfaffd4d80ca0}} 
+\index{Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}!Publish@{Publish}}
+\index{Publish@{Publish}!Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}}
+\subsubsection{\texorpdfstring{Publish()}{Publish()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily int Io\+T\+T\+::\+Mqtt\+Publisher\+::\+Publish (\begin{DoxyParamCaption}\item[{const char $\ast$}]{payload,  }\item[{int}]{qos = {\ttfamily 0},  }\item[{bool}]{retained = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & \\
+\hline
+{\em qos} & \\
+\hline
+{\em retained} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1MqttPublisher_ab85025b01adf841ab6734e3099ed6f49}\label{classIoTT_1_1MqttPublisher_ab85025b01adf841ab6734e3099ed6f49}} 
+\index{Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}!Publish@{Publish}}
+\index{Publish@{Publish}!Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}}
+\subsubsection{\texorpdfstring{Publish()}{Publish()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily int Io\+T\+T\+::\+Mqtt\+Publisher\+::\+Publish (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \&}]{uint8\+Val,  }\item[{int}]{qos = {\ttfamily 0},  }\item[{bool}]{retained = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em uint8\+Val} & \\
+\hline
+{\em qos} & \\
+\hline
+{\em retained} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1MqttPublisher_a18f8add5856c995a270848a1bfecce24}\label{classIoTT_1_1MqttPublisher_a18f8add5856c995a270848a1bfecce24}} 
+\index{Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}!Publish@{Publish}}
+\index{Publish@{Publish}!Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}}
+\subsubsection{\texorpdfstring{Publish()}{Publish()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily int Io\+T\+T\+::\+Mqtt\+Publisher\+::\+Publish (\begin{DoxyParamCaption}\item[{const bool \&}]{bool\+Val,  }\item[{int}]{qos = {\ttfamily 0},  }\item[{bool}]{retained = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em bool\+Val} & \\
+\hline
+{\em qos} & \\
+\hline
+{\em retained} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\mbox{\Hypertarget{classIoTT_1_1MqttPublisher_a1d86c942d392bb28b2715380cf88bf71}\label{classIoTT_1_1MqttPublisher_a1d86c942d392bb28b2715380cf88bf71}} 
+\index{Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}!Publish@{Publish}}
+\index{Publish@{Publish}!Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}}
+\subsubsection{\texorpdfstring{Publish()}{Publish()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily int Io\+T\+T\+::\+Mqtt\+Publisher\+::\+Publish (\begin{DoxyParamCaption}\item[{void $\ast$}]{payload,  }\item[{size\+\_\+t}]{payload\+Len,  }\item[{int}]{qos = {\ttfamily 0},  }\item[{bool}]{retained = {\ttfamily false} }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & \\
+\hline
+{\em payload\+Len} & \\
+\hline
+{\em qos} & \\
+\hline
+{\em retained} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classIoTT_1_1MqttPublisher_a82e5135a1270e1c2d8a923e042edd05a}\label{classIoTT_1_1MqttPublisher_a82e5135a1270e1c2d8a923e042edd05a}} 
+\index{Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}!m\+\_\+\+Queue\+Handle@{m\+\_\+\+Queue\+Handle}}
+\index{m\+\_\+\+Queue\+Handle@{m\+\_\+\+Queue\+Handle}!Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Queue\+Handle}{m\_QueueHandle}}
+{\footnotesize\ttfamily mqd\+\_\+t Io\+T\+T\+::\+Mqtt\+Publisher\+::m\+\_\+\+Queue\+Handle\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{classIoTT_1_1MqttPublisher_a921c6d3cff38da77e674f04a2b9cd0f3}\label{classIoTT_1_1MqttPublisher_a921c6d3cff38da77e674f04a2b9cd0f3}} 
+\index{Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}!m\+\_\+\+Topic@{m\+\_\+\+Topic}}
+\index{m\+\_\+\+Topic@{m\+\_\+\+Topic}!Io\+T\+T\+::\+Mqtt\+Publisher@{Io\+T\+T\+::\+Mqtt\+Publisher}}
+\subsubsection{\texorpdfstring{m\+\_\+\+Topic}{m\_Topic}}
+{\footnotesize\ttfamily const string Io\+T\+T\+::\+Mqtt\+Publisher\+::m\+\_\+\+Topic\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\hyperlink{MqttPublisher_8h}{Mqtt\+Publisher.\+h}\item 
+src/\hyperlink{MqttPublisher_8cpp}{Mqtt\+Publisher.\+cpp}\end{DoxyCompactItemize}

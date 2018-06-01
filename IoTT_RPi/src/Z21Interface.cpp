@@ -42,6 +42,11 @@ using namespace std;
 namespace IoTT
 {
 
+	/**
+	 *
+	 * @param port
+	 * @param topicBasePath
+	 */
 	Z21Interface::Z21Interface(in_port_t port /* = 21105 */, const string& topicBasePath /* = "IoTT/" */)
 	:	MqttSubscription((topicBasePath + "#").c_str())
 	,	m_pDecoders(Decoders::getInstance())
@@ -52,11 +57,20 @@ namespace IoTT
 		m_thread = thread([this]{threadFunc();});
 	}
 
+	/**
+	 *
+	 */
 	Z21Interface::~Z21Interface()
 	{
 		// TODO Auto-generated destructor stub
 	}
 
+	/**
+	 *
+	 * @param pMsg
+	 * @param address
+	 * @return
+	 */
 	ssize_t Z21Interface::sendToSocket(const uint8_t* pMsg, sockaddr* address)
 	{
 /*
@@ -71,6 +85,10 @@ namespace IoTT
 		return sendto(m_fdsock_me, pMsg, pMsg[0], 0, address, sizeof(struct sockaddr_in));
 	}
 
+	/**
+	 *
+	 * @param item
+	 */
 	void Z21Interface::OnNewData(const mqttMessageQueueItem& item)
 	{
 		printf("Z21Interface::OnNewData : comparing interface ['%s']\n\tto item ['%s']\n", m_TopicBasePath.c_str(), item.getTopic());
@@ -100,6 +118,10 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 * @param newState
+	 */
 	void Z21Interface::broadcastPowerStateChange(const bool& newState)
 	{
 		lock_guard<recursive_mutex> lock(m_MClients);
@@ -109,6 +131,10 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 * @param pLoc
+	 */
 	void Z21Interface::broadcastLocInfoChanged(LocDecoder* pLoc)
 	{
 		lock_guard<recursive_mutex> lock(m_MClients);
@@ -118,6 +144,10 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 * @param pAccessory
+	 */
 	void Z21Interface::broadcastAccessoryInfoChanged(Accessory* pAccessory)
 	{
 		lock_guard<recursive_mutex> lock(m_MClients);
@@ -127,6 +157,9 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 */
 	void Z21Interface::broadcastEmergencyStop()
 	{
 		lock_guard<recursive_mutex> lock(m_MClients);
@@ -136,6 +169,9 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 */
 	void Z21Interface::broadcastOvercurrent()
 	{
 		lock_guard<recursive_mutex> lock(m_MClients);
@@ -145,6 +181,11 @@ namespace IoTT
 		}
 	}
 
+	/**
+	 *
+	 * @param address
+	 * @return
+	 */
 	Z21Client* Z21Interface::findClient(const sockaddr_in& address)
 	{
 		lock_guard<recursive_mutex> lock(m_MClients);
@@ -166,6 +207,11 @@ namespace IoTT
 		return *client;
 	}
 
+	/**
+	 *
+	 * @param pClient
+	 * @return
+	 */
 	bool Z21Interface::removeClient(Z21Client* pClient)
 	{
 		lock_guard<recursive_mutex> lock(m_MClients);
@@ -179,11 +225,19 @@ namespace IoTT
 		return false;
 	}
 
+	/**
+	 *
+	 * @param address
+	 * @return
+	 */
 	Decoder* Z21Interface::findDecoder(const DCCAddress_t& address)
 	{
 		return Decoders::getInstance()->getDecoder(address);
 	}
 
+	/**
+	 *
+	 */
 	void Z21Interface::threadFunc(void)
 	{
 		m_fdStop = eventfd(0, 0);
